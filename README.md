@@ -1,6 +1,7 @@
-# Full Stack Development Template - Client and Server Assemblies.
-## - Florence Server Assembly.
-## - Florence Client Assembly.
+# Full Stack Development Template.
+## - Avril Server Concurrency.
+## - Avril Server Assembly.
+## - Avril Client Assembly.
 
 ### C# .NET Console.
 
@@ -15,11 +16,13 @@ Version 17.13.4
  
 
 ## Copendencies.
-### Florence Client Assembly.
-### Florence Server Assembly.
+### Avril Client Assembly.
+### Avril Server Assembly.
 
 ## Dependencies.
-### Server Library.
+### Avril Client Assembly.
+### Avril Server Assembly.
+#### Server Library.
  - https://github.com/OpenFSD/ServerLibrary
    
 ### WriteEnableForThreadsAtStacks.
@@ -43,3 +46,4 @@ Version: 2.0
 Version: .Net 8.0
 
 ## Development History.
+
