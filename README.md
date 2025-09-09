@@ -20,9 +20,7 @@ Version 17.13.4
 ### Avril Server Assembly.
 
 ## Dependencies.
-### Avril Client Assembly.
-### Avril Server Assembly.
-#### Server Library.
+### Server Library.
  - https://github.com/OpenFSD/ServerLibrary
    
 ### WriteEnableForThreadsAtStacks.
@@ -46,4 +44,5 @@ Version: 2.0
 Version: .Net 8.0
 
 ## Development History.
+
 
