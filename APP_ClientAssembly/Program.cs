@@ -1,13 +1,24 @@
 ﻿
-namespace Avril_FSD_CLientAssembly
+namespace Avril_FSD.ServerAssembly
 {
     static class Program
     {
+        private static Avril_FSD.ServerAssembly.Framework framework_ServerAssembly = null;
+
         static void Main()
+
         {
-            var programId_ConcurrencyQue_C = Avril_FSD.Library_For_LaunchEnableForConcurrentThreadsAt_CLIENT.Initialise_LaunchEnableForConcurrentThreadsAt();
-            var programId_WriteQue_C_OR = Avril_FSD.Library_For_WriteEnableForThreadsAt_CLIENTOUTPUTRECIEVE.Initialise_WriteEnable();
-            while (true) { }
+            System.Console.WriteLine("ENTERED => app entry point.");//TestBench
+
+            framework_ServerAssembly = new Avril_FSD.ServerAssembly.Framework();
+            while (framework_ServerAssembly == null) { /* wait until class created */ }
+            System.Console.WriteLine("Created: Client App Architechture.");//TestBench
+
+            while (true)
+            {
+
+            }
         }
+
     }
 }

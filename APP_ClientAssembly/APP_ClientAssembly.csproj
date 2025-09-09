@@ -9,12 +9,29 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="engine\**" />
+    <Compile Remove="gameInstance\**" />
+    <Compile Remove="graphics\**" />
+    <EmbeddedResource Remove="engine\**" />
+    <EmbeddedResource Remove="gameInstance\**" />
+    <EmbeddedResource Remove="graphics\**" />
+    <None Remove="engine\**" />
+    <None Remove="gameInstance\**" />
+    <None Remove="graphics\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="LIBLaunchEnableForConcurrentThreadsAtClient.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="LIBWriteEnableForThreadsAtClientOutputRecieve.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="OpenTK" Version="2.0.0" />
+    <PackageReference Include="System.Drawing.Common" Version="9.0.3" />
   </ItemGroup>
 
 </Project>
