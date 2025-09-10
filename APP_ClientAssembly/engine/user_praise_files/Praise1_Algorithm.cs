@@ -12,12 +12,9 @@ namespace Avril.ClientAssembly.Praise_Files
         { 
         
         }
-        public void Do_Praise(
-            Avril.ClientAssembly.Praise_Files.Praise1_Input in_SubSet,
-            Avril.ClientAssembly.Praise_Files.Praise1_Output out_SubSet
-        )
+        public void Do_Praise(Avril.ClientAssembly.Praise_Files.Praise1_Input in_SubSet, Avril.ClientAssembly.Praise_Files.Praise1_Output out_SubSet)
         {
-
+            //TODO
 
         }
     }

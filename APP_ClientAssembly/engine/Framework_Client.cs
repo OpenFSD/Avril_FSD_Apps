@@ -1,47 +1,42 @@
-﻿//using Avril.NetworkingClient;
-using System;
-using System.Text;
-
-namespace Avril.ClientAssembly
+﻿namespace Avril.ClientAssembly
 {
     public class Framework_Client
     {
-        static private Avril.ClientAssembly.Client _client = null;
+        static private Avril.ClientAssembly.Client _client;
         //private Networking networkingClient;
 
         private Int16 threadId = 0;
 
         public Framework_Client() 
         {
-            _client = new Avril.ClientAssembly.Client();
-            while (_client == null){ /* Wait whileis created */ }
-            System.Console.WriteLine("Created = > Avril.ClientAssembly.Client()");//TEST
+            Set_client(new Avril.ClientAssembly.Client());
+            while (Get_client() == null){ /* Wait whileis created */ }
+            System.Console.WriteLine("Created = > Avril.ClientAssembly.Client()");//TESTBENCH
         }
         public void Initialise(Avril.ClientAssembly.Framework_Client obj)
         {
-            obj.Get_Client().Get_Execute().Initialise_Libraries();
-            obj.Get_Client().Get_Execute().Initialise(obj);
-            obj.Get_Client().Get_Execute().Initialise_Threads(obj);
-/*
-            Valve.Sockets.Library.Initialize();
-            Valve.Sockets.Library.Initialize(new StringBuilder(1024));
-            Valve.Sockets.NetworkingIdentity networkingIdentity = new Valve.Sockets.NetworkingIdentity();
-            Valve.Sockets.Library.Initialize(ref networkingIdentity, new StringBuilder(1024));
-*/
-            //Framework.Get_Client().GetExecute().Create_And_Run_Graphics();//ToDo re enable
-
+            obj.Get_client().Get_data().Get_data_Control().Initialise(obj);
+            System.Console.WriteLine("alpha");//TESTBENCH
+            obj.Get_client().Get_execute().Initialise_Libraries();
+            System.Console.WriteLine("bravo");//TESTBENCH
+            obj.Get_client().Get_execute().Initialise(obj);
+            System.Console.WriteLine("charlie");//TESTBENCH
+            obj.Get_client().Get_execute().Initialise_Threads(obj);
+            System.Console.WriteLine("delta");//TESTBENCH
+            obj.Get_client().Get_execute().Create_And_Run_Graphics(obj);
+            System.Console.WriteLine("foxtrot");//TESTBENCH
         }
-        static public Avril.ClientAssembly.Client Get__Client()
+        static public Avril.ClientAssembly.Client Get__client()
         {
             return _client;
         }
-        public Avril.ClientAssembly.Client Get_Client()
+        public Avril.ClientAssembly.Client Get_client()
         {
             return _client;
         }
-        //static public Networking GetNetworking()
-        //{
-        //    return networkingClient;
-        //}
+        private void Set_client(Avril.ClientAssembly.Client value)
+        {
+            _client = value;
+        }
     }
 }

@@ -4,47 +4,47 @@ namespace Avril.ClientAssembly.Inputs
 {
     public class Input
     {
-        static private Avril.ClientAssembly.Inputs.Input_Control input_Control;
-        static private Object praiseInputBuffer_Subset;
-        static private UInt16 praiseEventId;
+        private Avril.ClientAssembly.Inputs.Input_Control _input_Control;
+        private Object _praiseInputBuffer_Subset;
+        private UInt16 _praiseEventId;
 
         public Input()
         {
-            input_Control = null;
-            praiseInputBuffer_Subset = null;
-            praiseEventId = new int();
-            praiseEventId = 0;
+            Set_input_Control(null);
+            Set_praiseInputBuffer_Subset(null);
+            Set_praiseEventId(0);
             System.Console.WriteLine("Avril.ClientAssembly: Input");
         }
 
         public void InitialiseControl() 
         {
-            input_Control = new Avril.ClientAssembly.Inputs.Input_Control();
-            while (input_Control == null) { /* Wait while is created */ }
+            Set_input_Control(new Avril.ClientAssembly.Inputs.Input_Control());
+            while (Get_input_Control() == null) { }
         }
-
-        public Object Get_InputBufferSubset()
+        public Avril.ClientAssembly.Inputs.Input_Control Get_input_Control()
         {
-            return praiseInputBuffer_Subset;
+            return _input_Control;
         }
-
-        public Avril.ClientAssembly.Inputs.Input_Control GetInputControl()
+        public Object Get_praiseInputBuffer_Subset()
         {
-            return input_Control;
+            return _praiseInputBuffer_Subset;
         }
-        public int GetPraiseEventId()
+        public int Get_praiseEventId()
         {
-            return praiseEventId;
+            return _praiseEventId;
         }
-
-        public void Set_InputBuffer_SubSet(Object value)
+        public void Set_input_Control(Input_Control value)
         {
-            praiseInputBuffer_Subset = value;
+            _input_Control = value;
+        }
+        public void Set_praiseInputBuffer_Subset(Object value)
+        {
+            _praiseInputBuffer_Subset = value;
         }
         
-        public void SetPraiseEventId(UInt16 value)
+        public void Set_praiseEventId(UInt16 value)
         {
-            praiseEventId = value;
+            _praiseEventId = value;
         }
     }
 }

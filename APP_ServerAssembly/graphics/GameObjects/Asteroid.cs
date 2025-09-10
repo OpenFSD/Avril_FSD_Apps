@@ -1,16 +1,15 @@
 ﻿using System;
 using OpenTK;
-using Avril.ServerAssembly.Graphics.Renderables;
+using Florence.ServerAssembly.Graphics.Renderables;
 
-namespace Avril.ServerAssembly.Graphics.GameObjects
+namespace Florence.ServerAssembly.Graphics.GameObjects
 {
     public class Asteroid : AGameObject
     {
         public int Score { get; set; }
-        private Avril.ServerAssembly.Graphics.GameObjects.Bullet _lockedBullet;
         private ARenderable _original;
-        public Asteroid(ARenderable model, Vector3 position, Vector3 direction, Vector3 rotation, float velocity) 
-            : base(model, position, direction, rotation, velocity)
+        public Asteroid(ARenderable model) 
+            : base(model)
         {
             _original = model;
         }
@@ -22,12 +21,6 @@ namespace Avril.ServerAssembly.Graphics.GameObjects
             _rotation.Y = (float)Math.Cos((time + GameObjectNumber) * 0.5);
             _rotation.Z = (float)Math.Cos((time + GameObjectNumber) * 0.2);
             base.Update(time, delta);
-        }
-        
-        public void LockBullet(Bullet bullet)
-        {
-            _lockedBullet = bullet;
-            _model = bullet.Model;
         }
     }
 }

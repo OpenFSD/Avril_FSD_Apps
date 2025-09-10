@@ -10,7 +10,7 @@ namespace Avril.ClientAssembly.GameInstance
     public class Settings
     {
         private float _fov = 45f;
-        private static int _refreshRate = 60;
+        private static int _refreshRate = 144;
         private static bool _systemInitialised = false;
         private char _screenSize_X;
         private char _screenSize_Y;
@@ -22,7 +22,7 @@ namespace Avril.ClientAssembly.GameInstance
             set_ScreenSize_Y((char)1080);
             Set_fov(90f);
         }
-//GET
+        //GET
         public float Get_fov()
         {
             return _fov;

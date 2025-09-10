@@ -2,7 +2,7 @@
 using System.Drawing;
 using OpenTK.Graphics.OpenGL4;
 
-namespace Avril.ServerAssembly.Graphics.Renderables
+namespace Florence.ServerAssembly.Graphics.Renderables
 {
     public class MipMapGeneratedRenderObject : ARenderable
     {

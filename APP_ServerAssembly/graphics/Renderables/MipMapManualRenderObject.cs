@@ -1,7 +1,10 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 using OpenTK.Graphics.OpenGL4;
 
-namespace Avril.ServerAssembly.Graphics.Renderables
+namespace Florence.ServerAssembly.Graphics.Renderables
 {
     public class MipMapManualRenderObject : ARenderable
     {

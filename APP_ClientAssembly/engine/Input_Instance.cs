@@ -1,28 +1,26 @@
 ﻿
-using System;
-
 namespace Avril.ClientAssembly.Inputs
 {
     public class Input_Instance
     {
-        static private Avril.ClientAssembly.Inputs.Input_Instance_Control inputInstance_Control;
-        static private Avril.ClientAssembly.Inputs.Input empty_InputBuffer;
-        static private Avril.ClientAssembly.Inputs.Input[] inputDoubleBuffer;
+        private Avril.ClientAssembly.Inputs.Input_Instance_Control _inputInstance_Control;
+        private Avril.ClientAssembly.Inputs.Input _empty_InputBuffer;
+        private Avril.ClientAssembly.Inputs.Input[] _inputDoubleBuffer;
 
         public Input_Instance() 
         {
-            inputInstance_Control = new Avril.ClientAssembly.Inputs.Input_Instance_Control();
-            while (inputInstance_Control == null) { /* Wait while is created */ }
+            Set_inputInstance_Control(new Avril.ClientAssembly.Inputs.Input_Instance_Control());
+            while (Get_inputInstance_Control() == null) { }
 
-            empty_InputBuffer = new Avril.ClientAssembly.Inputs.Input();
-            while (empty_InputBuffer == null) { /* Wait while is created */ }
-            empty_InputBuffer.InitialiseControl();
+            Set_empty_InputBuffer(new Avril.ClientAssembly.Inputs.Input());
+            while (Get_empty_InputBuffer() == null) { }
+            Get_empty_InputBuffer().InitialiseControl();
 
-            inputDoubleBuffer = new Avril.ClientAssembly.Inputs.Input[2];
+            _inputDoubleBuffer = new Avril.ClientAssembly.Inputs.Input[2];
             for (byte index = 0; index < 2; index++)
             {
-                inputDoubleBuffer[index] = empty_InputBuffer;
-                while (inputDoubleBuffer[index] == null) { /* Wait while is created */ }
+                _inputDoubleBuffer[index] = Get_empty_InputBuffer();
+                while (_inputDoubleBuffer[index] == null) { }
             }
         }
 
@@ -40,28 +38,38 @@ namespace Avril.ClientAssembly.Inputs
             return temp;
         }
 
-        public Avril.ClientAssembly.Inputs.Input GetBuffer_Front_InputDouble(Avril.ClientAssembly.Framework_Client obj)
+        public Avril.ClientAssembly.Inputs.Input Get_FRONT_inputDoubleBuffer(Avril.ClientAssembly.Framework_Client obj)
         {
-            return inputDoubleBuffer[BoolToInt16(obj.Get_Client().Get_Data().GetState_Buffer_InputPraise_SideToWrite())];
+            return _inputDoubleBuffer[BoolToInt16(obj.Get_client().Get_data().Get_state_Buffer_Input_ToWrite())];
         }
-        public Avril.ClientAssembly.Inputs.Input GetBuffer_Back_InputDouble(Avril.ClientAssembly.Framework_Client obj)
+        public Avril.ClientAssembly.Inputs.Input Get_BACK_inputDoubleBuffer(Avril.ClientAssembly.Framework_Client obj)
         {
-            return inputDoubleBuffer[BoolToInt16(!obj.Get_Client().Get_Data().GetState_Buffer_InputPraise_SideToWrite())];
-        }
-
-        public Avril.ClientAssembly.Inputs.Input GetEmptyInput()
-        {
-            return empty_InputBuffer;
+            return _inputDoubleBuffer[BoolToInt16(!obj.Get_client().Get_data().Get_state_Buffer_Input_ToWrite())];
         }
 
-        public Avril.ClientAssembly.Inputs.Input_Instance_Control GetInputInstance_Control()
+        public Avril.ClientAssembly.Inputs.Input Get_empty_InputBuffer()
         {
-            return inputInstance_Control;
+            return _empty_InputBuffer;
         }
 
-        public void SetBuffer_Input(Avril.ClientAssembly.Framework_Client obj, Avril.ClientAssembly.Inputs.Input value)
+        public Avril.ClientAssembly.Inputs.Input_Instance_Control Get_inputInstance_Control()
         {
-            inputDoubleBuffer[BoolToInt16(obj.Get_Client().Get_Data().GetState_Buffer_InputPraise_SideToWrite())] = value;
+            return _inputInstance_Control;
+        }
+
+        public void Set_inputDoubleBuffer(Avril.ClientAssembly.Framework_Client obj, Avril.ClientAssembly.Inputs.Input value)
+        {
+            _inputDoubleBuffer[BoolToInt16(obj.Get_client().Get_data().Get_state_Buffer_Input_ToWrite())] = value;
+        }
+
+        public void Set_empty_InputBuffer(Avril.ClientAssembly.Inputs.Input input)
+        {
+            _empty_InputBuffer = input;
+        }
+
+        public void Set_inputInstance_Control(Avril.ClientAssembly.Inputs.Input_Instance_Control input_Instance_Control)
+        {
+            _inputInstance_Control = input_Instance_Control;
         }
     }
 }

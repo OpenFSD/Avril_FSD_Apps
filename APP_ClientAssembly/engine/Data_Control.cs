@@ -1,29 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Avril.ClientAssembly
+﻿namespace Avril.ClientAssembly
 {
     public class Data_Control
     {
-        static private bool flag_IsLoaded_Stack_InputAction;
-        static private bool flag_IsLoaded_Stack_OutputAction;
-        static private bool[] isPraiseActive;
+        private bool _flag_IsLoaded_Stack_InputAction;
+        private bool _flag_IsLoaded_Stack_OutputAction;
+        private bool[] _isPraiseActive;
 
         public Data_Control()
         {
-            flag_IsLoaded_Stack_InputAction = false;
-            flag_IsLoaded_Stack_OutputAction = false;
-            isPraiseActive = new bool[6];//Number Of Praises
-            for (int index = 0; index < 6; index++)//Number Of Praises
+            Set_flag_IsLoaded_Stack_InputAction(false);
+            Set_flag_IsLoaded_Stack_OutputAction(false);
+            
+        }
+        public void Initialise(Avril.ClientAssembly.Framework_Client obj)
+        {
+            _isPraiseActive = new bool[obj.Get_client().Get_global().Get_numberOfPraises()];
+            for (int index = 0; index < obj.Get_client().Get_global().Get_numberOfPraises(); index++)
             {
-                isPraiseActive[index] = false;
+                Set_isPraiseActive(index, false);
             }
         }
-
         public void Push_Stack_InputActions(
             List<Avril.ClientAssembly.Inputs.Input> stack_InputAction,
             Avril.ClientAssembly.Inputs.Input buffer_Back_Input
@@ -58,34 +54,34 @@ namespace Avril.ClientAssembly
             stack_OutputRecieve.RemoveAt(0);
         }
 
-        public bool GetFlag_IsLoaded_Stack_InputAction()
+        public bool Get_flag_IsLoaded_Stack_InputAction()
         {
-            return flag_IsLoaded_Stack_InputAction;
+            return _flag_IsLoaded_Stack_InputAction;
         }
 
-        public bool GetFlag_IsLoaded_Stack_OutputAction()
+        public bool Get_flag_IsLoaded_Stack_OutputAction()
         {
-            return flag_IsLoaded_Stack_OutputAction;
+            return _flag_IsLoaded_Stack_OutputAction;
         }
 
-        public bool GetFlag_IsPraiseEvent(int praiseEventId)
+        public bool Get_isPraiseActive(int praiseEventId)
         {
-            return isPraiseActive[praiseEventId];
+            return _isPraiseActive[praiseEventId];
         }
         
-        public void SetFlag_InputStackLoaded(bool value)
+        public void Set_flag_IsLoaded_Stack_InputAction(bool value)
         {
-            flag_IsLoaded_Stack_InputAction = value;
+            _flag_IsLoaded_Stack_InputAction = value;
         }
 
-        public void SetFlag_OutputStackLoaded(bool value)
+        public void Set_flag_IsLoaded_Stack_OutputAction(bool value)
         {
-            flag_IsLoaded_Stack_OutputAction = value;
+            _flag_IsLoaded_Stack_OutputAction = value;
         }
 
-        public void SetIsPraiseEvent(int praiseEventId, bool value)
+        public void Set_isPraiseActive(int praiseEventId, bool value)
         {
-            isPraiseActive[praiseEventId] = value; 
+            _isPraiseActive[praiseEventId] = value; 
         }
 
     }

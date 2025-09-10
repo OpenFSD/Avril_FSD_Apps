@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Avril.ClientAssembly.Outputs
 {
     public class Output_Control
@@ -19,15 +13,15 @@ namespace Avril.ClientAssembly.Outputs
             switch (praiseEventId)
             {
                 case 0:
-                    obj.Get_Client().Get_Data().GetOutput_Instnace().GetBuffer_BackOutputDouble(obj).SetInputBufferSubSet(obj.Get_Client().Get_Data().GetUserI().GetPraise0_Input());
+                    obj.Get_client().Get_data().Get_output_Instnace().Get_BACK_outputDoubleBuffer(obj).SetInputBufferSubSet(obj.Get_client().Get_data().Get_user_I().GetPraise0_Input());
                     break;
 
                 case 1:
-                    obj.Get_Client().Get_Data().GetOutput_Instnace().GetBuffer_BackOutputDouble(obj).SetInputBufferSubSet(obj.Get_Client().Get_Data().GetUserI().GetPraise1_Input());
+                    obj.Get_client().Get_data().Get_output_Instnace().Get_BACK_outputDoubleBuffer(obj).SetInputBufferSubSet(obj.Get_client().Get_data().Get_user_I().GetPraise1_Input());
                     break;
 
                 case 2:
-                    obj.Get_Client().Get_Data().GetOutput_Instnace().GetBuffer_BackOutputDouble(obj).SetInputBufferSubSet(obj.Get_Client().Get_Data().GetUserI().GetPraise2_Input());
+                    obj.Get_client().Get_data().Get_output_Instnace().Get_BACK_outputDoubleBuffer(obj).SetInputBufferSubSet(obj.Get_client().Get_data().Get_user_I().GetPraise2_Input());
                     break;
 
             }

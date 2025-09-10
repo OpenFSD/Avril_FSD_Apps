@@ -1,111 +1,144 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Avril.ClientAssembly
+﻿namespace Avril.ClientAssembly
 {
     public class Data
     {
-        static private Avril.ClientAssembly.Data_Control data_Control;
-        //static private Avril.ClientAssembly.Game_Instance gameInstance;
-        static private ClientAssembly.GameInstance.Settings settings;
-        //byffers
-        static private Avril.ClientAssembly.Inputs.Input_Instance input_Instnace;
-        static private Avril.ClientAssembly.Outputs.Output_Instance output_Instnace;
-        //stack        
-        static private List<Avril.ClientAssembly.Outputs.Output> stack_Client_OutputRecieves;
-        //praises
-        static private Avril.ClientAssembly.Praise_Files.User_I user_I;
-
-        static private bool state_Buffer_Input_ToWrite;
-        static private bool state_Buffer_Output_ToWrite;
+        private Avril.ClientAssembly.Data_Control _data_Control;
+        private Avril.ClientAssembly.Game_Instance _gameInstance;
+        private ClientAssembly.GameInstance.Settings _settings;
+        private Avril.ClientAssembly.Inputs.Input_Instance _input_Instnace;
+        private Avril.ClientAssembly.Outputs.Output_Instance _output_Instnace;
+        private List<Avril.ClientAssembly.Outputs.Output> _stack_Client_OutputRecieves;
+        private Avril.ClientAssembly.Praise_Files.User_I _user_I;
+        private bool _state_Buffer_Input_ToWrite;
+        private bool _state_Buffer_Output_ToWrite;
 
         public Data()
         {
-            data_Control = null;
+            Set_data_Control(null);
             
-            //gameInstance = new Avril.ClientAssembly.Game_Instance();
-            //while (gameInstance == null) { /* Wait while is created */ }
+            Set_gameInstance(new Avril.ClientAssembly.Game_Instance());
+            while (Get_gameInstance() == null) { }
 
-            settings = new Avril.ClientAssembly.GameInstance.Settings();
-            while (settings == null) { /* Wait while is created */ }
+            Set_settings(new Avril.ClientAssembly.GameInstance.Settings());
+            while (Get_settings() == null) { }
 
-            input_Instnace = new Avril.ClientAssembly.Inputs.Input_Instance();
-            while (input_Instnace == null) { /* Wait while is created */ }
+            Set_input_Instnace(new Avril.ClientAssembly.Inputs.Input_Instance());
+            while (Get_input_Instnace() == null) { }
 
-            output_Instnace = new Avril.ClientAssembly.Outputs.Output_Instance();
-            while (output_Instnace == null) { /* Wait while is created */ }
+            Set_output_Instnace(new Avril.ClientAssembly.Outputs.Output_Instance());
+            while (Get_output_Instnace() == null) { }
 
-            stack_Client_OutputRecieves = new List<Avril.ClientAssembly.Outputs.Output>();
-            while (stack_Client_OutputRecieves == null) { /* Wait while is created */ }
+            Set_stack_Client_OutputRecieves(new List<Avril.ClientAssembly.Outputs.Output>());
+            while (Get_stack_Client_OutputRecieves() == null) { }
 
-            user_I = new Avril.ClientAssembly.Praise_Files.User_I();
-            while (user_I == null) { /* Wait while is created */ }
+            Set_user_I(new Avril.ClientAssembly.Praise_Files.User_I());
+            while (Get_user_I() == null) { }
 
-            state_Buffer_Input_ToWrite = true;
-            state_Buffer_Output_ToWrite = false;
+            Set_state_Buffer_Input_ToWrite(true);
+            Set_state_Buffer_Output_ToWrite(false);
 
             System.Console.WriteLine("Avril.ClientAssembly: Data");
         }
 
         public void InitialiseControl()
         {
-            data_Control = new Avril.ClientAssembly.Data_Control();
-            while (data_Control == null) { /* Wait while is created */ }
+            Set_data_Control(new Avril.ClientAssembly.Data_Control());
+            while (Get_data_Control() == null) { }
         }
 
         public void Flip_InBufferToWrite()
         {
-            state_Buffer_Input_ToWrite = !state_Buffer_Input_ToWrite;
+            Set_state_Buffer_Input_ToWrite(!Get_state_Buffer_Input_ToWrite());
         }
         public void Flip_OutBufferToWrite()
         {
-            state_Buffer_Output_ToWrite = !state_Buffer_Output_ToWrite;
+            Set_state_Buffer_Output_ToWrite(!Get_state_Buffer_Output_ToWrite());
         }
 
-        public Avril.ClientAssembly.Data_Control Get_Data_Control()
+        public Avril.ClientAssembly.Data_Control Get_data_Control()
         {
-            return data_Control;
+            return _data_Control;
         }
 
-        //public Avril.ClientAssembly.Game_Instance GetGame_Instance()
-        //{
-       //     return gameInstance;
-        //}
-
-        public Avril.ClientAssembly.Inputs.Input_Instance GetInput_Instnace()
+        public Avril.ClientAssembly.Game_Instance Get_gameInstance()
         {
-            return input_Instnace;
-        }
-        public Avril.ClientAssembly.Outputs.Output_Instance GetOutput_Instnace()
-        {
-            return output_Instnace;
+            return _gameInstance;
         }
 
-        public bool GetState_Buffer_InputPraise_SideToWrite()
+        public Avril.ClientAssembly.Inputs.Input_Instance Get_input_Instnace()
         {
-            return state_Buffer_Input_ToWrite;
+            return _input_Instnace;
         }
-        public bool GetState_Buffer_OutputPraise_SideToWrite()
+        public Avril.ClientAssembly.Outputs.Output_Instance Get_output_Instnace()
         {
-            return state_Buffer_Output_ToWrite;
-        }
-
-        public ClientAssembly.GameInstance.Settings GetSettings()
-        {
-            return settings;
+            return _output_Instnace;
         }
 
-        public List<Avril.ClientAssembly.Outputs.Output> GetStack_OutputsRecieved()
+        public bool Get_state_Buffer_Input_ToWrite()
         {
-            return stack_Client_OutputRecieves;
+            return _state_Buffer_Input_ToWrite;
+        }
+        public bool Get_state_Buffer_Output_ToWrite()
+        {
+            return _state_Buffer_Output_ToWrite;
         }
 
-        public Avril.ClientAssembly.Praise_Files.User_I GetUserI()
+        public ClientAssembly.GameInstance.Settings Get_settings()
         {
-            return user_I;
+            return _settings;
+        }
+
+        public List<Avril.ClientAssembly.Outputs.Output> Get_stack_Client_OutputRecieves()
+        {
+            return _stack_Client_OutputRecieves;
+        }
+
+        public Avril.ClientAssembly.Praise_Files.User_I Get_user_I()
+        {
+            return _user_I;
+        }
+
+        private void Set_data_Control(Avril.ClientAssembly.Data_Control data_Control)
+        {
+            _data_Control = data_Control;
+        }
+
+        private void Set_gameInstance(Avril.ClientAssembly.Game_Instance game_Instance)
+        {
+            _gameInstance = game_Instance;
+        }
+
+        private void Set_input_Instnace(Avril.ClientAssembly.Inputs.Input_Instance input_Instance)
+        {
+            _input_Instnace = input_Instance;
+        }
+        private void Set_output_Instnace(Avril.ClientAssembly.Outputs.Output_Instance output_Instance)
+        {
+            _output_Instnace = output_Instance;
+        }
+
+        private void Set_state_Buffer_Input_ToWrite(bool state_Buffer_Input_ToWrite)
+        {
+            _state_Buffer_Input_ToWrite = state_Buffer_Input_ToWrite;
+        }
+        private void Set_state_Buffer_Output_ToWrite(bool state_Buffer_Output_ToWrite)
+        {
+            _state_Buffer_Output_ToWrite = state_Buffer_Output_ToWrite;
+        }
+
+        private void Set_settings(ClientAssembly.GameInstance.Settings settings)
+        {
+            _settings = settings;
+        }
+
+        private void Set_stack_Client_OutputRecieves(List<Avril.ClientAssembly.Outputs.Output> stack_Client_OutputRecieves)
+        {
+            _stack_Client_OutputRecieves = stack_Client_OutputRecieves;
+        }
+
+        private void Set_user_I(Avril.ClientAssembly.Praise_Files.User_I user_I)
+        {
+            _user_I = user_I;
         }
     }
 }

@@ -81,11 +81,11 @@ namespace Avril.ClientAssembly.Graphics
 
             _gameObjectFactory = new GameObjectFactory(models);
 
-            _player = _gameObjectFactory.CreateSpacecraft();
-            _gameObjects.Add(_player);
-            _gameObjects.Add(_gameObjectFactory.CreateAsteroid());
-            _gameObjects.Add(_gameObjectFactory.CreateGoldenAsteroid());
-            _gameObjects.Add(_gameObjectFactory.CreateWoodenAsteroid());
+            //_player = _gameObjectFactory.CreateSpacecraft();
+            //_gameObjects.Add(_player);
+           // _gameObjects.Add(_gameObjectFactory.CreateAsteroid());
+            //_gameObjects.Add(_gameObjectFactory.CreateGoldenAsteroid());
+            //_gameObjects.Add(_gameObjectFactory.CreateWoodenAsteroid());
 
             _camera = new StaticCamera();
 
@@ -127,60 +127,6 @@ namespace Avril.ClientAssembly.Graphics
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
             _time += e.Time;
-            var remove = new HashSet<AGameObject>();
-            var view = new Vector4(0, 0, -2.4f, 0);
-            int removedAsteroids = 0;
-            int outOfBoundsAsteroids = 0;
-            foreach (var item in _gameObjects)
-            {
-                item.Update(_time, e.Time);
-                if (item.ToBeRemoved)
-                    remove.Add(item);
-
-                if (item.GetType() == typeof (Bullet))
-                {
-                    var collide = ((Bullet) item).CheckCollision(_gameObjects);
-                    if (collide != null)
-                    {
-                        remove.Add(item);
-                        if (remove.Add(collide))
-                        {
-                            _score += ((Asteroid)collide).Score;
-                            removedAsteroids++;
-                        }
-                    }
-                }
-                if (item.GetType() == typeof(Spacecraft))
-                {
-                    var collide = ((Spacecraft)item).CheckCollision(_gameObjects);
-                    if (collide != null)
-                    {
-                        foreach (var x in _gameObjects)
-                            remove.Add(x);
-                        _gameObjects.Add(_gameObjectFactory.CreateGameOver());
-                        _gameOver = true;
-                        removedAsteroids = 0;
-                        break;
-                    }
-                }
-            }
-            foreach (var r in remove)
-            {
-                r.ToBeRemoved = true;
-                _gameObjects.Remove(r);
-            }
-            for (int i = 0; i < removedAsteroids; i++)
-            {
-                _gameObjects.Add(_gameObjectFactory.CreateRandomAsteroid());
-            }
-            for (int i = 0; i < outOfBoundsAsteroids; i++)
-            {
-                _gameObjects.Add(_gameObjectFactory.CreateRandomAsteroid());
-            }
-            if (_lastBullet == null || _lastBullet.ToBeRemoved)
-            {
-                _camera = new StaticCamera();
-            }
             _camera.Update(_time, e.Time);
             HandleKeyboard(e.Time);
         }
@@ -188,71 +134,9 @@ namespace Avril.ClientAssembly.Graphics
         private void HandleKeyboard(double dt)
         {
             var keyState = Keyboard.GetState();
-
             if (keyState.IsKeyDown(Key.Escape))
             {
                 Exit();
-            }
-            if (keyState.IsKeyDown(Key.M))
-            {
-                GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Point);
-            }
-            if (keyState.IsKeyDown(Key.Comma))
-            {
-                GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
-            }
-            if (keyState.IsKeyDown(Key.Period))
-            {
-                GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
-            }
-
-            if(keyState.IsKeyDown(Key.Number1))
-            {
-                _bulletType = Bullet.BulletType.Straight;
-            }
-            if (keyState.IsKeyDown(Key.Number2))
-            {
-                _bulletType = Bullet.BulletType.Wave;
-            }
-            if (keyState.IsKeyDown(Key.Number3))
-            {
-                _bulletType = Bullet.BulletType.Seeker;
-            }
-            if (keyState.IsKeyDown(Key.Number4))
-            {
-                _bulletType = Bullet.BulletType.SeekerExtra;
-            }
-            if (keyState.IsKeyDown(Key.T))
-            {
-                _useFirstPerson = false;
-            }
-            if (keyState.IsKeyDown(Key.F))
-            {
-                _useFirstPerson = true;
-            }
-
-            if (keyState.IsKeyDown(Key.A))
-            {
-                _player.MoveLeft();
-            }
-            if (keyState.IsKeyDown(Key.D))
-            {
-                _player.MoveRight();
-            }
-            if (!_gameOver && keyState.IsKeyDown(Key.Space) && _lastKeyboardState.IsKeyUp(Key.Space))
-            {
-                var bullet = _gameObjectFactory.CreateBullet(_player.Position, _bulletType);
-                if (_bulletType == Bullet.BulletType.Seeker || _bulletType == Bullet.BulletType.SeekerExtra)
-                {
-                    var asteroids = _gameObjects.Where(x => x.GetType() == typeof (Asteroid)).ToList();
-                    bullet.SetTarget((Asteroid) asteroids[bullet.GameObjectNumber%asteroids.Count]);
-                    if(_useFirstPerson)
-                        _camera = new FirstPersonCamera(bullet);
-                    else
-                        _camera = new ThirdPersonCamera(bullet, new Vector3(-0.3f, -0.3f, 0.1f));
-                }
-                _lastBullet = bullet;
-                _gameObjects.Add(bullet);
             }
             _lastKeyboardState = keyState;
         }

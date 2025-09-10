@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 /*
-namespace Avril.ServerAssembly.game_Instance
+namespace Florence.ServerAssembly.game_Instance
 {
     public class Map_Default
     {
@@ -78,7 +78,7 @@ namespace Avril.ServerAssembly.game_Instance
             System.Console.WriteLine("FLORENCE: Map_Default");
         }
 
-        public void Draw_Square(Avril.ServerAssembly.Data data)
+        public void Draw_Square(Florence.ServerAssembly.Data data)
         {
             GL.DrawElements(
                 PrimitiveType.Triangles,

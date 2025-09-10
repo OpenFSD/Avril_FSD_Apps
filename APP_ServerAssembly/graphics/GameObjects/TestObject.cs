@@ -1,13 +1,13 @@
 ﻿using System;
 using OpenTK;
-using Avril.ServerAssembly.Graphics.Renderables;
+using Florence.ServerAssembly.Graphics.Renderables;
 
-namespace Avril.ServerAssembly.Graphics.GameObjects
+namespace Florence.ServerAssembly.Graphics.GameObjects
 {
     public class TestObject : AGameObject
     {
-        public TestObject(ARenderable model, Vector3 position, Vector3 direction, Vector3 rotation, float velocity) 
-            : base(model, position, direction, rotation, velocity)
+        public TestObject(ARenderable model) 
+            : base(model)
         {
         }
 

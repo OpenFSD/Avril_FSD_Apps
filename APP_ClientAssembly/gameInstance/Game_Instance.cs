@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Drawing;
 using OpenTK;
 using OpenTK.Graphics;
@@ -15,26 +13,31 @@ namespace Avril.ClientAssembly
 {
     public sealed class Game_Instance : GameWindow
     {
+        private bool done_once;
+
         private readonly string _title;
-        private GameObjectFactory _gameObjectFactory;
-        private readonly List<AGameObject> _gameObjects = new List<AGameObject>();
         private double _time;
         private readonly Color4 _backColor = new Color4(0.1f, 0.1f, 0.3f, 1.0f);
+        private FirstPersonCamera _cameraFP;
+        private ThirdPersonCamera _cameraTP;
         private Matrix4 _projectionMatrix;
         private float _fov = 45f;
+
+        private KeyboardState _lastKeyboardState;
+        private MouseState _lastMouseState;
+
+        private GameObjectFactory _gameObjectFactory;
+        private readonly List<AGameObject> _gameObjects = new List<AGameObject>();
+        
+        
         private ShaderProgram _texturedProgram;
         private ShaderProgram _solidProgram;
-        private KeyboardState _lastKeyboardState;
-        private Spacecraft _player;
-        private int _score;
-        private bool _gameOver;
-        private Bullet.BulletType _bulletType;
-        private Bullet _lastBullet;
-        private bool _useFirstPerson = true;
-        private ICamera _camera;
+        
+        private bool cameraSelector = false;
+       
         public Game_Instance()
-            : base(750, // initial width
-                500, // initial height
+            : base(1920, // initial width
+                1080, // initial height
                 GraphicsMode.Default,
                 "",  // initial title
                 GameWindowFlags.Fullscreen,
@@ -45,12 +48,12 @@ namespace Avril.ClientAssembly
         {
             _title += "dreamstatecoding.blogspot.com: OpenGL Version: " + GL.GetString(StringName.Version);
         }
+
         protected override void OnResize(EventArgs e)
         {
             GL.Viewport(0, 0, Width, Height);
             CreateProjection();
         }
-
 
         protected override void OnLoad(EventArgs e)
         {
@@ -58,38 +61,45 @@ namespace Avril.ClientAssembly
             VSync = VSyncMode.Off;
             CreateProjection();
             _solidProgram = new ShaderProgram();
-            _solidProgram.AddShader(ShaderType.VertexShader, "..\\..\\..\\Graphics\\Shaders\\1Vert\\simplePipeVert.c");
-            _solidProgram.AddShader(ShaderType.FragmentShader, "..\\..\\..\\Graphics\\Shaders\\5Frag\\simplePipeFrag.c");
+            _solidProgram.AddShader(ShaderType.VertexShader, "..\\..\\..\\..\\APP_ClientAssembly\\graphics\\Shaders\\1Vert\\simplePipeVert.c");
+            _solidProgram.AddShader(ShaderType.FragmentShader, "..\\..\\..\\..\\APP_ClientAssembly\\graphics\\Shaders\\5Frag\\simplePipeFrag.c");
             _solidProgram.Link();
 
             _texturedProgram = new ShaderProgram();
-            _texturedProgram.AddShader(ShaderType.VertexShader, "..\\..\\..\\Graphics\\Shaders\\1Vert\\simplePipeTexVert.c");
-            _texturedProgram.AddShader(ShaderType.FragmentShader, "..\\..\\..\\Graphics\\Shaders\\5Frag\\simplePipeTexFrag.c");
+            _texturedProgram.AddShader(ShaderType.VertexShader, "..\\..\\..\\..\\APP_ClientAssembly\\graphics\\Shaders\\1Vert\\simplePipeTexVert.c");
+            _texturedProgram.AddShader(ShaderType.FragmentShader, "..\\..\\..\\..\\APP_ClientAssembly\\graphics\\Shaders\\5Frag\\simplePipeTexFrag.c");
             _texturedProgram.Link();
 
             var models = new Dictionary<string, ARenderable>();
-            models.Add("Wooden", new MipMapGeneratedRenderObject(new IcoSphereFactory().Create(3), _texturedProgram.Id, "..\\..\\..\\graphics\\Textures\\wooden.png", 8));
-            models.Add("Golden", new MipMapGeneratedRenderObject(new IcoSphereFactory().Create(3), _texturedProgram.Id, "..\\..\\..\\graphics\\Textures\\golden.bmp", 8));
-            models.Add("Asteroid", new MipMapGeneratedRenderObject(new IcoSphereFactory().Create(3), _texturedProgram.Id, "..\\..\\..\\graphics\\Textures\\moonmap1k.jpg", 8));
-            models.Add("Spacecraft", new MipMapGeneratedRenderObject(RenderObjectFactory.CreateTexturedCube6(1, 1, 1), _texturedProgram.Id, "..\\..\\..\\graphics\\Textures\\spacecraft.png", 8));
-            models.Add("Gameover", new MipMapGeneratedRenderObject(RenderObjectFactory.CreateTexturedCube6(1, 1, 1), _texturedProgram.Id, "..\\..\\..\\graphics\\Textures\\gameover.png", 8));
-            models.Add("Bullet", new MipMapGeneratedRenderObject(new IcoSphereFactory().Create(3), _texturedProgram.Id, "..\\..\\..\\graphics\\Textures\\dotted.png", 8));
+            models.Add("Player", new MipMapGeneratedRenderObject(RenderObjectFactory.CreateTexturedCube6(1, 1, 1), _texturedProgram.Id, "..\\..\\..\\..\\APP_ClientAssembly\\graphics\\Textures\\gameover.png", 8));
+            models.Add("Wooden", new MipMapGeneratedRenderObject(new IcoSphereFactory().Create(3), _texturedProgram.Id, "..\\..\\..\\..\\APP_ClientAssembly\\graphics\\Textures\\wooden.png", 8));
+            models.Add("Golden", new MipMapGeneratedRenderObject(new IcoSphereFactory().Create(3), _texturedProgram.Id, "..\\..\\..\\..\\APP_ClientAssembly\\graphics\\Textures\\golden.bmp", 8));
+            models.Add("Asteroid", new MipMapGeneratedRenderObject(new IcoSphereFactory().Create(3), _texturedProgram.Id, "..\\..\\..\\..\\APP_ClientAssembly\\graphics\\Textures\\moonmap1k.jpg", 8));
+            models.Add("Spacecraft", new MipMapGeneratedRenderObject(RenderObjectFactory.CreateTexturedCube6(1, 1, 1), _texturedProgram.Id, "..\\..\\..\\..\\APP_ClientAssembly\\graphics\\Textures\\spacecraft.png", 8));
+            models.Add("Gameover", new MipMapGeneratedRenderObject(RenderObjectFactory.CreateTexturedCube6(1, 1, 1), _texturedProgram.Id, "..\\..\\..\\..\\APP_ClientAssembly\\graphics\\Textures\\gameover.png", 8));
+            models.Add("Bullet", new MipMapGeneratedRenderObject(new IcoSphereFactory().Create(3), _texturedProgram.Id, "..\\..\\..\\..\\APP_ClientAssembly\\graphics\\Textures\\dotted.png", 8));
 
-            //models.Add("TestObject", new TexturedRenderObject(RenderObjectFactory.CreateTexturedCube(1, 1, 1), _texturedProgram.Id, @"Components\Textures\asteroid texture one side.jpg"));
-            //models.Add("TestObjectGen", new MipMapGeneratedRenderObject(RenderObjectFactory.CreateTexturedCube(1, 1, 1), _texturedProgram.Id, @"Components\Textures\asteroid texture one side.jpg", 8));
-            //models.Add("TestObjectPreGen", new MipMapManualRenderObject(RenderObjectFactory.CreateTexturedCube(1, 1, 1), _texturedProgram.Id, @"Components\Textures\asteroid texture one side mipmap levels 0 to 8.bmp", 9));
+            //models.Add("TestObject", new TexturedRenderObject(RenderObjectFactory.CreateTexturedCube(1, 1, 1), _texturedProgram.Id, "..\\..\\..\\graphics\Textures\asteroid texture one side.jpg"));
+            //models.Add("TestObjectGen", new MipMapGeneratedRenderObject(RenderObjectFactory.CreateTexturedCube(1, 1, 1), _texturedProgram.Id, "..\\..\\..\\graphics\Textures\asteroid texture one side.jpg", 8));
+            //models.Add("TestObjectPreGen", new MipMapManualRenderObject(RenderObjectFactory.CreateTexturedCube(1, 1, 1), _texturedProgram.Id, "..\\..\\..\\graphics\Textures\asteroid texture one side mipmap levels 0 to 8.bmp", 9));
 
             _gameObjectFactory = new GameObjectFactory(models);
 
-            _player = _gameObjectFactory.CreateSpacecraft();
-            _gameObjects.Add(_player);
-            _gameObjects.Add(_gameObjectFactory.CreateAsteroid());
-            _gameObjects.Add(_gameObjectFactory.CreateGoldenAsteroid());
-            _gameObjects.Add(_gameObjectFactory.CreateWoodenAsteroid());
+            _gameObjectFactory.Create_PlayerOnClient();
+            _gameObjects.Add(_gameObjectFactory.Get_player());
 
-            _camera = new StaticCamera();
+            _gameObjects.Add(_gameObjectFactory.CreateSphericalAsteroid("Wooden", new Vector3(10f, 0f, 0f), new Vector3(1f)));
+            _gameObjects.Add(_gameObjectFactory.CreateSphericalAsteroid("Wooden", new Vector3(-10f, 0f, 0f), new Vector3(1f)));
+            _gameObjects.Add(_gameObjectFactory.CreateSphericalAsteroid("Golden", new Vector3(0f, 10f, 0f), new Vector3(1f)));
+            _gameObjects.Add(_gameObjectFactory.CreateSphericalAsteroid("Golden", new Vector3(0f, -10f, 0f), new Vector3(1f)));
+            _gameObjects.Add(_gameObjectFactory.CreateSphericalAsteroid("Asteroid", new Vector3(0f, 0f, 10f), new Vector3(1f)));
+            _gameObjects.Add(_gameObjectFactory.CreateSphericalAsteroid("Asteroid", new Vector3(0f, 0f, -10f), new Vector3(1f)));
 
-            CursorVisible = true;
+            //_camera = new StaticCamera();
+
+            _gameObjectFactory.Get_player().Create_Cameras();
+
+            CursorVisible = false;
 
             GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
             GL.PatchParameter(PatchParameterInt.PatchVertices, 3);
@@ -124,67 +134,90 @@ namespace Avril.ClientAssembly
                 0.1f,                       // near plane
                 4000f);                     // far plane
         }
+
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
             _time += e.Time;
-            var remove = new HashSet<AGameObject>();
-            var view = new Vector4(0, 0, -2.4f, 0);
-            int removedAsteroids = 0;
-            int outOfBoundsAsteroids = 0;
             foreach (var item in _gameObjects)
             {
                 item.Update(_time, e.Time);
-                if (item.ToBeRemoved)
-                    remove.Add(item);
+            }
+            HandleKeyboard(e.Time);
+            HandleMouse();
+            switch (cameraSelector)
+            {
+                case false:
+                    Get_gameObjectFactory().Get_player().Get_CameraFP().Update(_time, e.Time);
+                    break;
 
-                if (item.GetType() == typeof(Bullet))
+                case true:
+                    Get_gameObjectFactory().Get_player().Get_CameraTP().Update(_time, e.Time);
+                    break;
+            }
+        }
+        private void HandleMouse()
+        {
+            Console.WriteLine("TESTBENCH => HandleMouse");
+            MouseState mouseState = Mouse.GetCursorState();
+            Avril.ClientAssembly.Framework_Client obj = Program.Get_framework_Client();
+            if (obj.Get_client().Get_data().Get_data_Control().Get_isPraiseActive(1) == false)
+            {
+                if (_gameObjectFactory.Get_player().Get_IsFirstMouseMove()) // This bool variable is initially set to true.
                 {
-                    var collide = ((Bullet)item).CheckCollision(_gameObjects);
-                    if (collide != null)
-                    {
-                        remove.Add(item);
-                        if (remove.Add(collide))
-                        {
-                            _score += ((Asteroid)collide).Score;
-                            removedAsteroids++;
-                        }
-                    }
+                    _gameObjectFactory.Get_player().Set_MousePos(new Vector2(mouseState.X, mouseState.Y));
+                    _gameObjectFactory.Get_player().Set_IsFirstMouseMove(false);
                 }
-                if (item.GetType() == typeof(Spacecraft))
+                else
                 {
-                    var collide = ((Spacecraft)item).CheckCollision(_gameObjects);
-                    if (collide != null)
+/*
+                    switch (cameraSelector)
                     {
-                        foreach (var x in _gameObjects)
-                            remove.Add(x);
-                        _gameObjects.Add(_gameObjectFactory.CreateGameOver());
-                        _gameOver = true;
-                        removedAsteroids = 0;
+                    case false:
+                            if ((mouseState.X != (float)(Avril.ClientAssembly.Framework.GetGameServer().GetData().GetSettings().Get_ScreenSize_X() / 2))
+                                || (mouseState.Y != (float)(Avril.ClientAssembly.Framework.GetGameServer().GetData().GetSettings().Get_ScreenSize_Y() / 2)))
+                            {
+                                System.Console.WriteLine("TESTBENCH => mouse X = " + mouseState.X + "  mouse Y = " + mouseState.Y);
+
+                                float sensitivity = _gameObjectFactory.Get_player().Get_sensitivity();
+                                float anglePerPixle = Avril.ClientAssembly.Framework.GetGameServer().GetData().GetSettings().Get_fov() / Avril.ClientAssembly.Framework.GetGameServer().GetData().GetSettings().Get_ScreenSize_Y();
+                                float deltaX = anglePerPixle * (mouseState.X - (Avril.ClientAssembly.Framework.GetGameServer().GetData().GetSettings().Get_ScreenSize_X() / 2));
+                                float deltaY = anglePerPixle * (mouseState.Y - (Avril.ClientAssembly.Framework.GetGameServer().GetData().GetSettings().Get_ScreenSize_Y() / 2));
+                                System.Console.WriteLine("TESTBENCH => deltaX = " + deltaX + "  deltaY = " + deltaY);
+
+                                _gameObjectFactory.Get_player().Get_CameraFP().Update_Yaw(deltaX);
+                                System.Console.WriteLine("yaw => " + _gameObjectFactory.Get_player().Get_CameraFP().Get_Yaw());
+                                _gameObjectFactory.Get_player().Get_CameraFP().Update_Pitch(deltaY);
+                                System.Console.WriteLine("pitch => " + _gameObjectFactory.Get_player().Get_CameraFP().Get_Pitch());
+
+                                Get_gameObjectFactory().Get_player().Get_CameraFP().UpdateVectors();
+
+                                OpenTK.Input.Mouse.SetPosition((double)(Avril.ClientAssembly.Framework.GetGameServer().GetData().GetSettings().Get_ScreenSize_X() / 2), (double)(Avril.ClientAssembly.Framework.GetGameServer().GetData().GetSettings().Get_ScreenSize_Y() / 2));
+
+                                
+                                    Avril.ClientAssembly.Framework.GetGameServer().GetData().GetData_Control().SetIsPraiseEvent(1, true);
+                                    Avril.ClientAssembly.Framework.GetGameServer().GetData().GetInput_Instnace().GetBuffer_Back_InputDouble().GetInputControl().SelectSetIntputSubset(1);
+                                    Avril.ClientAssembly.Framework.GetGameServer().GetData().GetInput_Instnace().GetBuffer_Front_InputDouble().SetPraiseEventId(1);
+                                    Avril.ClientAssembly.Praise_Files.Praise1_Input input_subset_Praise1 = (Avril.ClientAssembly.Praise_Files.Praise1_Input)Avril.ClientAssembly.Framework.GetGameServer().GetData().GetInput_Instnace().GetBuffer_Front_InputDouble().Get_InputBufferSubset();
+                                    input_subset_Praise1.Set_Mouse_X(new_mouseState.X);
+                                    input_subset_Praise1.Set_Mouse_Y(new_mouseState.Y);
+                                    Avril.ClientAssembly.Framework.GetGameServer().GetData().Flip_InBufferToWrite();
+                                    //Avril.ClientAssembly.Networking.CreateAndSendNewMessage(1);//todo
+                                
+
+                            }
+                        break;
+
+                    case true:
+                        
                         break;
                     }
+*/
                 }
-            }
-            foreach (var r in remove)
-            {
-                r.ToBeRemoved = true;
-                _gameObjects.Remove(r);
-            }
-            for (int i = 0; i < removedAsteroids; i++)
-            {
-                _gameObjects.Add(_gameObjectFactory.CreateRandomAsteroid());
-            }
-            for (int i = 0; i < outOfBoundsAsteroids; i++)
-            {
-                _gameObjects.Add(_gameObjectFactory.CreateRandomAsteroid());
-            }
-            if (_lastBullet == null || _lastBullet.ToBeRemoved)
-            {
-                _camera = new StaticCamera();
-            }
-            _camera.Update(_time, e.Time);
-            HandleKeyboard(e.Time);
-        }
 
+                _lastMouseState = mouseState;
+                Console.WriteLine("TESTBENCH => HandleMouse .. Done");
+            }
+        }
         private void HandleKeyboard(double dt)
         {
             var keyState = Keyboard.GetState();
@@ -193,72 +226,28 @@ namespace Avril.ClientAssembly
             {
                 Exit();
             }
-            if (keyState.IsKeyDown(Key.M))
+            if (keyState.IsKeyDown(Key.W))
             {
-                GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Point);
+                
             }
-            if (keyState.IsKeyDown(Key.Comma))
+            if (keyState.IsKeyDown(Key.S))
             {
-                GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
-            }
-            if (keyState.IsKeyDown(Key.Period))
-            {
-                GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
-            }
-
-            if (keyState.IsKeyDown(Key.Number1))
-            {
-                _bulletType = Bullet.BulletType.Straight;
-            }
-            if (keyState.IsKeyDown(Key.Number2))
-            {
-                _bulletType = Bullet.BulletType.Wave;
-            }
-            if (keyState.IsKeyDown(Key.Number3))
-            {
-                _bulletType = Bullet.BulletType.Seeker;
-            }
-            if (keyState.IsKeyDown(Key.Number4))
-            {
-                _bulletType = Bullet.BulletType.SeekerExtra;
-            }
-            if (keyState.IsKeyDown(Key.T))
-            {
-                _useFirstPerson = false;
-            }
-            if (keyState.IsKeyDown(Key.F))
-            {
-                _useFirstPerson = true;
+                
             }
 
             if (keyState.IsKeyDown(Key.A))
             {
-                _player.MoveLeft();
+                
             }
             if (keyState.IsKeyDown(Key.D))
             {
-                _player.MoveRight();
-            }
-            if (!_gameOver && keyState.IsKeyDown(Key.Space) && _lastKeyboardState.IsKeyUp(Key.Space))
-            {
-                var bullet = _gameObjectFactory.CreateBullet(_player.Position, _bulletType);
-                if (_bulletType == Bullet.BulletType.Seeker || _bulletType == Bullet.BulletType.SeekerExtra)
-                {
-                    var asteroids = _gameObjects.Where(x => x.GetType() == typeof(Asteroid)).ToList();
-                    bullet.SetTarget((Asteroid)asteroids[bullet.GameObjectNumber % asteroids.Count]);
-                    if (_useFirstPerson)
-                        _camera = new FirstPersonCamera(bullet);
-                    else
-                        _camera = new ThirdPersonCamera(bullet, new Vector3(-0.3f, -0.3f, 0.1f));
-                }
-                _lastBullet = bullet;
-                _gameObjects.Add(bullet);
+                
             }
             _lastKeyboardState = keyState;
         }
         protected override void OnRenderFrame(FrameEventArgs e)
         {
-            Title = $"{_title}: FPS:{1f / e.Time:0000.0}, obj:{_gameObjects.Count}, score:{_score}";
+            Title = $"{_title}: FPS:{1f / e.Time:0000.0}, obj:{_gameObjects.Count}";
             GL.ClearColor(Color.Black);// _backColor);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
@@ -269,10 +258,28 @@ namespace Avril.ClientAssembly
                 if (lastProgram != program)
                     GL.UniformMatrix4(20, false, ref _projectionMatrix);
                 lastProgram = obj.Model.Program;
-                obj.Render(_camera);
+                switch (cameraSelector)
+                {
+                    case false:
+                        obj.Render(Get_gameObjectFactory().Get_player().Get_CameraFP());
+                        break;
+
+                    case true:
+                        obj.Render(Get_gameObjectFactory().Get_player().Get_CameraTP());
+                        break;
+                }
+                
 
             }
             SwapBuffers();
+        }
+        public bool Get_cameraSelector()
+        {
+            return cameraSelector;
+        }
+        public GameObjectFactory Get_gameObjectFactory()
+        {
+            return _gameObjectFactory;
         }
 
     }

@@ -3,41 +3,43 @@ namespace Avril.ClientAssembly
 { 
     public class IO_Listen_Respond
     {
-        static private byte listen_CoreId;
-        static private byte respond_CoreId;
-        static private Avril.ClientAssembly.IO_Listen_Respond_Control io_Control;
+        private Avril.ClientAssembly.IO_Listen_Respond_Control _io_Control;
+        private byte _listen_CoreId;
+        private byte _respond_CoreId;
+        
 
         public IO_Listen_Respond() 
         {
-            listen_CoreId = 255;
-            respond_CoreId = 255;
-            io_Control = null;
+            Set_io_Control(null);
+            Set_listen_CoreId(255);
+            Set_respond_CoreId(255);
         }
         public void InitialiseControl()
         {
-            io_Control = new Avril.ClientAssembly.IO_Listen_Respond_Control();
-            while (io_Control == null) { /* Wait while is created */ }
+            Set_io_Control(new Avril.ClientAssembly.IO_Listen_Respond_Control());
+            while (Get_io_Control() == null) { }
         }
 
-        public void Thread_Input_Listen(Avril.ClientAssembly.Framework_Client obj)
+        public void Thread_Input_Listen()
         {
-            listen_CoreId = 0;
+            Set_listen_CoreId(0);
+            Avril.ClientAssembly.Framework_Client obj = Program.Get_framework_Client();
             bool done_once = true;
-            while (Framework_Client.Get__Client().Get_Execute().GetExecute_Control().GetFlag_ThreadInitialised(listen_CoreId) == true)
+            while (obj.Get_client().Get_execute().Get_execute_Control().Get_flag_ThreadInitialised(Get_listen_CoreId()) == true)
             {
                 if (done_once == true)
                 {
-                    Framework_Client.Get__Client().Get_Execute().GetExecute_Control().SetFlag_ThreadInitialised(listen_CoreId, false);
+                    obj.Get_client().Get_execute().Get_execute_Control().Set_flag_ThreadInitialised(Get_listen_CoreId(), false);
                     done_once = false;
                 }
             }
             System.Console.WriteLine("Thread Initalised => Thread_Input_Listen()");//TestBench
-            while (Framework_Client.Get__Client().Get_Execute().GetExecute_Control().GetFlag_Client_App_Initialised() == true)
+            while (obj.Get_client().Get_execute().Get_execute_Control().Get_flag_isInitialised_ClientApp() == true)
             {
 
             }
             System.Console.WriteLine("Thread Starting => Thread_Input_Listen()");//TestBench
-            while (Framework_Client.Get__Client().Get_Execute().GetExecute_Control().GetFlag_Client_App_Initialised() == false)
+            while (obj.Get_client().Get_execute().Get_execute_Control().Get_flag_isInitialised_ClientApp() == false)
             {
                 //Networking.CopyPayloadFromMessage();//todo
             }
@@ -45,30 +47,51 @@ namespace Avril.ClientAssembly
 
         public void Thread_Output_Respond()
         {
-            respond_CoreId = 1;
+            Set_respond_CoreId(1);
+            Avril.ClientAssembly.Framework_Client obj = Program.Get_framework_Client();
             bool done_once = true;
-            while (Framework_Client.Get__Client().Get_Execute().GetExecute_Control().GetFlag_ThreadInitialised(respond_CoreId) == true)
+            while (obj.Get_client().Get_execute().Get_execute_Control().Get_flag_ThreadInitialised(Get_respond_CoreId()) == true)
             {
                 if (done_once == true)
                 {
-                    Framework_Client.Get__Client().Get_Execute().GetExecute_Control().SetFlag_ThreadInitialised(respond_CoreId, false);
+                    obj.Get_client().Get_execute().Get_execute_Control().Set_flag_ThreadInitialised(Get_respond_CoreId(), false);
                     done_once = false;
                 }
             }
             System.Console.WriteLine("Thread Initalised => Thread_Output_Respond()");//TestBench
-            while (Framework_Client.Get__Client().Get_Execute().GetExecute_Control().GetFlag_Client_App_Initialised() == true)
+            while (obj.Get_client().Get_execute().Get_execute_Control().Get_flag_isInitialised_ClientApp() == true)
             {
 
             }
             System.Console.WriteLine("Thread Starting => Thread_Output_Respond()");//TestBench
-            while (Framework_Client.Get__Client().Get_Execute().GetExecute_Control().GetFlag_Client_App_Initialised() == false)
+            while (obj.Get_client().Get_execute().Get_execute_Control().Get_flag_isInitialised_ClientApp() == false)
             {
                 //Networking.CreateAndSendNewMessage();//todo
             }
         }
-        public Avril.ClientAssembly.IO_Listen_Respond_Control GetIO_Control()
+        public IO_Listen_Respond_Control Get_io_Control()
         {
-            return io_Control;
+            return _io_Control;
+        }
+        public byte Get_listen_CoreId()
+        {
+            return _listen_CoreId;
+        }
+        public byte Get_respond_CoreId()
+        {
+            return _respond_CoreId;
+        }
+        public void Set_io_Control(IO_Listen_Respond_Control io_control)
+        {
+            _io_Control = io_control;
+        }
+        public void Set_listen_CoreId(byte listen_coreId)
+        {
+            _listen_CoreId = listen_coreId;
+        }
+        public void Set_respond_CoreId(byte respond_coreId)
+        {
+            _respond_CoreId = respond_coreId;
         }
     }
 }

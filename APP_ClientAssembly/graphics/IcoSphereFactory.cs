@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using OpenTK;
+﻿using OpenTK;
 using Avril.ClientAssembly.Graphics.Renderables;
 
 namespace Avril.ClientAssembly.Graphics

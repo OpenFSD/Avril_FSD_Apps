@@ -87,7 +87,7 @@ namespace ClientAssembly.GameInstance
         {
             GL.DrawElements(
                 PrimitiveType.Triangles,
-                data.GetOutput_Instnace().GetBuffer_FrontOutputDouble(obj).Get_Indices().Length,
+                data.Get_output_Instnace().Get_BACK_outputDoubleBuffer(obj).Get_Indices().Length,
                 DrawElementsType.UnsignedInt,
                 0
             );

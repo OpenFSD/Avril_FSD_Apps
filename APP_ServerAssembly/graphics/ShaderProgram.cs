@@ -1,7 +1,10 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using OpenTK.Graphics.OpenGL4;
 
-namespace Avril.ServerAssembly.Graphics
+namespace Florence.ServerAssembly.Graphics
 {
     public class ShaderProgram : IDisposable
     {

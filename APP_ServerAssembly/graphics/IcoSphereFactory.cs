@@ -1,7 +1,9 @@
-﻿using OpenTK;
-using Avril.ServerAssembly.Graphics.Renderables;
+﻿using System;
+using System.Collections.Generic;
+using OpenTK;
+using Florence.ServerAssembly.Graphics.Renderables;
 
-namespace Avril.ServerAssembly.Graphics
+namespace Florence.ServerAssembly.Graphics
 {
     // based on http://blog.andreaskahler.com/2009/06/creating-icosphere-mesh-in-code.html
     // does not yet implement vertex indexing as I do not know that yet. update will come when I figure that out in openGL

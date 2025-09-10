@@ -1,33 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Avril.ClientAssembly.Outputs
 {
     public class Output_Instance
     {
-        static private Avril.ClientAssembly.Outputs.Output empty_OutputBuffer;
-        static private Avril.ClientAssembly.Outputs.Output[] outputDoubleBuffer;
-        static private Avril.ClientAssembly.Outputs.Output transmitOutputBuffer;
+        private Avril.ClientAssembly.Outputs.Output _empty_OutputBuffer;
+        private Avril.ClientAssembly.Outputs.Output[] _outputDoubleBuffer;
+        private Avril.ClientAssembly.Outputs.Output _transmitOutputBuffer;
 
         public Output_Instance() 
         {
-            empty_OutputBuffer = new Avril.ClientAssembly.Outputs.Output();
-            while (empty_OutputBuffer == null) { /* Wait while is created */ }
-            empty_OutputBuffer.InitialiseControl();
+            Set_empty_OutputBuffer(new Avril.ClientAssembly.Outputs.Output());
+            while (Get_empty_OutputBuffer() == null) { }
+            Get_empty_OutputBuffer().InitialiseControl();
 
-            outputDoubleBuffer = new Avril.ClientAssembly.Outputs.Output[2];
+            _outputDoubleBuffer = new Avril.ClientAssembly.Outputs.Output[2];
             for (byte index = 0; index < 2; index++)
             {
-                outputDoubleBuffer[index] = empty_OutputBuffer;
-                while (outputDoubleBuffer == null) { /* Wait while is created */ }
+                _outputDoubleBuffer[index] = Get_empty_OutputBuffer();
+                while (_outputDoubleBuffer[index] == null) { }
             }
-
-            transmitOutputBuffer = new Avril.ClientAssembly.Outputs.Output();
-            while (transmitOutputBuffer == null) { /* Wait while is created */ }
-
+            Set_transmitOutputBuffer(new Avril.ClientAssembly.Outputs.Output());
+            while (Get_transmitOutputBuffer() == null) { }
         }
 
         private UInt16 BoolToInt16(bool value)
@@ -44,28 +37,34 @@ namespace Avril.ClientAssembly.Outputs
             return temp;
         }
 
-        public Avril.ClientAssembly.Outputs.Output GetEmptyOutput()
+        public Avril.ClientAssembly.Outputs.Output Get_empty_OutputBuffer()
         {
-            return empty_OutputBuffer;
+            return _empty_OutputBuffer;
         }
-        public Avril.ClientAssembly.Outputs.Output GetBuffer_FrontOutputDouble(Avril.ClientAssembly.Framework_Client obj)
+        public Avril.ClientAssembly.Outputs.Output Get_FRONT_outputDoubleBuffer(Avril.ClientAssembly.Framework_Client obj)
         {
-            return outputDoubleBuffer[BoolToInt16(obj.Get_Client().Get_Data().GetState_Buffer_OutputPraise_SideToWrite())];
+            return _outputDoubleBuffer[BoolToInt16(obj.Get_client().Get_data().Get_state_Buffer_Output_ToWrite())];
         }
-        public Avril.ClientAssembly.Outputs.Output GetBuffer_BackOutputDouble(Avril.ClientAssembly.Framework_Client obj)
+        public Avril.ClientAssembly.Outputs.Output Get_BACK_outputDoubleBuffer(Avril.ClientAssembly.Framework_Client obj)
         {
-            return outputDoubleBuffer[BoolToInt16(!obj.Get_Client().Get_Data().GetState_Buffer_OutputPraise_SideToWrite())];
+            return _outputDoubleBuffer[BoolToInt16(!obj.Get_client().Get_data().Get_state_Buffer_Output_ToWrite())];
+        }
+        public Avril.ClientAssembly.Outputs.Output Get_transmitOutputBuffer()
+        {
+            return _transmitOutputBuffer;
         }
 
-        public Avril.ClientAssembly.Outputs.Output GetTransmitOutputBuffer()
+        private void Set_empty_OutputBuffer(Avril.ClientAssembly.Outputs.Output value)
         {
-            return transmitOutputBuffer;
+            _empty_OutputBuffer = value;
         }
-
-
-        public void SetBuffer_Output(Avril.ClientAssembly.Framework_Client obj, Avril.ClientAssembly.Outputs.Output value)
+        public void Set_outputDoubleBuffer(Avril.ClientAssembly.Framework_Client obj, Avril.ClientAssembly.Outputs.Output value)
         {
-            outputDoubleBuffer[BoolToInt16(!obj.Get_Client().Get_Data().GetState_Buffer_OutputPraise_SideToWrite())] = value;
+            _outputDoubleBuffer[BoolToInt16(!obj.Get_client().Get_data().Get_state_Buffer_Output_ToWrite())] = value;
+        }
+        private void Set_transmitOutputBuffer(Avril.ClientAssembly.Outputs.Output value)
+        {
+            _transmitOutputBuffer = value;
         }
     }
 }
