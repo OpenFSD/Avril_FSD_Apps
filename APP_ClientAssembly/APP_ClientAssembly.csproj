@@ -9,18 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="engine\**" />
-    <Compile Remove="gameInstance\**" />
-    <Compile Remove="graphics\**" />
-    <EmbeddedResource Remove="engine\**" />
-    <EmbeddedResource Remove="gameInstance\**" />
-    <EmbeddedResource Remove="graphics\**" />
-    <None Remove="engine\**" />
-    <None Remove="gameInstance\**" />
-    <None Remove="graphics\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="LIBLaunchEnableForConcurrentThreadsAtClient.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -32,6 +20,17 @@
   <ItemGroup>
     <PackageReference Include="OpenTK" Version="2.0.0" />
     <PackageReference Include="System.Drawing.Common" Version="9.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="engine\user_praise_files\" />
+    <Folder Include="gameInstance\" />
+    <Folder Include="graphics\Cameras\" />
+    <Folder Include="graphics\GameObjects\" />
+    <Folder Include="graphics\Shaders\1Vert\" />
+    <Folder Include="graphics\Shaders\5Frag\" />
+    <Folder Include="graphics\Textures\" />
+    <Folder Include="graphics\Renderables\" />
   </ItemGroup>
 
 </Project>

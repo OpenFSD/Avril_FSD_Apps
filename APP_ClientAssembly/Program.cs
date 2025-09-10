@@ -1,24 +1,21 @@
-﻿
-namespace Avril_FSD.ServerAssembly
+﻿// Client Assembly
+namespace Avril.ClientAssembly
 {
-    static class Program
+    class Program
     {
-        private static Avril_FSD.ServerAssembly.Framework framework_ServerAssembly = null;
+        private static Avril.ClientAssembly.Framework_Client framework = null;
 
-        static void Main()
-
+        static void Main(string[] args)
         {
-            System.Console.WriteLine("ENTERED => app entry point.");//TestBench
+            framework = new Avril.ClientAssembly.Framework_Client();
+            while (framework == null) { /* wait untill is created */ }
+            framework.Initialise(framework);
 
-            framework_ServerAssembly = new Avril_FSD.ServerAssembly.Framework();
-            while (framework_ServerAssembly == null) { /* wait until class created */ }
-            System.Console.WriteLine("Created: Client App Architechture.");//TestBench
-
+            System.Console.WriteLine("Avril.ClientAssembly START");//TEST
             while (true)
             {
 
             }
         }
-
     }
 }
