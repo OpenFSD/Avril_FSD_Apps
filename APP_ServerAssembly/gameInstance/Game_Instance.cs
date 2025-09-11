@@ -8,8 +8,6 @@ using Avril.ServerAssembly.Graphics.Cameras;
 using Avril.ServerAssembly.Graphics.GameObjects;
 using Avril.ServerAssembly.Graphics.Renderables;
 using Avril.ServerAssembly.Graphics;
-using System.Drawing.Drawing2D;
-using Avril.ServerAssembly;
 
 namespace Avril.ServerAssembly
 {
@@ -62,25 +60,45 @@ namespace Avril.ServerAssembly
             Debug.WriteLine("OnLoad");
             VSync = VSyncMode.Off;
             CreateProjection();
+#if DEBUG
             _solidProgram = new ShaderProgram();
-            _solidProgram.AddShader(ShaderType.VertexShader, "..\\..\\..\\..\\graphics\\Shaders\\1Vert\\simplePipeVert.c");
-            _solidProgram.AddShader(ShaderType.FragmentShader, "..\\..\\..\\..\\graphics\\Shaders\\5Frag\\simplePipeFrag.c");
+            _solidProgram.AddShader(ShaderType.VertexShader, "..\\..\\..\\..\\APP_ClientAssembly\\graphics\\Shaders\\1Vert\\simplePipeVert.c");
+            _solidProgram.AddShader(ShaderType.FragmentShader, "..\\..\\..\\..\\APP_ClientAssembly\\graphics\\Shaders\\5Frag\\simplePipeFrag.c");
             _solidProgram.Link();
 
             _texturedProgram = new ShaderProgram();
-            _texturedProgram.AddShader(ShaderType.VertexShader, "..\\..\\..\\..\\graphics\\Shaders\\1Vert\\simplePipeTexVert.c");
-            _texturedProgram.AddShader(ShaderType.FragmentShader, "..\\..\\..\\..\\graphics\\Shaders\\5Frag\\simplePipeTexFrag.c");
+            _texturedProgram.AddShader(ShaderType.VertexShader, "..\\..\\..\\..\\APP_ClientAssembly\\graphics\\Shaders\\1Vert\\simplePipeTexVert.c");
+            _texturedProgram.AddShader(ShaderType.FragmentShader, "..\\..\\..\\..\\APP_ClientAssembly\\graphics\\Shaders\\5Frag\\simplePipeTexFrag.c");
             _texturedProgram.Link();
 
             var models = new Dictionary<string, ARenderable>();
-            models.Add("Player", new MipMapGeneratedRenderObject(RenderObjectFactory.CreateTexturedCube6(1, 1, 1), _texturedProgram.Id, "..\\..\\..\\..\\graphics\\Textures\\gameover.png", 8));
-            models.Add("Wooden", new MipMapGeneratedRenderObject(new IcoSphereFactory().Create(3), _texturedProgram.Id, "..\\..\\..\\..\\graphics\\Textures\\wooden.png", 8));
-            models.Add("Golden", new MipMapGeneratedRenderObject(new IcoSphereFactory().Create(3), _texturedProgram.Id, "..\\..\\..\\..\\graphics\\Textures\\golden.bmp", 8));
-            models.Add("Asteroid", new MipMapGeneratedRenderObject(new IcoSphereFactory().Create(3), _texturedProgram.Id, "..\\..\\..\\..\\graphics\\Textures\\moonmap1k.jpg", 8));
-            models.Add("Spacecraft", new MipMapGeneratedRenderObject(RenderObjectFactory.CreateTexturedCube6(1, 1, 1), _texturedProgram.Id, "..\\..\\..\\..\\graphics\\Textures\\spacecraft.png", 8));
-            models.Add("Gameover", new MipMapGeneratedRenderObject(RenderObjectFactory.CreateTexturedCube6(1, 1, 1), _texturedProgram.Id, "..\\..\\..\\..\\graphics\\Textures\\gameover.png", 8));
-            models.Add("Bullet", new MipMapGeneratedRenderObject(new IcoSphereFactory().Create(3), _texturedProgram.Id, "..\\..\\..\\..\\graphics\\Textures\\dotted.png", 8));
+            models.Add("Player", new MipMapGeneratedRenderObject(RenderObjectFactory.CreateTexturedCube6(1, 1, 1), _texturedProgram.Id, "..\\..\\..\\..\\APP_ClientAssembly\\graphics\\Textures\\gameover.png", 8));
+            models.Add("Wooden", new MipMapGeneratedRenderObject(new IcoSphereFactory().Create(3), _texturedProgram.Id, "..\\..\\..\\..\\APP_ClientAssembly\\graphics\\Textures\\wooden.png", 8));
+            models.Add("Golden", new MipMapGeneratedRenderObject(new IcoSphereFactory().Create(3), _texturedProgram.Id, "..\\..\\..\\..\\APP_ClientAssembly\\graphics\\Textures\\golden.bmp", 8));
+            models.Add("Asteroid", new MipMapGeneratedRenderObject(new IcoSphereFactory().Create(3), _texturedProgram.Id, "..\\..\\..\\..\\APP_ClientAssembly\\graphics\\Textures\\moonmap1k.jpg", 8));
+            models.Add("Spacecraft", new MipMapGeneratedRenderObject(RenderObjectFactory.CreateTexturedCube6(1, 1, 1), _texturedProgram.Id, "..\\..\\..\\..\\APP_ClientAssembly\\graphics\\Textures\\spacecraft.png", 8));
+            models.Add("Gameover", new MipMapGeneratedRenderObject(RenderObjectFactory.CreateTexturedCube6(1, 1, 1), _texturedProgram.Id, "..\\..\\..\\..\\APP_ClientAssembly\\graphics\\Textures\\gameover.png", 8));
+            models.Add("Bullet", new MipMapGeneratedRenderObject(new IcoSphereFactory().Create(3), _texturedProgram.Id, "..\\..\\..\\..\\APP_ClientAssembly\\graphics\\Textures\\dotted.png", 8));
+#else
+            _solidProgram = new ShaderProgram();
+            _solidProgram.AddShader(ShaderType.VertexShader, "..\\..\\..\\APP_ClientAssembly\\graphics\\Shaders\\1Vert\\simplePipeVert.c");
+            _solidProgram.AddShader(ShaderType.FragmentShader, "..\\..\\..\\APP_ClientAssembly\\graphics\\Shaders\\5Frag\\simplePipeFrag.c");
+            _solidProgram.Link();
 
+            _texturedProgram = new ShaderProgram();
+            _texturedProgram.AddShader(ShaderType.VertexShader, "..\\..\\..\\APP_ClientAssembly\\graphics\\Shaders\\1Vert\\simplePipeTexVert.c");
+            _texturedProgram.AddShader(ShaderType.FragmentShader, "..\\..\\..\\APP_ClientAssembly\\graphics\\Shaders\\5Frag\\simplePipeTexFrag.c");
+            _texturedProgram.Link();
+
+            var models = new Dictionary<string, ARenderable>();
+            models.Add("Player", new MipMapGeneratedRenderObject(RenderObjectFactory.CreateTexturedCube6(1, 1, 1), _texturedProgram.Id, "..\\..\\..\\APP_ClientAssembly\\graphics\\Textures\\gameover.png", 8));
+            models.Add("Wooden", new MipMapGeneratedRenderObject(new IcoSphereFactory().Create(3), _texturedProgram.Id, "..\\..\\..\\APP_ClientAssembly\\graphics\\Textures\\wooden.png", 8));
+            models.Add("Golden", new MipMapGeneratedRenderObject(new IcoSphereFactory().Create(3), _texturedProgram.Id, "..\\..\\..\\APP_ClientAssembly\\graphics\\Textures\\golden.bmp", 8));
+            models.Add("Asteroid", new MipMapGeneratedRenderObject(new IcoSphereFactory().Create(3), _texturedProgram.Id, "..\\..\\..\\APP_ClientAssembly\\graphics\\Textures\\moonmap1k.jpg", 8));
+            models.Add("Spacecraft", new MipMapGeneratedRenderObject(RenderObjectFactory.CreateTexturedCube6(1, 1, 1), _texturedProgram.Id, "..\\..\\..\\APP_ClientAssembly\\graphics\\Textures\\spacecraft.png", 8));
+            models.Add("Gameover", new MipMapGeneratedRenderObject(RenderObjectFactory.CreateTexturedCube6(1, 1, 1), _texturedProgram.Id, "..\\..\\..\\APP_ClientAssembly\\graphics\\Textures\\gameover.png", 8));
+            models.Add("Bullet", new MipMapGeneratedRenderObject(new IcoSphereFactory().Create(3), _texturedProgram.Id, "..\\..\\..\\APP_ClientAssembly\\graphics\\Textures\\dotted.png", 8));
+#endif
             //models.Add("TestObject", new TexturedRenderObject(RenderObjectFactory.CreateTexturedCube(1, 1, 1), _texturedProgram.Id, "..\\..\\..\\graphics\Textures\asteroid texture one side.jpg"));
             //models.Add("TestObjectGen", new MipMapGeneratedRenderObject(RenderObjectFactory.CreateTexturedCube(1, 1, 1), _texturedProgram.Id, "..\\..\\..\\graphics\Textures\asteroid texture one side.jpg", 8));
             //models.Add("TestObjectPreGen", new MipMapManualRenderObject(RenderObjectFactory.CreateTexturedCube(1, 1, 1), _texturedProgram.Id, "..\\..\\..\\graphics\Textures\asteroid texture one side mipmap levels 0 to 8.bmp", 9));
@@ -108,6 +126,9 @@ namespace Avril.ServerAssembly
             GL.PointSize(3);
             GL.Enable(EnableCap.DepthTest);
             GL.Enable(EnableCap.CullFace);
+
+            SIMULATION.SIM_Networking_Server.Initialise_Server();
+            
             Closed += OnClosed;
             Debug.WriteLine("OnLoad .. done");
         }
@@ -161,64 +182,6 @@ namespace Avril.ServerAssembly
         {
             Console.WriteLine("TESTBENCH => HandleMouse");
             MouseState mouseState = Mouse.GetCursorState();
-            
-            if (Framework.GetGameServer().GetData().GetData_Control().GetFlag_IsPraiseEvent(1) == false)
-            {
-                if (_gameObjectFactory.Get_player().Get_IsFirstMouseMove()) // This bool variable is initially set to true.
-                {
-                    _gameObjectFactory.Get_player().Set_MousePos(new Vector2(mouseState.X, mouseState.Y));
-                    _gameObjectFactory.Get_player().Set_IsFirstMouseMove(false);
-                }
-                else
-                {
-/*
-                    switch (cameraSelector)
-                    {
-                    case false:
-                            if ((mouseState.X != (float)(Avril.ServerAssembly.Framework.GetGameServer().GetData().GetSettings().Get_ScreenSize_X() / 2))
-                                || (mouseState.Y != (float)(Avril.ServerAssembly.Framework.GetGameServer().GetData().GetSettings().Get_ScreenSize_Y() / 2)))
-                            {
-                                System.Console.WriteLine("TESTBENCH => mouse X = " + mouseState.X + "  mouse Y = " + mouseState.Y);
-
-                                float sensitivity = _gameObjectFactory.Get_player().Get_sensitivity();
-                                float anglePerPixle = Avril.ServerAssembly.Framework.GetGameServer().GetData().GetSettings().Get_fov() / Avril.ServerAssembly.Framework.GetGameServer().GetData().GetSettings().Get_ScreenSize_Y();
-                                float deltaX = anglePerPixle * (mouseState.X - (Avril.ServerAssembly.Framework.GetGameServer().GetData().GetSettings().Get_ScreenSize_X() / 2));
-                                float deltaY = anglePerPixle * (mouseState.Y - (Avril.ServerAssembly.Framework.GetGameServer().GetData().GetSettings().Get_ScreenSize_Y() / 2));
-                                System.Console.WriteLine("TESTBENCH => deltaX = " + deltaX + "  deltaY = " + deltaY);
-
-                                _gameObjectFactory.Get_player().Get_CameraFP().Update_Yaw(deltaX);
-                                System.Console.WriteLine("yaw => " + _gameObjectFactory.Get_player().Get_CameraFP().Get_Yaw());
-                                _gameObjectFactory.Get_player().Get_CameraFP().Update_Pitch(deltaY);
-                                System.Console.WriteLine("pitch => " + _gameObjectFactory.Get_player().Get_CameraFP().Get_Pitch());
-
-                                Get_gameObjectFactory().Get_player().Get_CameraFP().UpdateVectors();
-
-                                OpenTK.Input.Mouse.SetPosition((double)(Avril.ServerAssembly.Framework.GetGameServer().GetData().GetSettings().Get_ScreenSize_X() / 2), (double)(Avril.ServerAssembly.Framework.GetGameServer().GetData().GetSettings().Get_ScreenSize_Y() / 2));
-
-                                
-                                    Avril.ServerAssembly.Framework.GetGameServer().GetData().GetData_Control().SetIsPraiseEvent(1, true);
-                                    Avril.ServerAssembly.Framework.GetGameServer().GetData().GetInput_Instnace().GetBuffer_Back_InputDouble().GetInputControl().SelectSetIntputSubset(1);
-                                    Avril.ServerAssembly.Framework.GetGameServer().GetData().GetInput_Instnace().GetBuffer_Front_InputDouble().SetPraiseEventId(1);
-                                    Avril.ServerAssembly.Praise_Files.Praise1_Input input_subset_Praise1 = (Avril.ServerAssembly.Praise_Files.Praise1_Input)Avril.ServerAssembly.Framework.GetGameServer().GetData().GetInput_Instnace().GetBuffer_Front_InputDouble().Get_InputBufferSubset();
-                                    input_subset_Praise1.Set_Mouse_X(new_mouseState.X);
-                                    input_subset_Praise1.Set_Mouse_Y(new_mouseState.Y);
-                                    Avril.ServerAssembly.Framework.GetGameServer().GetData().Flip_InBufferToWrite();
-                                    //Avril.ServerAssembly.Networking.CreateAndSendNewMessage(1);//todo
-                                
-
-                            }
-                        break;
-
-                    case true:
-                        
-                        break;
-                    }
-*/
-                }
-
-                _lastMouseState = mouseState;
-                Console.WriteLine("TESTBENCH => HandleMouse .. Done");
-            }
         }
         private void HandleKeyboard(double dt)
         {
@@ -246,6 +209,58 @@ namespace Avril.ServerAssembly
                 
             }
             _lastKeyboardState = keyState;
+            /*
+                    Vector3 fowards = new Vector3(0);
+                    Vector3 backwards = new Vector3(0);
+                    Vector3 left = new Vector3(0);
+                    Vector3 right = new Vector3(0);
+                    if (keyState.IsKeyDown(Key.W))
+                    {
+                        Avril.ServerAssembly.Framework.GetGameServer().GetData().GetData_Control().SetIsPraiseEvent(2, true);
+                        fowards = _gameObjectFactory.Get_player().Get_CameraFPOP().Get_fowards();
+                    }
+                    if (keyState.IsKeyDown(Key.S))
+                    {
+                        Avril.ServerAssembly.Framework.GetGameServer().GetData().GetData_Control().SetIsPraiseEvent(3, true);
+                        backwards = - _gameObjectFactory.Get_player().Get_CameraFPOP().Get_fowards();
+                    }
+                    if (keyState.IsKeyDown(Key.A))
+                    {
+                        Avril.ServerAssembly.Framework.GetGameServer().GetData().GetData_Control().SetIsPraiseEvent(4, true);
+                        right = _gameObjectFactory.Get_player().Get_CameraFPOP().Get_right();
+                    }
+                    if (keyState.IsKeyDown(Key.D))
+                    {
+                        Avril.ServerAssembly.Framework.GetGameServer().GetData().GetData_Control().SetIsPraiseEvent(5, true);
+                        left = - _gameObjectFactory.Get_player().Get_CameraFPOP().Get_right();
+                    }
+                    if (Avril.ServerAssembly.Framework.GetGameServer().GetData().GetData_Control().GetFlag_IsPraiseEvent(2) == true
+                        || Avril.ServerAssembly.Framework.GetGameServer().GetData().GetData_Control().GetFlag_IsPraiseEvent(3) == true
+                        || Avril.ServerAssembly.Framework.GetGameServer().GetData().GetData_Control().GetFlag_IsPraiseEvent(4) == true
+                        || Avril.ServerAssembly.Framework.GetGameServer().GetData().GetData_Control().GetFlag_IsPraiseEvent(5) == true
+                    )
+                    {
+                        var player = _gameObjectFactory.Get_player();
+                        var camera = _gameObjectFactory.Get_player().Get_CameraFPOP();
+
+                        _gameObjectFactory.Get_player().Set_direction(_gameObjectFactory.Get_player().Get_position() + new Vector3(fowards + backwards + right + left).Normalized());
+                        _gameObjectFactory.Get_player().Set_newPosition(_gameObjectFactory.Get_player().Get_position() + (Vector3.Multiply(_gameObjectFactory.Get_player().Get_direction(), (float)(_gameObjectFactory.Get_player().Get_cameraSpeed() * dt))));
+                        _gameObjectFactory.Get_player().Set_newPosition(_gameObjectFactory.Get_player().Get_position().Normalized() * 101f);
+                        
+                        player.Clamp_Rotations(camera.Calculate_Position_Rotations(_gameObjectFactory.Get_player().Get_position()));
+                        
+                        Quaternion quart = Quaternion.FromEulerAngles(player.Get_Rotation().X, player.Get_Rotation().Y, player.Get_Rotation().Z);
+                        camera.Set_fowards(Vector3.Transform(camera.Get_fowards(), quart));
+                        camera.Set_up(Vector3.Transform(camera.Get_up(), quart));
+                        camera.Set_right(Vector3.Cross(camera.Get_fowards(), camera.Get_up()));
+
+                        OpenTK.Input.Mouse.SetPosition((double)(Avril.ServerAssembly.Framework.GetGameServer().GetData().GetSettings().Get_ScreenSize_X() / 2), (double)(Avril.ServerAssembly.Framework.GetGameServer().GetData().GetSettings().Get_ScreenSize_Y() / 2));
+
+                    }
+                    for (int index = 2; index < 6; index++)
+                    {
+                        Avril.ServerAssembly.Framework.GetGameServer().GetData().GetData_Control().SetIsPraiseEvent(index, false);
+                    }*/
         }
         protected override void OnRenderFrame(FrameEventArgs e)
         {

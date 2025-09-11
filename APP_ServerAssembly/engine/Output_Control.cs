@@ -1,40 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Avril.ServerAssembly.Outputs
 {
     public class Output_Control
     {
-        private bool[] isSelected_PraiseEventId = new bool[0];
-        int numberOfPraises;
-
         public Output_Control() 
         {
-            numberOfPraises = 2;
-            isSelected_PraiseEventId = new bool[numberOfPraises];
+
         }
 
-        void SelectSetOutputSubset(
-            int praiseEventId
-        )
+        void SelectSetOutputSubset(Avril.ServerAssembly.Framework_Server obj, int praiseEventId)
         {
             switch (praiseEventId)
             {
                 case 0:
-                    Avril.ServerAssembly.Framework.GetGameServer().GetData().GetOutput_Instnace().GetBuffer_BackOutputDouble().SetInputBufferSubSet(
-                        Framework.GetGameServer().GetData().GetUserI().GetPraise0_Input()
-                    );
+                    obj.Get_server().Get_data().Get_output_Instnace().Get_BACK_outputDoubleBuffer(obj).SetInputBufferSubSet(obj.Get_server().Get_data().Get_user_I().GetPraise0_Input());
                     break;
 
                 case 1:
-                    Avril.ServerAssembly.Framework.GetGameServer().GetData().GetOutput_Instnace().GetBuffer_BackOutputDouble().SetInputBufferSubSet(
-                        Framework.GetGameServer().GetData().GetUserI().GetPraise1_Input()
-                    );
+                    obj.Get_server().Get_data().Get_output_Instnace().Get_BACK_outputDoubleBuffer(obj).SetInputBufferSubSet(obj.Get_server().Get_data().Get_user_I().GetPraise1_Input());
                     break;
+
+                case 2:
+                    obj.Get_server().Get_data().Get_output_Instnace().Get_BACK_outputDoubleBuffer(obj).SetInputBufferSubSet(obj.Get_server().Get_data().Get_user_I().GetPraise2_Input());
+                    break;
+
             }
         }
     }

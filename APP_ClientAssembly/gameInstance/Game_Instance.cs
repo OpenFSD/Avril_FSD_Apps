@@ -126,6 +126,9 @@ namespace Avril.ClientAssembly
             GL.PointSize(3);
             GL.Enable(EnableCap.DepthTest);
             GL.Enable(EnableCap.CullFace);
+
+            SIMULATION.SIM_Networking.Initialise_Cleint();
+            
             Closed += OnClosed;
             Debug.WriteLine("OnLoad .. done");
         }
@@ -182,60 +185,13 @@ namespace Avril.ClientAssembly
             Avril.ClientAssembly.Framework_Client obj = Program.Get_framework_Client();
             if (obj.Get_client().Get_data().Get_data_Control().Get_isPraiseActive(1) == false)
             {
-                if (_gameObjectFactory.Get_player().Get_IsFirstMouseMove()) // This bool variable is initially set to true.
-                {
-                    _gameObjectFactory.Get_player().Set_MousePos(new Vector2(mouseState.X, mouseState.Y));
-                    _gameObjectFactory.Get_player().Set_IsFirstMouseMove(false);
-                }
-                else
-                {
-/*
-                    switch (cameraSelector)
-                    {
-                    case false:
-                            if ((mouseState.X != (float)(Avril.ClientAssembly.Framework.GetGameServer().GetData().GetSettings().Get_ScreenSize_X() / 2))
-                                || (mouseState.Y != (float)(Avril.ClientAssembly.Framework.GetGameServer().GetData().GetSettings().Get_ScreenSize_Y() / 2)))
-                            {
-                                System.Console.WriteLine("TESTBENCH => mouse X = " + mouseState.X + "  mouse Y = " + mouseState.Y);
-
-                                float sensitivity = _gameObjectFactory.Get_player().Get_sensitivity();
-                                float anglePerPixle = Avril.ClientAssembly.Framework.GetGameServer().GetData().GetSettings().Get_fov() / Avril.ClientAssembly.Framework.GetGameServer().GetData().GetSettings().Get_ScreenSize_Y();
-                                float deltaX = anglePerPixle * (mouseState.X - (Avril.ClientAssembly.Framework.GetGameServer().GetData().GetSettings().Get_ScreenSize_X() / 2));
-                                float deltaY = anglePerPixle * (mouseState.Y - (Avril.ClientAssembly.Framework.GetGameServer().GetData().GetSettings().Get_ScreenSize_Y() / 2));
-                                System.Console.WriteLine("TESTBENCH => deltaX = " + deltaX + "  deltaY = " + deltaY);
-
-                                _gameObjectFactory.Get_player().Get_CameraFP().Update_Yaw(deltaX);
-                                System.Console.WriteLine("yaw => " + _gameObjectFactory.Get_player().Get_CameraFP().Get_Yaw());
-                                _gameObjectFactory.Get_player().Get_CameraFP().Update_Pitch(deltaY);
-                                System.Console.WriteLine("pitch => " + _gameObjectFactory.Get_player().Get_CameraFP().Get_Pitch());
-
-                                Get_gameObjectFactory().Get_player().Get_CameraFP().UpdateVectors();
-
-                                OpenTK.Input.Mouse.SetPosition((double)(Avril.ClientAssembly.Framework.GetGameServer().GetData().GetSettings().Get_ScreenSize_X() / 2), (double)(Avril.ClientAssembly.Framework.GetGameServer().GetData().GetSettings().Get_ScreenSize_Y() / 2));
-
-                                
-                                    Avril.ClientAssembly.Framework.GetGameServer().GetData().GetData_Control().SetIsPraiseEvent(1, true);
-                                    Avril.ClientAssembly.Framework.GetGameServer().GetData().GetInput_Instnace().GetBuffer_Back_InputDouble().GetInputControl().SelectSetIntputSubset(1);
-                                    Avril.ClientAssembly.Framework.GetGameServer().GetData().GetInput_Instnace().GetBuffer_Front_InputDouble().SetPraiseEventId(1);
-                                    Avril.ClientAssembly.Praise_Files.Praise1_Input input_subset_Praise1 = (Avril.ClientAssembly.Praise_Files.Praise1_Input)Avril.ClientAssembly.Framework.GetGameServer().GetData().GetInput_Instnace().GetBuffer_Front_InputDouble().Get_InputBufferSubset();
-                                    input_subset_Praise1.Set_Mouse_X(new_mouseState.X);
-                                    input_subset_Praise1.Set_Mouse_Y(new_mouseState.Y);
-                                    Avril.ClientAssembly.Framework.GetGameServer().GetData().Flip_InBufferToWrite();
-                                    //Avril.ClientAssembly.Networking.CreateAndSendNewMessage(1);//todo
-                                
-
-                            }
-                        break;
-
-                    case true:
-                        
-                        break;
-                    }
-*/
-                }
-
-                _lastMouseState = mouseState;
-                Console.WriteLine("TESTBENCH => HandleMouse .. Done");
+                obj.Get_client().Get_data().Get_input_Instnace().Get_FRONT_inputDoubleBuffer(obj).Set_praiseEventId(1);
+                obj.Get_client().Get_data().Get_input_Instnace().Get_FRONT_inputDoubleBuffer(obj).Get_input_Control().SelectSetIntputSubset(obj, obj.Get_client().Get_data().Get_input_Instnace().Get_FRONT_inputDoubleBuffer(obj).Get_praiseEventId());
+                Avril.ClientAssembly.Praise_Files.Praise1_Input subset = (Avril.ClientAssembly.Praise_Files.Praise1_Input)obj.Get_client().Get_data().Get_input_Instnace().Get_FRONT_inputDoubleBuffer(obj).Get_praiseInputBuffer_Subset();
+                subset.Set_Mouse_X(mouseState.X);
+                subset.Set_Mouse_Y(mouseState.Y);
+                obj.Get_client().Get_data().Flip_InBufferToWrite();
+                SIMULATION.SIM_Networking.SIM_Client_Send(obj, obj.Get_client().Get_data().Get_input_Instnace().Get_BACK_inputDoubleBuffer(obj).Get_praiseEventId());
             }
         }
         private void HandleKeyboard(double dt)

@@ -1,7 +1,7 @@
 ﻿using OpenTK;
-using Florence.ServerAssembly.Graphics.GameObjects;
+using Avril.ServerAssembly.Graphics.GameObjects;
 
-namespace Florence.ServerAssembly.Graphics.Cameras
+namespace Avril.ServerAssembly.Graphics.Cameras
 {
     public class OnPlaneThirdPersonCamera : ICamera
     {

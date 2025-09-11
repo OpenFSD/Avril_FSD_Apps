@@ -1,22 +1,51 @@
-﻿using Avril.ServerAssembly.UserIn;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Avril.ServerAssembly.Inputs
 {
     public class Input_Control
     {
-        private bool[] isSelected_PraiseEventId = new bool[0];
-        int numberOfPraises;
-
         public Input_Control()
         {
-            numberOfPraises = 2;//move to global
-            isSelected_PraiseEventId = new bool[numberOfPraises];
+
         }
+/*
+        public void LoadValuesInToInputSubset(
+            ushort praiseEventId,
+            float period
+        )
+        {
+            Avril.ServerAssembly.Inputs.Input newSLot_Stack_InputAction = Avril.ServerAssembly.Framework.Get_server().Get_data().Get_input_Instnace().GetEmptyInput();
+            newSLot_Stack_InputAction.SetPraiseEventId(praiseEventId);
+            switch (praiseEventId)
+            {
+                case 0:
+
+                    break;
+
+                case 1:
+                    Avril.ServerAssembly.Praise_Files.Praise1_Input desternation_Subset = (Avril.ServerAssembly.Praise_Files.Praise1_Input)Framework.Get_server().Get_data().Get_input_Instnace().Get_Transmit_InputBuffer().Get_InputBufferSubset();
+                    Vector2 mouse = Framework.Get_server().Get_data().GetGame_Instance().GetPlayer(0).GetMousePos();
+                    desternation_Subset.Set_Mouse_X(mouse.X);
+                    desternation_Subset.Set_Mouse_Y(mouse.Y);
+                    break;
+            }
+        }
+*/
+        public void SelectSetIntputSubset(Avril.ServerAssembly.Framework_Server obj, int praiseEventId)
+        {
+            switch (praiseEventId)
+            {
+                case 0:
+                    obj.Get_server().Get_data().Get_input_Instnace().Get_FRONT_inputDoubleBuffer(obj).Set_praiseInputBuffer_Subset(obj.Get_server().Get_data().Get_user_I().GetPraise0_Input());
+                    break;
+
+                case 1:
+                    obj.Get_server().Get_data().Get_input_Instnace().Get_FRONT_inputDoubleBuffer(obj).Set_praiseInputBuffer_Subset(obj.Get_server().Get_data().Get_user_I().GetPraise1_Input());
+                    break;
+
+		        case 2:
+                    obj.Get_server().Get_data().Get_input_Instnace().Get_FRONT_inputDoubleBuffer(obj).Set_praiseInputBuffer_Subset(obj.Get_server().Get_data().Get_user_I().GetPraise2_Input());
+                    break;
+            }
+		}
     }
 }

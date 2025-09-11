@@ -4,11 +4,11 @@ using Avril.ServerAssembly.Graphics.Renderables;
 
 namespace Avril.ServerAssembly.Graphics
 {
-    public class RenderObjectFactory
+    public class ObjectFactory
     {
         public static ColoredVertex[] CreateSolidCube(float side, Color4 color)
         {
-            side = side/2f; // half side - and other half
+            side = side / 2f; // half side - and other half
             ColoredVertex[] vertices =
             {
                 new ColoredVertex(new Vector4(-side, -side, -side, 1.0f),   color),

@@ -1,7 +1,7 @@
 ﻿using OpenTK;
 using OpenTK.Graphics;
 
-namespace Florence.ServerAssembly.Graphics.Renderables
+namespace Avril.ServerAssembly.Graphics.Renderables
 {
     public struct ColoredVertex
     {

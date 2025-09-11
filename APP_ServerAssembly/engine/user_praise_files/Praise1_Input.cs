@@ -4,37 +4,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Avril.ServerAssembly.UserIn
+namespace Avril.ServerAssembly.Praise_Files
 {
     public class Praise1_Input
     {
-        static private Int16 position_X;
-        static private Int16 position_Y;
+        static private float mouse_X;
+        static private float mouse_Y;
 
         public Praise1_Input()
         {
-            position_X = 0;
-            position_Y = 0;
+            mouse_X = 0;
+            mouse_Y = 0;
         }
 
-        public Int16 Get_Position_X() 
+        public float Get_Mouse_X() 
         {   
-            return position_X; 
+            return mouse_X; 
         }
 
-        public Int16 Get_Position_Y()
+        public float Get_Mouse_Y()
         {
-            return position_Y;
+            return mouse_Y;
         }
 
-        public void Set_Position_X(Int16 value) 
+        public void Set_Mouse_X(float value) 
         {
-            position_X = value;
+            mouse_X = value;
         }
         
-        public void Set_Position_Y(Int16 value)
+        public void Set_Mouse_Y(float value)
         {
-            position_Y = value;
+            mouse_Y = value;
         }
     }
 }

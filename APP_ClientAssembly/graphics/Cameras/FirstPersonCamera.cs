@@ -60,20 +60,12 @@ namespace Avril.ClientAssembly.Graphics.Cameras
                 Set_Yaw(Get_Yaw() + (float)(Math.PI * 2));
             }
         }
-        public void UpdateVectors()
+        public void UpdateVectors(float pitch, float yaw)
         {
-            Vector3 fowards = new Vector3(0, 0, 0);
-            fowards.X = MathF.Cos(_pitch) * MathF.Cos(_yaw);
-            fowards.Y = MathF.Sin(_pitch);
-            fowards.Z = MathF.Cos(_pitch) * MathF.Sin(_yaw);
+            _fowards = new Vector3(MathF.Cos(pitch) * MathF.Cos(yaw), MathF.Sin(pitch), MathF.Cos(pitch) * MathF.Sin(yaw));
+            _fowards = Vector3.Normalize(_fowards);
 
-            float _deltaPitch = Vector3.CalculateAngle(new Vector3(_fowards.X, 0, 0), new Vector3(fowards.X, 0, 0));
-            float _deltaYaw = Vector3.CalculateAngle(new Vector3(0, _fowards.Y, 0), new Vector3(0, fowards.Y, 0));
-            float _deltaRoll = Vector3.CalculateAngle(new Vector3(0, 0, _fowards.Z), new Vector3(0, 0, fowards.Z));
-
-            _fowards = Vector3.Normalize(fowards);
-
-            _up = RotateVector(_up, _deltaPitch, _deltaYaw, _deltaRoll);
+            _up = Vector3.UnitY;
 
             _right = Vector3.Normalize(Vector3.Cross(_fowards, _up));
         }

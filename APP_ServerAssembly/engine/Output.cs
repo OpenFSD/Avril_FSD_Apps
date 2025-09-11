@@ -1,21 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-//using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Avril.ServerAssembly.Outputs
+﻿namespace Avril.ServerAssembly.Outputs
 {
     public class Output
     {
-        static private Avril.ServerAssembly.Outputs.Output_Control output_Control;
-        // private Avril.ServerAssembly.game_Instance.Player player;
+        private Avril.ServerAssembly.Outputs.Output_Control _output_Control;
+        private UInt16 _praiseEventId;
+        private Object _praiseOutputBuffer_Subset;
 
-        private int praiseEventId;
-        private Object praiseOutputBuffer_Subset;
-
-        private static float[] vertices = {
+        private static float[] _vertices = {
             -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
             0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
             0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
@@ -58,11 +49,11 @@ namespace Avril.ServerAssembly.Outputs
             -0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
             -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
         };
-        private static uint[] indices = {  // note that we start from 0!
+        private static uint[] _indices = {  // note that we start from 0!
             0, 1, 3,   // first triangle
             1, 2, 3    // second triangle
         };
-        private static float[] texCoords = {
+        private static float[] _texCoords = {
             0.0f, 0.0f,  // lower-left corner  
             1.0f, 0.0f,  // lower-right corner
             0.5f, 1.0f   // top-center corner
@@ -70,52 +61,48 @@ namespace Avril.ServerAssembly.Outputs
 
         public Output()
         {
-            //player = new Avril.ServerAssembly.game_Instance.Player();
+            //player = new Avril.ServerAssembly.Player();
 
-            praiseEventId = new int();
-            praiseEventId = 0;
+            _praiseEventId = new int();
+            _praiseEventId = 0;
 
-            praiseOutputBuffer_Subset = null;
+            _praiseOutputBuffer_Subset = null;
 
             System.Console.WriteLine("Avril.ServerAssembly: Output");
         }
 
         public void InitialiseControl()
         {
-            output_Control = new Avril.ServerAssembly.Outputs.Output_Control();
-            while (output_Control == null) { /* Wait while is created */ }
+            _output_Control = new Avril.ServerAssembly.Outputs.Output_Control();
+            while (_output_Control == null) { /* Wait while is created */ }
         }
         public uint[] Get_Indices()
         {
-            return indices;
+            return _indices;
         }
         public Object GetOutputBufferSubset()
         {
-            return praiseOutputBuffer_Subset;
+            return _praiseOutputBuffer_Subset;
         }
 
         public float[] Get_Vertices()
         {
-            return vertices;
+            return _vertices;
         }
-        //public Avril.ServerAssembly.game_Instance.Player GetPlayer()
-        //{
-       //     return player;
-        //}
-
+ 
         public int GetPraiseEventId()
         {
-            return praiseEventId;
+            return _praiseEventId;
         }
 
         public void SetInputBufferSubSet(Object value)
         {
-            praiseOutputBuffer_Subset = value;
+            _praiseOutputBuffer_Subset = value;
         }
 
-        public void SetPraiseEventId(int value)
+        public void SetPraiseEventId(ushort value)
         {
-            praiseEventId = value;
+            _praiseEventId = value;
         }
     }
 }

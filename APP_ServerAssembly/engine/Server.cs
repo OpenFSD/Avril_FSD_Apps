@@ -2,47 +2,61 @@
 {
     public class Server
     {
-        static private Avril.ServerAssembly.Algorithms algorithms;
-        static private Avril.ServerAssembly.Data data;
-        static private Avril.ServerAssembly.Execute execute;
-        static private Avril.ServerAssembly.Global global;
+        private Algorithms _algorithms;
+        private Data _data;
+        private Execute _execute;
+        private Global _global;
 
         public Server()
         {
-            global = new Avril.ServerAssembly.Global();
-            while (global == null) { /* Wait while is created */ }
+            Set_global(new Global());
+            while (Get_global() == null) { }
 
-            algorithms = new Avril.ServerAssembly.Algorithms(global.Get_NumCores());
-            while (algorithms == null) { /* Wait while is created */ }
+            Set_algorithms(new Algorithms(Get_global().Get_numberOfCores()));
+            while (Get_algorithms() == null) { }
 
-            data = new Avril.ServerAssembly.Data();
-            while (data == null) { /* Wait while is created */ }
-            data.InitialiseControl();
+            Set_data(new Data());
+            while (Get_data() == null) { }
+            Get_data().InitialiseControl();
 
-            execute = new Avril.ServerAssembly.Execute();
-            while (execute == null) { /* Wait while is created */ }
-            execute.Initialise_Control(global.Get_NumCores(), global);
+            Set_execute(new Execute(Get_global().Get_numberOfCores()));
+            while (Get_execute() == null) { }
+            Get_execute().Initialise_Control(Get_global().Get_numberOfCores(), Get_global());
 
-            System.Console.WriteLine("Avril.ServerAssembly: Server");
         }
 
-        public Avril.ServerAssembly.Algorithms GetAlgorithms()
+        public Algorithms Get_algorithms()
         {
-            return algorithms;
+            return _algorithms;
         }
-        public Avril.ServerAssembly.Data GetData()
+        public Data Get_data()
         {
-            return data;
+            return _data;
+        }
+        public Execute Get_execute()
+        {
+            return _execute;
         }
 
-        public Avril.ServerAssembly.Global GetGlobal()
+        public Global Get_global()
         {
-            return global;
+            return _global;
         }
-
-        public Avril.ServerAssembly.Execute GetExecute()
+        private void Set_algorithms(Algorithms value)
         {
-            return execute;
+            _algorithms = value;
+        }
+        private void Set_data(Data value)
+        {
+            _data = value;
+        }
+        private void Set_execute(Execute value)
+        {
+            _execute = value;
+        }
+        private void Set_global(Global value)
+        {
+            _global = value;
         }
     }
 }

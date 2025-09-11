@@ -1,7 +1,7 @@
 ﻿using OpenTK;
-using Florence.ServerAssembly.Graphics.GameObjects;
+using Avril.ServerAssembly.Graphics.GameObjects;
 
-namespace Florence.ServerAssembly.Graphics.Cameras
+namespace Avril.ServerAssembly.Graphics.Cameras
 {
     public class OnPlaneFirstPersonCamera : ICamera
     {
@@ -97,7 +97,7 @@ namespace Florence.ServerAssembly.Graphics.Cameras
         /*
         public Vector3 Update_Position_Rotations(Vector3 newPosition)
         {
-            var player = Florence.ServerAssembly.Framework.GetGameServer().GetData().GetGame_InstanceOP().Get_gameObjectFactory().Get_player();
+            var player = Avril.ServerAssembly.Framework.GetGameServer().GetData().GetGame_InstanceOP().Get_gameObjectFactory().Get_player();
 
             float temp = (Vector3.Cross(new Vector3(newPosition.X, 0, 0), new Vector3(player.Get_LastPosition().X, 0, 0))).Length / (new Vector3(player.Get_LastPosition().X, 0, 0).Length * new Vector3(newPosition.X, 0, 0).Length);
             temp = Math.Clamp(temp, -1f, 1f);

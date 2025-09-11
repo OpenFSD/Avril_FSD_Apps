@@ -3,29 +3,25 @@ namespace Avril.ServerAssembly.Inputs
 {
     public class Input_Instance
     {
-        static private Avril.ServerAssembly.Inputs.Input_Instance_Control inputInstance_Control;
-        static private Avril.ServerAssembly.Inputs.Input empty_InputBuffer;
-        static private Avril.ServerAssembly.Inputs.Input[] inputDoubleBuffer;
-        static private Avril.ServerAssembly.Inputs.Input transmitInputBuffer;
+        private Avril.ServerAssembly.Inputs.Input_Instance_Control _inputInstance_Control;
+        private Avril.ServerAssembly.Inputs.Input _empty_InputBuffer;
+        private Avril.ServerAssembly.Inputs.Input[] _inputDoubleBuffer;
 
-        public Input_Instance()
+        public Input_Instance() 
         {
-            inputInstance_Control = new Avril.ServerAssembly.Inputs.Input_Instance_Control();
-            while (inputInstance_Control == null) { /* Wait while is created */ }
+            Set_inputInstance_Control(new Avril.ServerAssembly.Inputs.Input_Instance_Control());
+            while (Get_inputInstance_Control() == null) { }
 
-            empty_InputBuffer = new Avril.ServerAssembly.Inputs.Input();
-            while (empty_InputBuffer == null) { /* Wait while is created */ }
-            empty_InputBuffer.InitialiseControl();
+            Set_empty_InputBuffer(new Avril.ServerAssembly.Inputs.Input());
+            while (Get_empty_InputBuffer() == null) { }
+            Get_empty_InputBuffer().InitialiseControl();
 
-            inputDoubleBuffer = new Avril.ServerAssembly.Inputs.Input[2];
+            _inputDoubleBuffer = new Avril.ServerAssembly.Inputs.Input[2];
             for (byte index = 0; index < 2; index++)
             {
-                inputDoubleBuffer[index] = empty_InputBuffer;
-                while (inputDoubleBuffer[index] == null) { /* Wait while is created */ }
+                _inputDoubleBuffer[index] = Get_empty_InputBuffer();
+                while (_inputDoubleBuffer[index] == null) { }
             }
-
-            transmitInputBuffer = new Avril.ServerAssembly.Inputs.Input();
-            while (transmitInputBuffer == null) { /* Wait while is created */ }
         }
 
         private UInt16 BoolToInt16(bool value)
@@ -42,33 +38,38 @@ namespace Avril.ServerAssembly.Inputs
             return temp;
         }
 
-        public Avril.ServerAssembly.Inputs.Input GetBuffer_Front_InputDouble()
+        public Avril.ServerAssembly.Inputs.Input Get_FRONT_inputDoubleBuffer(Avril.ServerAssembly.Framework_Server obj)
         {
-            return inputDoubleBuffer[BoolToInt16(Avril.ServerAssembly.Framework.GetGameServer().GetData().GetState_Buffer_InputPraise_SideToWrite())];
+            return _inputDoubleBuffer[BoolToInt16(obj.Get_server().Get_data().Get_state_Buffer_Input_ToWrite())];
         }
-        public Avril.ServerAssembly.Inputs.Input GetBuffer_Back_InputDouble()
+        public Avril.ServerAssembly.Inputs.Input Get_BACK_inputDoubleBuffer(Avril.ServerAssembly.Framework_Server obj)
         {
-            return inputDoubleBuffer[BoolToInt16(!Avril.ServerAssembly.Framework.GetGameServer().GetData().GetState_Buffer_InputPraise_SideToWrite())];
-        }
-
-        public Avril.ServerAssembly.Inputs.Input GetEmptyInput()
-        {
-            return empty_InputBuffer;
+            return _inputDoubleBuffer[BoolToInt16(!obj.Get_server().Get_data().Get_state_Buffer_Input_ToWrite())];
         }
 
-        public Avril.ServerAssembly.Inputs.Input_Instance_Control GetInputInstance_Control()
+        public Avril.ServerAssembly.Inputs.Input Get_empty_InputBuffer()
         {
-            return inputInstance_Control;
+            return _empty_InputBuffer;
         }
 
-        public Avril.ServerAssembly.Inputs.Input Get_Transmit_InputBuffer()
+        public Avril.ServerAssembly.Inputs.Input_Instance_Control Get_inputInstance_Control()
         {
-            return transmitInputBuffer;
+            return _inputInstance_Control;
         }
 
-        public void SetBuffer_Input(Avril.ServerAssembly.Inputs.Input value)
+        public void Set_inputDoubleBuffer(Avril.ServerAssembly.Framework_Server obj, Avril.ServerAssembly.Inputs.Input value)
         {
-            inputDoubleBuffer[BoolToInt16(Avril.ServerAssembly.Framework.GetGameServer().GetData().GetState_Buffer_InputPraise_SideToWrite())] = value;
+            _inputDoubleBuffer[BoolToInt16(obj.Get_server().Get_data().Get_state_Buffer_Input_ToWrite())] = value;
+        }
+
+        public void Set_empty_InputBuffer(Avril.ServerAssembly.Inputs.Input input)
+        {
+            _empty_InputBuffer = input;
+        }
+
+        public void Set_inputInstance_Control(Avril.ServerAssembly.Inputs.Input_Instance_Control input_Instance_Control)
+        {
+            _inputInstance_Control = input_Instance_Control;
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Avril.ServerAssembly.Frame.Serv.Algo.UserAlg
+namespace Avril.ServerAssembly.Praise_Files
 {
     public class Praise0_Algorithm
     {
@@ -12,13 +12,9 @@ namespace Avril.ServerAssembly.Frame.Serv.Algo.UserAlg
         { 
         
         }
-        public void Do_Praise(
-            Avril.ServerAssembly.UserIn.Praise0_Input in_SubSet,
-            Avril.ServerAssembly.UserOut.Praise0_Output out_SubSet
-        )
+        public void Do_Praise(Avril.ServerAssembly.Praise_Files.Praise0_Input in_SubSet, Avril.ServerAssembly.Praise_Files.Praise0_Output out_SubSet)
         {
-
-
+            out_SubSet.SetFlag_IsPingActive(in_SubSet.GetFlag_IsPingActive());
         }
     }
 }

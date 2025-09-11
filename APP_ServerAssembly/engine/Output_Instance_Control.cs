@@ -1,28 +1,28 @@
 ﻿
-namespace FLORENCE.Outputs
+namespace Avril.ServerAssembly.Outputs
 {
     public class Output_Instance_Control
     {
-        private bool[] isSelected_PraiseEventId = { false, false };
+        private bool[] _isSelected_PraiseEventId = { false, false };
 
         public Output_Instance_Control()
         {
-            isSelected_PraiseEventId = new bool[2] { false, false };
+            _isSelected_PraiseEventId = new bool[2] { false, false };
         }
 
-        public bool Get_IsSelected_PraiseEventId(int index)
+        public bool Get_isSelected_PraiseEventId(int index)
         {
-            return isSelected_PraiseEventId[index];
+            return _isSelected_PraiseEventId[index];
         }
 
-        public int GetLength_IsSelected_PraiseEventId()
+        public int Get_isSelected_PraiseEventId()
         {
-            return isSelected_PraiseEventId.Length;
+            return _isSelected_PraiseEventId.Length;
         }
 
-        public void SetIsSelected_PraiseEventId(int index, bool value)
+        public void Set_isSelected_PraiseEventId(int index, bool value)
         {
-            isSelected_PraiseEventId[index] = value;
+            _isSelected_PraiseEventId[index] = value;
         }
     }
 }

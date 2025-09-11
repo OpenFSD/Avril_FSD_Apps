@@ -1,10 +1,10 @@
 ﻿using OpenTK;
 using OpenTK.Graphics.OpenGL4;
-using Florence.ServerAssembly.Graphics.Cameras;
-using Florence.ServerAssembly.Graphics.Renderables;
-using Florence.ServerAssembly.GameInstance;
+using Avril.ServerAssembly.Graphics.Cameras;
+using Avril.ServerAssembly.Graphics.Renderables;
+using Avril.ServerAssembly.GameInstance;
 
-namespace Florence.ServerAssembly.Graphics.GameObjects
+namespace Avril.ServerAssembly.Graphics.GameObjects
 {
     public abstract class APlayerObject
     {

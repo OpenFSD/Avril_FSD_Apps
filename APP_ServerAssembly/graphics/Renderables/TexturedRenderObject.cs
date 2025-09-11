@@ -2,7 +2,7 @@
 using System.Drawing;
 using OpenTK.Graphics.OpenGL4;
 
-namespace Florence.ServerAssembly.Graphics.Renderables
+namespace Avril.ServerAssembly.Graphics.Renderables
 {
     public class TexturedRenderObject : ARenderable
     {

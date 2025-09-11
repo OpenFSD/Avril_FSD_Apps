@@ -3,49 +3,53 @@ namespace Avril.ServerAssembly
 {
     public class Execute_Control
     {
-        private bool flag_SystemInitialised;
-        private bool[] flag_ThreadInitialised;
+        private bool _flag_SystemInitialised;
+        private bool[] _flag_ThreadInitialised;
 
-        public Execute_Control(byte numberOfCores)
+        public Execute_Control(int numberOfCores)
         {
-            flag_SystemInitialised = new bool();
-            flag_SystemInitialised = true;
+            Set_flag_SystemInitialised(true);
 
-            flag_ThreadInitialised = new bool[numberOfCores];
-            for (short index = 0; index < numberOfCores; index++)
+            _flag_ThreadInitialised = new bool[numberOfCores];
+            for(byte index = 0; index < numberOfCores; index++)
             {
-                flag_ThreadInitialised[index] = new bool();
-                flag_ThreadInitialised[index] = true;
+                Set_flag_ThreadInitialised(index, true);
             }
         }
 
-        public bool GetFlag_Server_Shell_Initialised()
+        public bool Get_flag_isInitialised_ClientApp()
         {
-            flag_SystemInitialised = false;
-            for (byte index = 0; index < Avril.ServerAssembly.Framework.GetGameServer().GetGlobal().Get_NumCores(); index++)
+            Set_flag_SystemInitialised(false);
+            for (byte index = 0; index < _flag_ThreadInitialised.Length; index++)
             {
-                if (flag_ThreadInitialised[index] == true)
+                if (Get_flag_ThreadInitialised(index) == true)
                 {
-                    flag_SystemInitialised = true;
+                    Set_flag_SystemInitialised(true);
                 }
             }
-            return flag_SystemInitialised;
+            return Get_flag_SystemInitialised();
         }
-
-        public bool GetFlag_ThreadInitialised(byte coreId)
+        public bool Get_flag_SystemInitialised()
         {
-            return flag_ThreadInitialised[coreId];
+            return _flag_SystemInitialised;
+        }
+        public bool Get_flag_ThreadInitialised(byte coreId)
+        {
+            return _flag_ThreadInitialised[coreId];
         }
 
         public void SetConditionCodeOfThisThreadedCore(byte coreId)
         {
-            //Todo
-            SetFlag_ThreadInitialised(coreId);
+            Set_flag_ThreadInitialised(coreId, false);
         }
 
-        public void SetFlag_ThreadInitialised(byte coreId)
+        private void Set_flag_SystemInitialised(bool flag)
         {
-            flag_ThreadInitialised[coreId] = false;
+            _flag_SystemInitialised = flag;
+        }
+        public void Set_flag_ThreadInitialised(byte coreId, bool value)
+        {
+            _flag_ThreadInitialised[coreId] = false;
         }
     }
 }
