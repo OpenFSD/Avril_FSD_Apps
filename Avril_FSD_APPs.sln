@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APP_ServerAssembly", "APP_S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APP_ClientAssembly", "APP_ClientAssembly\APP_ClientAssembly.csproj", "{CD708E54-E692-4353-A079-D61F1EBF4D98}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameMainScreen_Client", "GameMainScreen\GameMainScreen_Client.csproj", "{6631A536-540C-49DC-A1AD-999532736B2F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,18 @@ Global
 		{CD708E54-E692-4353-A079-D61F1EBF4D98}.Release|x64.Build.0 = Release|Any CPU
 		{CD708E54-E692-4353-A079-D61F1EBF4D98}.Release|x86.ActiveCfg = Release|Any CPU
 		{CD708E54-E692-4353-A079-D61F1EBF4D98}.Release|x86.Build.0 = Release|Any CPU
+		{6631A536-540C-49DC-A1AD-999532736B2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6631A536-540C-49DC-A1AD-999532736B2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6631A536-540C-49DC-A1AD-999532736B2F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6631A536-540C-49DC-A1AD-999532736B2F}.Debug|x64.Build.0 = Debug|Any CPU
+		{6631A536-540C-49DC-A1AD-999532736B2F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6631A536-540C-49DC-A1AD-999532736B2F}.Debug|x86.Build.0 = Debug|Any CPU
+		{6631A536-540C-49DC-A1AD-999532736B2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6631A536-540C-49DC-A1AD-999532736B2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6631A536-540C-49DC-A1AD-999532736B2F}.Release|x64.ActiveCfg = Release|Any CPU
+		{6631A536-540C-49DC-A1AD-999532736B2F}.Release|x64.Build.0 = Release|Any CPU
+		{6631A536-540C-49DC-A1AD-999532736B2F}.Release|x86.ActiveCfg = Release|Any CPU
+		{6631A536-540C-49DC-A1AD-999532736B2F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

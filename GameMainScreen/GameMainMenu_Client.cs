@@ -1,0 +1,39 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Diagnostics;
+using System.Drawing;
+using System.Linq;
+using System.Runtime.Remoting.Lifetime;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace GameMainScreen
+{
+    public partial class GameMainMenu_Client : Form
+    {
+        public GameMainMenu_Client()
+        {
+            InitializeComponent();
+        }
+
+        private void GameMainMenu_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start("..\\..\\..\\APP_ClientAssembly\\bin\\Release\\net8.0\\APP_ClientAssembly.exe");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error launching console app: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+    }
+}

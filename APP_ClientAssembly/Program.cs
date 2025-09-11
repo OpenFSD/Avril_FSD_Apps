@@ -9,6 +9,8 @@
             framework = new Avril.ClientAssembly.Framework_Client();
             while (framework == null) { /* wait untill is created */ }
             framework.Initialise(framework);
+
+            while (true) { }
         }
 
         static public Avril.ClientAssembly.Framework_Client Get_framework_Client()
