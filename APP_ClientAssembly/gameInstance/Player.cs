@@ -9,7 +9,7 @@ namespace Avril.ClientAssembly.GameInstance
     {
         private bool _firstMove;
         private bool _firstMouseMove;
-        private Vector2 mousePos;
+        private Vector2 _mouse_Position;
         private FirstPersonCamera _cameraFP;
         private ThirdPersonCamera _cameraTP;
         private float cameraSpeed;
@@ -20,7 +20,7 @@ namespace Avril.ClientAssembly.GameInstance
         {
             _firstMove = true;
             _firstMouseMove = true;
-            mousePos = new Vector2(0, 0);
+            _mouse_Position = new Vector2(0, 0);
             _cameraFP = null;
             _cameraTP = null;
             cameraSpeed = 1.5f;
@@ -58,7 +58,7 @@ namespace Avril.ClientAssembly.GameInstance
         }
         public Vector2 Get_MousePos()
         {
-            return mousePos;
+            return _mouse_Position;
         }
 
         public float Get_cameraSpeed()
@@ -84,7 +84,7 @@ namespace Avril.ClientAssembly.GameInstance
 
         public void Set_MousePos(Vector2 pos)
         {
-            mousePos = pos;
+            _mouse_Position = pos;
         }
 
 

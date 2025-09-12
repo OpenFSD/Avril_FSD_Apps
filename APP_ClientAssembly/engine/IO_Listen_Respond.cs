@@ -20,31 +20,6 @@ namespace Avril.ClientAssembly
             while (Get_io_Control() == null) { }
         }
 
-        public void Thread_Input_Listen()
-        {
-            Set_listen_CoreId(0);
-            Avril.ClientAssembly.Framework_Client obj = Program.Get_framework_Client();
-            bool done_once = true;
-            while (obj.Get_client().Get_execute().Get_execute_Control().Get_flag_ThreadInitialised(Get_listen_CoreId()) == true)
-            {
-                if (done_once == true)
-                {
-                    obj.Get_client().Get_execute().Get_execute_Control().Set_flag_ThreadInitialised(Get_listen_CoreId(), false);
-                    done_once = false;
-                }
-            }
-            System.Console.WriteLine("Thread Initalised => Thread_Input_Listen()");//TestBench
-            while (obj.Get_client().Get_execute().Get_execute_Control().Get_flag_isInitialised_ClientApp() == true)
-            {
-
-            }
-            System.Console.WriteLine("Thread Starting => Thread_Input_Listen()");//TestBench
-            while (obj.Get_client().Get_execute().Get_execute_Control().Get_flag_isInitialised_ClientApp() == false)
-            {
-                //Networking.CopyPayloadFromMessage();//todo
-            }
-        }
-
         public void Thread_Output_Respond()
         {
             Set_respond_CoreId(1);

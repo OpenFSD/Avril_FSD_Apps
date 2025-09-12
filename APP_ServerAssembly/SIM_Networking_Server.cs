@@ -52,22 +52,56 @@ namespace SIMULATION
                     break;
 
                 case 1:
-                    byte[] buffer = new byte[8];
-                    Avril.ServerAssembly.Praise_Files.Praise1_Input subset = (Avril.ServerAssembly.Praise_Files.Praise1_Input)obj.Get_client().Get_data().Get_input_Instnace().Get_BACK_inputDoubleBuffer(obj).Get_praiseInputBuffer_Subset();
-                    byte[] byteArray = BitConverter.GetBytes(subset.Get_Mouse_X());
+                    byte[] buffer = new byte[36];
+                    Avril.ServerAssembly.Praise_Files.Praise1_Output subset = (Avril.ServerAssembly.Praise_Files.Praise1_Output)obj.Get_server().Get_data().Get_input_Instnace().Get_BACK_inputDoubleBuffer(obj).Get_praiseInputBuffer_Subset();
+                    byte[] byteArray = BitConverter.GetBytes(subset.Get_fowards().X);
                     for (ushort index = 0; index < 4; index++)
                     {
                         buffer[index] = byteArray[index];
                     }
-                    byteArray = BitConverter.GetBytes(subset.Get_Mouse_Y());
+                    byteArray = BitConverter.GetBytes(subset.Get_fowards().Y);
+                    for (ushort index = 4; index < 8; index++)
+                    {
+                        buffer[index] = byteArray[index];
+                    }
+                    byteArray = BitConverter.GetBytes(subset.Get_fowards().Z);
+                    for (ushort index = 8; index < 12; index++)
+                    {
+                        buffer[index] = byteArray[index];
+                    }
+                    byteArray = BitConverter.GetBytes(subset.Get_right().X);
                     for (ushort index = 0; index < 4; index++)
                     {
-                        buffer[index + 4] = byteArray[index];
+                        buffer[index + 12] = byteArray[index];
                     }
+                    byteArray = BitConverter.GetBytes(subset.Get_right().Y);
+                    for (ushort index = 4; index < 8; index++)
+                    {
+                        buffer[index + 12] = byteArray[index];
+                    }
+                    byteArray = BitConverter.GetBytes(subset.Get_right().Z);
+                    for (ushort index = 8; index < 12; index++)
+                    {
+                        buffer[index + 12] = byteArray[index];
+                    }
+                    byteArray = BitConverter.GetBytes(subset.Get_up().X);
+                    for (ushort index = 0; index < 4; index++)
+                    {
+                        buffer[index + 24] = byteArray[index];
+                    }
+                    byteArray = BitConverter.GetBytes(subset.Get_up().Y);
+                    for (ushort index = 4; index < 8; index++)
+                    {
+                        buffer[index + 24] = byteArray[index];
+                    }
+                    byteArray = BitConverter.GetBytes(subset.Get_up().Z);
+                    for (ushort index = 8; index < 12; index++)
+                    {
+                        buffer[index + 24] = byteArray[index];
+                    }
+                    _server.Write(buffer, 0, buffer.Length);
                     break;
             }
-            byte[] message = Encoding.UTF8.GetBytes("Hello from Sender - serverside!");
-            _server.Write(message, 0, message.Length);
         }
     }
 }

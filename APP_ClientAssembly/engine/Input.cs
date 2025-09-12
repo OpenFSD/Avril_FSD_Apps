@@ -7,6 +7,7 @@ namespace Avril.ClientAssembly.Inputs
         private Avril.ClientAssembly.Inputs.Input_Control _input_Control;
         private Object _praiseInputBuffer_Subset;
         private ushort _praiseEventId;
+        private ushort _playerId;
 
         public Input()
         {
@@ -33,6 +34,10 @@ namespace Avril.ClientAssembly.Inputs
         {
             return _praiseEventId;
         }
+        public ushort Get_playerId()
+        {
+            return _playerId;
+        }
         public void Set_input_Control(Input_Control value)
         {
             _input_Control = value;
@@ -45,6 +50,10 @@ namespace Avril.ClientAssembly.Inputs
         public void Set_praiseEventId(ushort value)
         {
             _praiseEventId = value;
+        }
+        public void Set_playerId(ushort value)
+        {
+            _playerId = value;
         }
     }
 }

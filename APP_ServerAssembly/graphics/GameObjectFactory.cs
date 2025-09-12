@@ -13,10 +13,12 @@ namespace Avril.ServerAssembly.Graphics
         private readonly Random _random = new Random();
         private readonly Dictionary<string, ARenderable> _models;
         private Avril.ServerAssembly.GameInstance.Player _player;
+
         public GameObjectFactory(Dictionary<string, ARenderable> models)
         {
             _models = models;
         }
+
         public void Create_PlayerOnClient()
         {
             _player = new Avril.ServerAssembly.GameInstance.Player(

@@ -203,6 +203,7 @@
     <ClInclude Include="Praise2_Input.h" />
     <ClInclude Include="Praise2_Output.h" />
     <ClInclude Include="Server.h" />
+    <ClInclude Include="Settings.h" />
     <ClInclude Include="User_Alg.h" />
     <ClInclude Include="User_I.h" />
     <ClInclude Include="User_O.h" />
@@ -242,6 +243,7 @@
     <ClCompile Include="Praise2_Input.cpp" />
     <ClCompile Include="Praise2_Output.cpp" />
     <ClCompile Include="Server.cpp" />
+    <ClCompile Include="Settings.cpp" />
     <ClCompile Include="User_Alg.cpp" />
     <ClCompile Include="User_I.cpp" />
     <ClCompile Include="User_O.cpp" />

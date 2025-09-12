@@ -291,7 +291,7 @@ namespace Avril.ServerAssembly
         {
             return cameraSelector;
         }
-        public GameObjectFactory Get_gameObjectFactory()
+        public GameObjectFactory* Get_gameObjectFactory()
         {
             return _gameObjectFactory;
         }

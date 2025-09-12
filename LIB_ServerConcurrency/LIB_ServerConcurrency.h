@@ -19,14 +19,14 @@ namespace Avril_FSD
 		static void Push_Stack_InputPraises(class Framework_Server* obj);
 		static void Select_Set_Intput_Subset(class Framework_Server* obj, __int8 priaseEventId);
 
-		static bool Get_flag_isNewInputDataReady(class Framework_Server* obj);
-		static bool Get_flag_isNewOutputDataReady(class Framework_Server* obj);
+		//static bool Get_flag_isNewInputDataReady(class Framework_Server* obj);
+		//static bool Get_flag_isNewOutputDataReady(class Framework_Server* obj);
 		static bool Get_flag_IsStackLoaded_Server_InputAction(class Framework_Server* obj);
 		static bool Get_flag_IsStackLoaded_Server_OutputRecieve(class Framework_Server* obj);
 		static bool Get_flag_ServerConcurrency_Initialised(class Framework_Server* obj);
 
-		static void Set_Flag_isNewInputDataReady(bool value);
-		static void Set_flag_isNewOutputDataReady(bool value);
+		//static void Set_flag_IsStackLoaded_Server_InputAction(class Framework_Server* obj, bool value);
+		//static void Set_flag_IsStackLoaded_Server_OutputRecieve(class Framework_Server* obj, bool value);
 
 	// Praise Event Id
 		static __int8 Get_PraiseEventId(class Framework_Server* obj);

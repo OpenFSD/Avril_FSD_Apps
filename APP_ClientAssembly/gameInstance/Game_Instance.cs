@@ -185,6 +185,7 @@ namespace Avril.ClientAssembly
             Avril.ClientAssembly.Framework_Client obj = Program.Get_framework_Client();
             if (obj.Get_client().Get_data().Get_data_Control().Get_isPraiseActive(1) == false)
             {
+                obj.Get_client().Get_data().Get_input_Instnace().Get_FRONT_inputDoubleBuffer(obj).Set_playerId(0);
                 obj.Get_client().Get_data().Get_input_Instnace().Get_FRONT_inputDoubleBuffer(obj).Set_praiseEventId(1);
                 obj.Get_client().Get_data().Get_input_Instnace().Get_FRONT_inputDoubleBuffer(obj).Get_input_Control().SelectSetIntputSubset(obj, obj.Get_client().Get_data().Get_input_Instnace().Get_FRONT_inputDoubleBuffer(obj).Get_praiseEventId());
                 Avril.ClientAssembly.Praise_Files.Praise1_Input subset = (Avril.ClientAssembly.Praise_Files.Praise1_Input)obj.Get_client().Get_data().Get_input_Instnace().Get_FRONT_inputDoubleBuffer(obj).Get_praiseInputBuffer_Subset();

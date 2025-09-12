@@ -69,7 +69,10 @@ namespace Avril.ServerAssembly
             System.Console.WriteLine("Thread Starting => Thread_Output_Respond()");//TestBench
             while (obj.Get_server().Get_execute().Get_execute_Control().Get_flag_isInitialised_ClientApp() == false)
             {
-                SIMULATION.SIM_Networking_Server.SIM_Server_Send(obj, obj.Get_server().Get_data().Get_output_Instnace().Get_FRONT_outputDoubleBuffer(obj).Get_praiseEventId());
+                if(Avril_FSD.Library_For_Server_Concurrency.Get_flag_IsStackLoaded_Server_OutputRecieve())
+                {
+                    SIMULATION.SIM_Networking_Server.SIM_Server_Send(obj, obj.Get_server().Get_data().Get_output_Instnace().Get_FRONT_outputDoubleBuffer(obj).Get_praiseEventId());
+                }
             }
         }
         public IO_Listen_Respond_Control Get_io_Control()

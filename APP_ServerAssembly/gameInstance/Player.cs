@@ -7,8 +7,8 @@ namespace Avril.ServerAssembly.GameInstance
 {
     public class Player : AGameObject
     {
-        private bool _firstMove;
-        private bool _firstMouseMove;
+        private bool _isFirstMove;
+        private bool _isFirstMouseMove;
         private Vector2 mousePos;
         private FirstPersonCamera _cameraFP;
         private ThirdPersonCamera _cameraTP;
@@ -18,8 +18,8 @@ namespace Avril.ServerAssembly.GameInstance
         public Player(ARenderable model, Vector3 position, Vector3 direction, Vector3 rotation, float velocity)
             : base(model, position, direction, rotation, velocity)
         {
-            _firstMove = true;
-            _firstMouseMove = true;
+            _isFirstMove = true;
+            _isFirstMouseMove = true;
             mousePos = new Vector2(0, 0);
             _cameraFP = null;
             _cameraTP = null;
@@ -48,13 +48,13 @@ namespace Avril.ServerAssembly.GameInstance
             return _cameraTP;
         }
 
-        public bool Get_IsFirstMove()
+        public bool Get_isFirstMove()
         {
-            return _firstMove;
+            return _isFirstMove;
         }
-        public bool Get_IsFirstMouseMove()
+        public bool Get_isFirstMouseMove()
         {
-            return _firstMouseMove;
+            return _isFirstMouseMove;
         }
         public Vector2 Get_MousePos()
         {
@@ -73,13 +73,13 @@ namespace Avril.ServerAssembly.GameInstance
 
 
 
-        public void Set_IsFirstMove(bool value)
+        public void Get_isFirstMove(bool value)
         {
-            _firstMove = value;
+            _isFirstMove = value;
         }
-        public void Set_IsFirstMouseMove(bool value)
+        public void Get_isFirstMouseMove(bool value)
         {
-            _firstMouseMove = value;
+            _isFirstMouseMove = value;
         }
 
         public void Set_MousePos(Vector2 pos)

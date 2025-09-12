@@ -35,10 +35,11 @@
 #include "Praise2_Algorithm.h"
 #include "Execute.h"
 #include "Execute_Control.h"
-#include "GameInstance.h"
-#include "Player.h"
 #include "include/LIB_LaunchEnableForConcurrentThreadsAt_SERVER/LIB_LaunchEnableForConcurrentThreadsAt_SERVER.h"
 #include "include/LIB_WriteEnableForThreadsAt_SERVERINPUTACTION/LIB_WriteEnableForThreadsAt_SERVERINPUTACTION.h"
 #include "include/LIB_WriteEnableForThreadsAt_SERVEROUTPUTRECIEVE/LIB_WriteEnableForThreadsAt_SERVEROUTPUTRECIEVE.h"
+#include "GameInstance.h"
+#include "Player.h"
+#include "Settings.h"
 
 #endif //PCH_H

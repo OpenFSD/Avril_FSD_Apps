@@ -1,27 +1,10 @@
-﻿
-/
-
-namespace Avril.ServerAssembly.Inputs
+﻿namespace Avril.ServerAssembly.Inputs
 {
     public class Input_Control
     {
         public Input_Control()
         {
 
-        }
-
-        public void LoadValuesInToInputSubset(NamedPipeServerStream server, ushort praiseEventId)
-        {
-            switch (praiseEventId)
-            {
-                case 0:
-
-                    break;
-
-                case 1:
-
-                    break;
-            }
         }
 
         public void SelectSetIntputSubset(Avril.ServerAssembly.Framework_Server obj, int praiseEventId)

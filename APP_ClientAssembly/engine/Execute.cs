@@ -35,13 +35,6 @@
 
             Set_thread(1, new Thread(obj.Get_client().Get_algorithms().Get_io_ListenRespond().Thread_Output_Respond));
             Get_thread(1).Start();
-
-            for (byte i = 0; i < (obj.Get_client().Get_global().Get_numberOfCores() - 2); i++)
-            {
-                obj.Get_client().Get_algorithms().Get_concurrent(i).Set_concurrentCoreId(i);
-                Set_thread(i, new Thread(obj.Get_client().Get_algorithms().Get_concurrent(i).Thread_Concurrent));
-                Get_thread(i).Start();
-            }
         }
 
         public void Create_And_Run_Graphics(Avril.ClientAssembly.Framework_Client obj)

@@ -13,18 +13,15 @@ namespace Avril_FSD
         void Push_Stack_InputPraises(class Framework_Server* obj);
         void Push_Stack_Output(class Framework_Server* obj, __int8 concurrentCoreId);
         
-        bool GetFlag_InputStackLoaded();
-        bool GetFlag_OutputStackLoaded();
-        bool GetFlag_isNewInputDataReady();
-        bool GetFlag_isNewOutputDataReady();
-
-        void SetFlag_isNewInputDataReady(bool value);
-        void SetFlag_isNewOutputDataReady(bool value);
+        bool Get_flag_IsStackLoaded_Server_InputAction();
+        bool Get_flag_IsStackLoaded_Server_OutputRecieve();
+        //bool GetFlag_isNewInputDataReady();
+       // bool GetFlag_isNewOutputDataReady();
 
     protected:
 
     private:
-        void SetFlag_InputStackLoaded(bool value);
-        void SetFlag_OutputStackLoaded(bool value);
+        void Set_flag_IsStackLoaded_Server_InputAction(bool value);
+        void Set_flag_IsStackLoaded_Server_OutputRecieve(bool value);
     };
 }
