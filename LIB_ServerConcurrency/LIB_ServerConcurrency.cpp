@@ -9,11 +9,11 @@ std::array<float, 3> _fowards;
 std::array<float, 3> _up;
 std::array<float, 3> _right;
 
-bool _Flag_isNewInputDataReady;
+bool _flag_isNewInputDataReady;
 bool _flag_isNewOutputDataReady;
-bool _Flag_IsStackLoaded_Server_InputAction;
-bool _Flag_IsStackLoaded_Server_OutputRecieve;
-bool _Flag_IsInitialised_Avril_FSD_ServerAssembly;
+bool _flag_IsStackLoaded_Server_InputAction;
+bool _flag_IsStackLoaded_Server_OutputRecieve;
+bool _flag_IsInitialised_Avril_FSD_ServerAssembly;
 
 // Praise Event Id
 __int8 _PraiseEventId;
@@ -37,37 +37,22 @@ LIBSERVERCONCURRENCY_API int fnLIBServerConcurrency(void)
 {
     return 0;
 }
+
+void Avril_FSD::CLIBServerConcurrency::Flip_InBufferToWrite(Avril_FSD::Framework_Server* obj)
+{
+    obj->Get_Server_Assembly()->Get_Data()->Flip_Input_DoubleBuffer();
+}
+
+void Avril_FSD::CLIBServerConcurrency::Flip_OutBufferToWrite(Avril_FSD::Framework_Server* obj)
+{
+    obj->Get_Server_Assembly()->Get_Data()->Flip_Output_DoubleBuffer();
+}
 void* Avril_FSD::CLIBServerConcurrency::Initialise_Server_Assembly()
 {
     Avril_FSD::Framework_Server* programId_ServerConcurrencyLibrary = new class Avril_FSD::Framework_Server();
     while (programId_ServerConcurrencyLibrary == NULL) {}
     programId_ServerConcurrencyLibrary->Initialise_Program(programId_ServerConcurrencyLibrary);
     return (void*)programId_ServerConcurrencyLibrary;
-}
-bool Avril_FSD::CLIBServerConcurrency::Get_Flag_isNewInputDataReady(Avril_FSD::Framework_Server* obj)
-{
-    _Flag_isNewInputDataReady = obj->Get_Server_Assembly()->Get_Data()->Get_Data_Control()->GetFlag_isNewInputDataReady();
-    return _Flag_isNewInputDataReady;
-}
-bool Avril_FSD::CLIBServerConcurrency::Get_flag_isNewOutputDataReady(Avril_FSD::Framework_Server* obj)
-{
-    _flag_isNewOutputDataReady = obj->Get_Server_Assembly()->Get_Data()->Get_Data_Control()->GetFlag_isNewOutputDataReady();
-    return _flag_isNewOutputDataReady;
-}
-bool Avril_FSD::CLIBServerConcurrency::Get_Flag_IsStackLoaded_Server_InputAction(Avril_FSD::Framework_Server* obj)
-{
-    _Flag_IsStackLoaded_Server_InputAction = obj->Get_Server_Assembly()->Get_Data()->Get_Data_Control()->GetFlag_InputStackLoaded();
-    return _Flag_IsStackLoaded_Server_InputAction;
-}
-bool Avril_FSD::CLIBServerConcurrency::Get_Flag_IsStackLoaded_Server_OutputRecieve(Avril_FSD::Framework_Server* obj)
-{
-    _Flag_IsStackLoaded_Server_OutputRecieve = obj->Get_Server_Assembly()->Get_Data()->Get_Data_Control()->GetFlag_OutputStackLoaded();
-    return _Flag_IsStackLoaded_Server_OutputRecieve;
-}
-bool Avril_FSD::CLIBServerConcurrency::GetFlag_ServerConcurrency_Initialised(Avril_FSD::Framework_Server* obj)
-{
-    _Flag_IsInitialised_Avril_FSD_ServerAssembly = obj->Get_Server_Assembly()->Get_Execute()->Get_Control_Of_Execute()->GetFlag_SystemInitialised(obj);
-    return _Flag_IsInitialised_Avril_FSD_ServerAssembly;
 }
 void Avril_FSD::CLIBServerConcurrency::Pop_Stack_Output(Avril_FSD::Framework_Server* obj)
 {
@@ -76,6 +61,44 @@ void Avril_FSD::CLIBServerConcurrency::Pop_Stack_Output(Avril_FSD::Framework_Ser
 void Avril_FSD::CLIBServerConcurrency::Push_Stack_InputPraises(Avril_FSD::Framework_Server* obj)
 {
     obj->Get_Server_Assembly()->Get_Data()->Get_Data_Control()->Push_Stack_InputPraises(obj);
+}
+void Avril_FSD::CLIBServerConcurrency::Select_Set_Intput_Subset(Avril_FSD::Framework_Server* obj, __int8 priaseEventId)
+{
+    obj->Get_Server_Assembly()->Get_Data()->GetBuffer_InputFrontDouble()->Get_Input_Control()->SelectSet_Input_Subset(/obj, priaseEventId);
+}
+
+bool Avril_FSD::CLIBServerConcurrency::Get_flag_isNewInputDataReady(Avril_FSD::Framework_Server* obj)
+{
+    _flag_isNewInputDataReady = obj->Get_Server_Assembly()->Get_Data()->Get_Data_Control()->GetFlag_isNewInputDataReady();
+    return _flag_isNewInputDataReady;
+}
+bool Avril_FSD::CLIBServerConcurrency::Get_flag_isNewOutputDataReady(Avril_FSD::Framework_Server* obj)
+{
+    _flag_isNewOutputDataReady = obj->Get_Server_Assembly()->Get_Data()->Get_Data_Control()->GetFlag_isNewOutputDataReady();
+    return _flag_isNewOutputDataReady;
+}
+bool Avril_FSD::CLIBServerConcurrency::Get_flag_IsStackLoaded_Server_InputAction(Avril_FSD::Framework_Server* obj)
+{
+    _flag_IsStackLoaded_Server_InputAction = obj->Get_Server_Assembly()->Get_Data()->Get_Data_Control()->GetFlag_InputStackLoaded();
+    return _flag_IsStackLoaded_Server_InputAction;
+}
+bool Avril_FSD::CLIBServerConcurrency::Get_flag_IsStackLoaded_Server_OutputRecieve(Avril_FSD::Framework_Server* obj)
+{
+    _flag_IsStackLoaded_Server_OutputRecieve = obj->Get_Server_Assembly()->Get_Data()->Get_Data_Control()->GetFlag_OutputStackLoaded();
+    return _flag_IsStackLoaded_Server_OutputRecieve;
+}
+void Avril_FSD::CLIBServerConcurrency::Set_Flag_isNewInputDataReady(bool value)
+{
+    _flag_isNewInputDataReady = value;
+}
+void Avril_FSD::CLIBServerConcurrency::Set_flag_isNewOutputDataReady(bool value)
+{
+    _flag_isNewOutputDataReady = value;
+}
+bool Avril_FSD::CLIBServerConcurrency::Get_flag_ServerConcurrency_Initialised(Avril_FSD::Framework_Server* obj)
+{
+    _flag_IsInitialised_Avril_FSD_ServerAssembly = obj->Get_Server_Assembly()->Get_Execute()->Get_Control_Of_Execute()->GetFlag_SystemInitialised(obj);
+    return _flag_IsInitialised_Avril_FSD_ServerAssembly;
 }
 
 __int8 Avril_FSD::CLIBServerConcurrency::Get_PraiseEventId(Avril_FSD::Framework_Server* obj)
@@ -159,3 +182,5 @@ Avril_FSD::CLIBServerConcurrency::CLIBServerConcurrency()
 {
     return;
 }
+
+

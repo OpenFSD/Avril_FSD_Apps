@@ -125,10 +125,7 @@ namespace Avril.ServerAssembly
             GL.PatchParameter(PatchParameterInt.PatchVertices, 3);
             GL.PointSize(3);
             GL.Enable(EnableCap.DepthTest);
-            GL.Enable(EnableCap.CullFace);
-
-            SIMULATION.SIM_Networking_Server.Initialise_Server();
-            
+            GL.Enable(EnableCap.CullFace);            
             Closed += OnClosed;
             Debug.WriteLine("OnLoad .. done");
         }

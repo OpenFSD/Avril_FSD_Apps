@@ -29,6 +29,7 @@ namespace Avril.ServerAssembly
             {
                 if (done_once == true)
                 {
+                    SIMULATION.SIM_Networking_Server.Initialise_Server();//TESTBENCH
                     obj.Get_server().Get_execute().Get_execute_Control().Set_flag_ThreadInitialised(Get_listen_CoreId(), false);
                     done_once = false;
                 }
@@ -41,7 +42,9 @@ namespace Avril.ServerAssembly
             System.Console.WriteLine("Thread Starting => Thread_Input_Listen()");//TestBench
             while (obj.Get_server().Get_execute().Get_execute_Control().Get_flag_isInitialised_ClientApp() == false)
             {
-                //Networking.CopyPayloadFromMessage();//todo
+                SIMULATION.SIM_Networking_Server.SIM_Server_Recieve(obj, obj.Get_server().Get_data().Get_input_Instnace().Get_BACK_inputDoubleBuffer(obj).Get_praiseEventId());
+                Avril_FSD.Library_For_Server_Concurrency.Flip_InBufferToWrite();
+                Avril_FSD.Library_For_Server_Concurrency.Push_Stack_InputPraises();
             }
         }
 
@@ -66,7 +69,7 @@ namespace Avril.ServerAssembly
             System.Console.WriteLine("Thread Starting => Thread_Output_Respond()");//TestBench
             while (obj.Get_server().Get_execute().Get_execute_Control().Get_flag_isInitialised_ClientApp() == false)
             {
-                //Networking.CreateAndSendNewMessage();//todo
+                SIMULATION.SIM_Networking_Server.SIM_Server_Send(obj, obj.Get_server().Get_data().Get_output_Instnace().Get_FRONT_outputDoubleBuffer(obj).Get_praiseEventId());
             }
         }
         public IO_Listen_Respond_Control Get_io_Control()

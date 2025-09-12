@@ -3,7 +3,7 @@
     public class Output
     {
         private Avril.ServerAssembly.Outputs.Output_Control _output_Control;
-        private UInt16 _praiseEventId;
+        private ushort _praiseEventId;
         private Object _praiseOutputBuffer_Subset;
 
         private static float[] _vertices = {
@@ -90,7 +90,7 @@
             return _vertices;
         }
  
-        public int GetPraiseEventId()
+        public ushort Get_praiseEventId()
         {
             return _praiseEventId;
         }
@@ -100,7 +100,7 @@
             _praiseOutputBuffer_Subset = value;
         }
 
-        public void SetPraiseEventId(ushort value)
+        public void Set_praiseEventId(ushort value)
         {
             _praiseEventId = value;
         }

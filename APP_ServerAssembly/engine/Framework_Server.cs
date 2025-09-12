@@ -23,7 +23,7 @@
             System.Console.WriteLine("charlie");//TESTBENCH
             obj.Get_server().Get_execute().Initialise_Threads(obj);
             System.Console.WriteLine("delta");//TESTBENCH
-            obj.Get_server().Get_execute().Create_And_Run_Graphics(obj);
+            //obj.Get_server().Get_execute().Create_And_Run_Graphics(obj);
             System.Console.WriteLine("foxtrot");//TESTBENCH
         }
         static public Avril.ServerAssembly.Server Get__server()
