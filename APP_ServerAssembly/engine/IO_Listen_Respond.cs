@@ -7,7 +7,6 @@ namespace Avril.ServerAssembly
         private byte _listen_CoreId;
         private byte _respond_CoreId;
         
-
         public IO_Listen_Respond() 
         {
             Set_io_Control(null);
@@ -23,8 +22,8 @@ namespace Avril.ServerAssembly
         public void Thread_Input_Listen()
         {
             Set_listen_CoreId(0);
-            Avril.ServerAssembly.Framework_Server obj = Avril_FSD.ServerAssembly.Program.Get_framework_Client();
-            bool done_once = true;
+            Avril.ServerAssembly.Framework_Server obj = Avril_FSD.ServerAssembly.Program.Get_framework_Server();
+            bool done_once = true; 
             while (obj.Get_server().Get_execute().Get_execute_Control().Get_flag_ThreadInitialised(Get_listen_CoreId()) == true)
             {
                 if (done_once == true)
@@ -42,16 +41,18 @@ namespace Avril.ServerAssembly
             System.Console.WriteLine("Thread Starting => Thread_Input_Listen()");//TestBench
             while (obj.Get_server().Get_execute().Get_execute_Control().Get_flag_isInitialised_ClientApp() == false)
             {
+                Avril_FSD.Library_For_WriteEnableForThreadsAt_SERVERINPUTACTION.Write_Start(Avril_FSD.Library_For_Server_Concurrency.Get_program_WriteEnableStack_ServerInputAction(obj), Get_listen_CoreId());
                 SIMULATION.SIM_Networking_Server.SIM_Server_Recieve(obj, obj.Get_server().Get_data().Get_input_Instnace().Get_BACK_inputDoubleBuffer(obj).Get_praiseEventId());
                 Avril_FSD.Library_For_Server_Concurrency.Flip_InBufferToWrite();
                 Avril_FSD.Library_For_Server_Concurrency.Push_Stack_InputPraises();
+                Avril_FSD.Library_For_WriteEnableForThreadsAt_SERVERINPUTACTION.Write_End(Avril_FSD.Library_For_Server_Concurrency.Get_program_WriteEnableStack_ServerInputAction(obj), Get_listen_CoreId());
             }
         }
 
         public void Thread_Output_Respond()
         {
             Set_respond_CoreId(1);
-            Avril.ServerAssembly.Framework_Server obj = Avril_FSD.ServerAssembly.Program.Get_framework_Client();
+            Avril.ServerAssembly.Framework_Server obj = Avril_FSD.ServerAssembly.Program.Get_framework_Server();
             bool done_once = true;
             while (obj.Get_server().Get_execute().Get_execute_Control().Get_flag_ThreadInitialised(Get_respond_CoreId()) == true)
             {
@@ -71,7 +72,9 @@ namespace Avril.ServerAssembly
             {
                 if(Avril_FSD.Library_For_Server_Concurrency.Get_flag_IsStackLoaded_Server_OutputRecieve())
                 {
+                    Avril_FSD.Library_For_WriteEnableForThreadsAt_SERVEROUTPUTRECIEVE.Write_Start(Avril_FSD.Library_For_Server_Concurrency.Get_program_WriteEnableStack_ServerOutputRecieve(obj), Get_respond_CoreId());
                     SIMULATION.SIM_Networking_Server.SIM_Server_Send(obj, obj.Get_server().Get_data().Get_output_Instnace().Get_FRONT_outputDoubleBuffer(obj).Get_praiseEventId());
+                    Avril_FSD.Library_For_WriteEnableForThreadsAt_SERVEROUTPUTRECIEVE.Write_End(Avril_FSD.Library_For_Server_Concurrency.Get_program_WriteEnableStack_ServerOutputRecieve(obj), Get_respond_CoreId());
                 }
             }
         }

@@ -4,10 +4,9 @@
 #include "pch.h"
 #include "framework.h"
 #include "LIB_ServerConcurrency.h"
-
-std::array<float, 3> _fowards;
-std::array<float, 3> _up;
-std::array<float, 3> _right;
+#include "include/LIB_LaunchEnableForConcurrentThreadsAt_SERVER/LaunchEnableForConcurrentThreadsAt_SERVER_Framework.h"
+#include "include/LIB_WriteEnableForThreadsAt_SERVERINPUTACTION/WriteEnableForThreadsAt_SERVERINPUTACTION_Framework.h"
+#include "include/LIB_WriteEnableForThreadsAt_SERVEROUTPUTRECIEVE/WriteEnableForThreadsAt_SERVEROUTPUTRECIEVE_Framework.h"
 
 bool _flag_isNewInputDataReady;
 bool _flag_isNewOutputDataReady;
@@ -25,9 +24,9 @@ bool _Praise0_Output_IsPingActive;
 // Praise 1 Data
 float _Praise1_Input_mouseDelta_X;
 float _Praise1_Input_mouseDelta_Y;
-std::array<float, 3> _Praise1_Output_Player_Fowards;
-std::array<float, 3> _Praise1_Output_Player_Up;
-std::array<float, 3> _Praise1_Output_Player_Right;
+Eigen::Vector3d _Praise1_Output_Player_Fowards;
+Eigen::Vector3d _Praise1_Output_Player_Up;
+Eigen::Vector3d _Praise1_Output_Player_Right;
 
 // This is an example of an exported variable
 LIBSERVERCONCURRENCY_API int nLIBServerConcurrency=0;
@@ -67,17 +66,6 @@ void Avril_FSD::CLIBServerConcurrency::Select_Set_Intput_Subset(Avril_FSD::Frame
     obj->Get_Server_Assembly()->Get_Data()->GetBuffer_InputFrontDouble()->Get_Input_Control()->SelectSet_Input_Subset(obj, priaseEventId);
 }
 
-//bool Avril_FSD::CLIBServerConcurrency::Get_flag_isNewInputDataReady(Avril_FSD::Framework_Server* obj)
-//{
-//    _flag_isNewInputDataReady = obj->Get_Server_Assembly()->Get_Data()->Get_Data_Control()->GetFlag_isNewInputDataReady();
-//    return _flag_isNewInputDataReady;
-//}
-//bool Avril_FSD::CLIBServerConcurrency::Get_flag_isNewOutputDataReady(Avril_FSD::Framework_Server* obj)
-//{
-//    _flag_isNewOutputDataReady = obj->Get_Server_Assembly()->Get_Data()->Get_Data_Control()->GetFlag_isNewOutputDataReady();
-//    return _flag_isNewOutputDataReady;
-//}
-
 bool Avril_FSD::CLIBServerConcurrency::Get_flag_IsStackLoaded_Server_InputAction(Avril_FSD::Framework_Server* obj)
 {
     _flag_IsStackLoaded_Server_InputAction = obj->Get_Server_Assembly()->Get_Data()->Get_Data_Control()->Get_flag_IsStackLoaded_Server_InputAction();
@@ -88,28 +76,27 @@ bool Avril_FSD::CLIBServerConcurrency::Get_flag_IsStackLoaded_Server_OutputRecie
     _flag_IsStackLoaded_Server_OutputRecieve = obj->Get_Server_Assembly()->Get_Data()->Get_Data_Control()->Get_flag_IsStackLoaded_Server_OutputRecieve();
     return _flag_IsStackLoaded_Server_OutputRecieve;
 }
-//void Avril_FSD::CLIBServerConcurrency::Set_Flag_isNewInputDataReady(bool value)
-//{
-//    _flag_isNewInputDataReady = value;
-//}
-//void Avril_FSD::CLIBServerConcurrency::Set_flag_isNewOutputDataReady(bool value)
-//{
-//    _flag_isNewOutputDataReady = value;
-//}
 bool Avril_FSD::CLIBServerConcurrency::Get_flag_ServerConcurrency_Initialised(Avril_FSD::Framework_Server* obj)
 {
     _flag_IsInitialised_Avril_FSD_ServerAssembly = obj->Get_Server_Assembly()->Get_Execute()->Get_Control_Of_Execute()->GetFlag_SystemInitialised(obj);
     return _flag_IsInitialised_Avril_FSD_ServerAssembly;
 }
 
-//void Avril_FSD::CLIBServerConcurrency::Set_flag_IsStackLoaded_Server_InputAction(Framework_Server* obj, bool value)
-//{
-//    obj->Get_Server_Assembly()->Get_Data()->Get_Data_Control()->
-//}
+Avril_FSD::LaunchEnableForConcurrentThreadsAt_SERVER_Framework* Avril_FSD::CLIBServerConcurrency::Get_program_ConcurrentQue_Server(Avril_FSD::Framework_Server* obj)
+{
+    return obj->Get_Server_Assembly()->Get_Execute()->Get_Program_ConcurrentQue_Server();
+}
 
-//void Avril_FSD::CLIBServerConcurrency::Set_flag_IsStackLoaded_Server_OutputRecieve(Framework_Server* obj, bool value)
-//{
-//}
+Avril_FSD::WriteEnableForThreadsAt_SERVERINPUTACTION_Framework* Avril_FSD::CLIBServerConcurrency::Get_program_WriteEnableStack_ServerInputAction(Avril_FSD::Framework_Server* obj)
+{
+    return obj->Get_Server_Assembly()->Get_Execute()->Get_Program_WriteEnable_ServerInputAction();
+}
+
+Avril_FSD::WriteEnableForThreadsAt_SERVEROUTPUTRECIEVE_Framework* Avril_FSD::CLIBServerConcurrency::Get_program_WriteEnableStack_ServerOutputRecieve(Avril_FSD::Framework_Server* obj)
+{
+    return obj->Get_Server_Assembly()->Get_Execute()->Get_Program_WriteEnable_ServerOutputRecieve();
+}
+
 
 __int8 Avril_FSD::CLIBServerConcurrency::Get_PraiseEventId(Avril_FSD::Framework_Server* obj)
 {
@@ -159,30 +146,27 @@ void Avril_FSD::CLIBServerConcurrency::Set_Praise1_Input_mouseDelta_Y(Avril_FSD:
     obj->Get_Server_Assembly()->Get_Data()->Get_User_I()->Get_Praise1_Input()->Set_mouse_Y(value);
 }
 
-std::array<float, 3> Avril_FSD::CLIBServerConcurrency::Get_Praise1_Output_Player_Fowards(Avril_FSD::Framework_Server* obj)
+Eigen::Vector3d Avril_FSD::CLIBServerConcurrency::Get_Praise1_Output_Player_Fowards(Avril_FSD::Framework_Server* obj)
 {
-    _Praise1_Output_Player_Fowards = std::array<float, 3> {_fowards.at(0), _fowards.at(1), _fowards.at(2)};
     return _Praise1_Output_Player_Fowards;
 }
-std::array<float, 3> Avril_FSD::CLIBServerConcurrency::Get_Praise1_Output_Player_Up(Avril_FSD::Framework_Server* obj)
+Eigen::Vector3d Avril_FSD::CLIBServerConcurrency::Get_Praise1_Output_Player_Up(Avril_FSD::Framework_Server* obj)
 {
-    _Praise1_Output_Player_Up = std::array<float, 3> {_up.at(0), _up.at(1), _up.at(2)};
     return _Praise1_Output_Player_Up;
 }
-std::array<float, 3> Avril_FSD::CLIBServerConcurrency::Get_Praise1_Output_Player_Right(Avril_FSD::Framework_Server* obj)
+Eigen::Vector3d Avril_FSD::CLIBServerConcurrency::Get_Praise1_Output_Player_Right(Avril_FSD::Framework_Server* obj)
 {
-    _Praise1_Output_Player_Right = std::array<float, 3> {_right.at(0), _right.at(1), _right.at(2)};
     return _Praise1_Output_Player_Right;
 }
-void Avril_FSD::CLIBServerConcurrency::Set_Praise1_Output_Player_Fowards(Avril_FSD::Framework_Server* obj, std::array<float, 3> value)
+void Avril_FSD::CLIBServerConcurrency::Set_Praise1_Output_Player_Fowards(Avril_FSD::Framework_Server* obj, Eigen::Vector3d value)
 {
     obj->Get_Server_Assembly()->Get_Data()->Get_User_O()->Get_Praise1_Output()->SetFowards(value);
 }
-void Avril_FSD::CLIBServerConcurrency::Set_Praise1_Output_Player_Up(Avril_FSD::Framework_Server* obj, std::array<float, 3> value)
+void Avril_FSD::CLIBServerConcurrency::Set_Praise1_Output_Player_Up(Avril_FSD::Framework_Server* obj, Eigen::Vector3d value)
 {
     obj->Get_Server_Assembly()->Get_Data()->Get_User_O()->Get_Praise1_Output()->SetUp(value);
 }
-void Avril_FSD::CLIBServerConcurrency::Set_Praise1_Output_Player_Right(Avril_FSD::Framework_Server* obj, std::array<float, 3> value)
+void Avril_FSD::CLIBServerConcurrency::Set_Praise1_Output_Player_Right(Avril_FSD::Framework_Server* obj, Eigen::Vector3d value)
 {
     obj->Get_Server_Assembly()->Get_Data()->Get_User_O()->Get_Praise1_Output()->SetUp(value);
 }

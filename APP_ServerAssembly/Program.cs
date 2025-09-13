@@ -13,7 +13,7 @@
             System.Console.WriteLine("Created: Server App Architechture.");//TestBench
         }
 
-        static public Avril.ServerAssembly.Framework_Server Get_framework_Client()
+        static public Avril.ServerAssembly.Framework_Server Get_framework_Server()
         {
             return _framework_ServerAssembly;
         }

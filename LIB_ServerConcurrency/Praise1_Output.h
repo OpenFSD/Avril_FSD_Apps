@@ -1,5 +1,5 @@
 #pragma once
-
+#include <Eigen/Dense>
 namespace Avril_FSD
 {
 	class Praise1_Output
@@ -7,12 +7,12 @@ namespace Avril_FSD
 	public:
 		Praise1_Output();
 		virtual ~Praise1_Output();
-		std::array<float, 3> GetFowards();
-		std::array<float, 3> GetRight();
-		std::array<float, 3> GetUp();
+		Eigen::Vector3d GetFowards();
+		Eigen::Vector3d GetRight();
+		Eigen::Vector3d GetUp();
 
-		void SetFowards(std::array<float, 3> fowards);
-		void SetRight(std::array<float, 3> right);
-		void SetUp(std::array<float, 3> up);
+		void SetFowards(Eigen::Vector3d fowards);
+		void SetRight(Eigen::Vector3d right);
+		void SetUp(Eigen::Vector3d up);
 	};
 }

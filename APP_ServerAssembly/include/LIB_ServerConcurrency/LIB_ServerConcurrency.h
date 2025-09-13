@@ -1,9 +1,3 @@
-// The following ifdef block is the standard way of creating macros which make exporting
-// from a DLL simpler. All files within this DLL are compiled with the LIBSERVERCONCURRENCY_EXPORTS
-// symbol defined on the command line. This symbol should not be defined on any project
-// that uses this DLL. This way any other project whose source files include this file see
-// LIBSERVERCONCURRENCY_API functions as being imported from a DLL, whereas this DLL sees symbols
-// defined with this macro as being exported.
 #include <array>
 #ifdef LIBSERVERCONCURRENCY_EXPORTS
 #define LIBSERVERCONCURRENCY_API __declspec(dllexport)
@@ -18,15 +12,21 @@ namespace Avril_FSD
 	public:
 		CLIBServerConcurrency(void);
 		// TODO: add your methods here.
+		static void Flip_InBufferToWrite(Avril_FSD::Framework_Server* obj);
+		static void Flip_OutBufferToWrite(Avril_FSD::Framework_Server* obj);
 		static void* Initialise_Server_Assembly();
-		static bool Get_Flag_isNewInputDataReady(class Framework_Server* obj);
-		static bool Get_flag_isNewOutputDataReady(class Framework_Server* obj);
-		static bool Get_Flag_IsStackLoaded_Server_InputAction(class Framework_Server* obj);
-		static bool Get_Flag_IsStackLoaded_Server_OutputRecieve(class Framework_Server* obj);
-		static bool GetFlag_ServerConcurrency_Initialised(class Framework_Server* obj);
 		static void Pop_Stack_Output(class Framework_Server* obj);
 		static void Push_Stack_InputPraises(class Framework_Server* obj);
-		//static void Set_Flag_isNewInputDataReady(bool value);
+		static void Select_Set_Intput_Subset(class Framework_Server* obj, __int8 priaseEventId);
+
+		static bool Get_flag_IsStackLoaded_Server_InputAction(class Framework_Server* obj);
+		static bool Get_flag_IsStackLoaded_Server_OutputRecieve(class Framework_Server* obj);
+		static bool Get_flag_ServerConcurrency_Initialised(class Framework_Server* obj);
+
+		static Avril_FSD::LaunchEnableForConcurrentThreadsAt_SERVER_Framework* Get_program_ConcurrentQue_Server(Avril_FSD::Framework_Server* obj);
+		static Avril_FSD::WriteEnableForThreadsAt_SERVERINPUTACTION_Framework* Get_program_WriteEnableStack_ServerInputAction(Avril_FSD::Framework_Server* obj);
+		static Avril_FSD::WriteEnableForThreadsAt_SERVEROUTPUTRECIEVE_Framework* Get_program_WriteEnableStack_ServerOutputRecieve(Avril_FSD::Framework_Server* obj);
+
 	// Praise Event Id
 		static __int8 Get_PraiseEventId(class Framework_Server* obj);
 		static void Set_PraiseEventId(class Framework_Server* obj, __int8 value);
@@ -40,12 +40,12 @@ namespace Avril_FSD
 		static float Get_Praise1_Input_mouseDelta_Y(class Framework_Server* obj);
 		static void Set_Praise1_Input_mouseDelta_X(class Framework_Server* obj, float value);
 		static void Set_Praise1_Input_mouseDelta_Y(class Framework_Server* obj, float value);
-		static std::array<float, 3> Get_Praise1_Output_Player_Fowards(class Framework_Server* obj);
-		static std::array<float, 3> Get_Praise1_Output_Player_Up(class Framework_Server* obj);
-		static std::array<float, 3> Get_Praise1_Output_Player_Right(class Framework_Server* obj);
-		static void Set_Praise1_Output_Player_Fowards(class Framework_Server* obj, std::array<float, 3> value);
-		static void Set_Praise1_Output_Player_Up(class Framework_Server* obj, std::array<float, 3> value);
-		static void Set_Praise1_Output_Player_Right(class Framework_Server* obj, std::array<float, 3> value);
+		static Eigen::Vector3d Get_Praise1_Output_Player_Fowards(class Framework_Server* obj);
+		static Eigen::Vector3d Get_Praise1_Output_Player_Up(class Framework_Server* obj);
+		static Eigen::Vector3d Get_Praise1_Output_Player_Right(class Framework_Server* obj);
+		static void Set_Praise1_Output_Player_Fowards(class Framework_Server* obj, Eigen::Vector3d value);
+		static void Set_Praise1_Output_Player_Up(class Framework_Server* obj, Eigen::Vector3d value);
+		static void Set_Praise1_Output_Player_Right(class Framework_Server* obj, Eigen::Vector3d value);
 		// Praise 0 Data
 	};
 }

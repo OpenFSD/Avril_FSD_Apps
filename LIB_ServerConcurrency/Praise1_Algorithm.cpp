@@ -43,9 +43,9 @@ void Avril_FSD::Praise1_Algorithm::Do_Praise(Avril_FSD::Framework_Server* obj, c
             break;
         }
     }
-    //out_SubSet->SetFowards(selectedPlayer->Get_camera_FP()->Get_fowards());//todo cast to vector3
-    //out_SubSet->SetRight();
-    //out_SubSet->SetUp();
+    out_SubSet->SetFowards(selectedPlayer->Get_camera_FP()->Get_fowards());//todo cast to vector3
+    out_SubSet->SetRight(selectedPlayer->Get_camera_FP()->Get_right());
+    out_SubSet->SetUp(selectedPlayer->Get_camera_FP()->Get_up());
     //_lastMouseState = mouseState;
     //Console.WriteLine("TESTBENCH => HandleMouse .. Done");
 }
