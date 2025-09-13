@@ -40,6 +40,7 @@
 #include "include/LIB_WriteEnableForThreadsAt_SERVEROUTPUTRECIEVE/LIB_WriteEnableForThreadsAt_SERVEROUTPUTRECIEVE.h"
 #include "GameInstance.h"
 #include "Player.h"
+#include "FirstPersonCamera.h"
 #include "Settings.h"
 
 #endif //PCH_H

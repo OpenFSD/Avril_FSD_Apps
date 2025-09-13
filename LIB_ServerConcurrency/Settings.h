@@ -5,6 +5,9 @@ namespace Avril_FSD
 	class Settings
 	{
 	public:
+		Settings();
+		virtual ~Settings();
+
 		float Get_fov();
 		int Get_refreshRate();
 		bool Get_systemInitialised();

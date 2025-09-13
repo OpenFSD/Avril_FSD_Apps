@@ -8,7 +8,7 @@ namespace Avril_FSD
     public:
         Player();
         virtual ~Player();
-
+		class FirstPersonCamera* Get_camera_FP();
 		bool Get_isFirstMove();
 		bool Get_isFirstMouseMove();
 		bool Get_cameraSelector();
@@ -19,10 +19,8 @@ namespace Avril_FSD
 		std::vector<float> Get_Right();
 		std::vector<float> Get_Up();
 		std::vector<float> Get_mouse_Position();
-		float Get_pitch();
-		float Get_yaw();
-		float Get_roll();
 
+		void Set_camera_FP(FirstPersonCamera* camera);
 		void Set_isFirstMove(bool value);
 		void Set_isFirstMouseMove(bool value);
 		void Set_cameraSpeed(float cameraSpeed);
@@ -32,8 +30,5 @@ namespace Avril_FSD
 		void Set_right(std::vector<float> right);
 		void Set_up(std::vector<float> up);
 		void Set_mouse_Position(std::vector<float> mousePosition);
-		void Set_pitch(float fowards);
-		void Set_yaw(float right);
-		void Set_roll(float up);
     };
 }

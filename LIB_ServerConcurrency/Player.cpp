@@ -1,5 +1,7 @@
 #include "pch.h"
 
+class Avril_FSD::FirstPersonCamera* _camera_FP;
+
 bool _isFirstMove;
 bool _isFirstMouseMove;
 bool _cameraSelector;
@@ -10,12 +12,11 @@ std::vector<float> _front;
 std::vector<float> _right;
 std::vector<float> _up;
 std::vector<float> _mouse_Position;
-float _pitch;
-float _yaw;
-float _roll;
 
 Avril_FSD::Player::Player()
 {
+	Set_camera_FP(new class Avril_FSD::FirstPersonCamera());
+
 	_isFirstMove = true;
 	_isFirstMouseMove = false;
 	_player_Position = { 0.0, 0.0, 0.0 };
@@ -29,6 +30,11 @@ Avril_FSD::Player::Player()
 }
 Avril_FSD::Player::~Player()
 {
+}
+
+Avril_FSD::FirstPersonCamera* Avril_FSD::Player::Get_camera_FP()
+{
+	return _camera_FP;
 }
 
 bool Avril_FSD::Player::Get_isFirstMove()
@@ -72,21 +78,10 @@ std::vector<float> Avril_FSD::Player::Get_mouse_Position()
 	return _mouse_Position;
 }
 
-float Avril_FSD::Player::Get_pitch()
+void Avril_FSD::Player::Set_camera_FP(Avril_FSD::FirstPersonCamera* camera)
 {
-	return _pitch;
+	_camera_FP = camera;
 }
-
-float Avril_FSD::Player::Get_yaw()
-{
-	return _yaw;
-}
-
-float Avril_FSD::Player::Get_roll()
-{
-	return _roll;
-}
-
 void Avril_FSD::Player::Set_isFirstMove(bool value)
 {
 	_isFirstMove = value;
@@ -131,19 +126,4 @@ void Avril_FSD::Player::Set_up(std::vector<float> up)
 void Avril_FSD::Player::Set_mouse_Position(std::vector<float> mousePosition)
 {
 	_mouse_Position = mousePosition;
-}
-
-void Avril_FSD::Player::Set_pitch(float pitch)
-{
-	_pitch = pitch;
-}
-
-void Avril_FSD::Player::Set_yaw(float yaw)
-{
-	_yaw = yaw;
-}
-
-void Avril_FSD::Player::Set_roll(float roll)
-{
-	_roll = roll;
 }

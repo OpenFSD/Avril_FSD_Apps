@@ -2,7 +2,7 @@
 
 #include <cstddef>
 
-std::vector<class /Avril_FSD::Player*> _player;
+std::vector<class Avril_FSD::Player*> _player;
 class Avril_FSD::Settings* _settings;
 
 Avril_FSD::GameInstance::GameInstance()

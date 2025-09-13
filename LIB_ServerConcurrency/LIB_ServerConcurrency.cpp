@@ -142,21 +142,21 @@ void Avril_FSD::CLIBServerConcurrency::Set_Praise0_Output_IsPingActive(Avril_FSD
 //
 float Avril_FSD::CLIBServerConcurrency::Get_Praise1_Input_mouseDelta_X(Avril_FSD::Framework_Server* obj)
 {
-    _Praise1_Input_mouseDelta_X = obj->Get_Server_Assembly()->Get_Data()->Get_User_I()->Get_Praise1_Input()->Get_mouse_delta_X();
+    _Praise1_Input_mouseDelta_X = obj->Get_Server_Assembly()->Get_Data()->Get_User_I()->Get_Praise1_Input()->Get_mouse_X();
     return _Praise1_Input_mouseDelta_X;
 }
 void Avril_FSD::CLIBServerConcurrency::Set_Praise1_Input_mouseDelta_X(Avril_FSD::Framework_Server* obj, float value)
 {
-    obj->Get_Server_Assembly()->Get_Data()->Get_User_I()->Get_Praise1_Input()->Set_mouse_delta_X(value);
+    obj->Get_Server_Assembly()->Get_Data()->Get_User_I()->Get_Praise1_Input()->Set_mouse_X(value);
 }
 float Avril_FSD::CLIBServerConcurrency::Get_Praise1_Input_mouseDelta_Y(Avril_FSD::Framework_Server* obj)
 {
-    _Praise1_Input_mouseDelta_Y = obj->Get_Server_Assembly()->Get_Data()->Get_User_I()->Get_Praise1_Input()->Get_mouse_delta_Y();
+    _Praise1_Input_mouseDelta_Y = obj->Get_Server_Assembly()->Get_Data()->Get_User_I()->Get_Praise1_Input()->Get_mouse_Y();
     return _Praise1_Input_mouseDelta_Y;
 }
 void Avril_FSD::CLIBServerConcurrency::Set_Praise1_Input_mouseDelta_Y(Avril_FSD::Framework_Server* obj, float value)
 {
-    obj->Get_Server_Assembly()->Get_Data()->Get_User_I()->Get_Praise1_Input()->Set_mouse_delta_Y(value);
+    obj->Get_Server_Assembly()->Get_Data()->Get_User_I()->Get_Praise1_Input()->Set_mouse_Y(value);
 }
 
 std::array<float, 3> Avril_FSD::CLIBServerConcurrency::Get_Praise1_Output_Player_Fowards(Avril_FSD::Framework_Server* obj)

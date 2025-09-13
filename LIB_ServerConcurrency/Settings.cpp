@@ -1,5 +1,4 @@
 #include "pch.h"
-#include "Settings.h"
 
 float _fov;
 int _refreshRate;
@@ -14,6 +13,10 @@ Avril_FSD::Settings::Settings()
 	_systemInitialised = false;
 	_screenSize_X = (float)1920;
 	_screenSize_Y = (float)1080;
+}
+
+Avril_FSD::Settings::~Settings()
+{
 }
 
 float Avril_FSD::Settings::Get_fov()

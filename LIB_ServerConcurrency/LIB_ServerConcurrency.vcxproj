@@ -166,6 +166,7 @@
     <ClInclude Include="Data_Control.h" />
     <ClInclude Include="Execute.h" />
     <ClInclude Include="Execute_Control.h" />
+    <ClInclude Include="FirstPersonCamera.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Framework_Server.h" />
     <ClInclude Include="GameInstance.h" />
@@ -217,6 +218,7 @@
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Execute.cpp" />
     <ClCompile Include="Execute_Control.cpp" />
+    <ClCompile Include="FirstPersonCamera.cpp" />
     <ClCompile Include="Framework_Server.cpp" />
     <ClCompile Include="GameInstance.cpp" />
     <ClCompile Include="Global.cpp" />
@@ -255,5 +257,12 @@
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\Eigen3.3.3.9\build\native\Eigen3.targets" Condition="Exists('..\packages\Eigen3.3.3.9\build\native\Eigen3.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Eigen3.3.3.9\build\native\Eigen3.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Eigen3.3.3.9\build\native\Eigen3.targets'))" />
+  </Target>
 </Project>

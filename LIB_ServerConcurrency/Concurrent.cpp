@@ -85,7 +85,7 @@ void Avril_FSD::Concurrent::Thread_Concurrency(Avril_FSD::Framework_Server* obj,
 
 void Avril_FSD::Concurrent::Do_Concurrent_Algorithm_For_PraiseEventId(
     Avril_FSD::Framework_Server* obj,
-    Avril_FSD::Player* player,
+    char playerId,
     __int8 ptr_praiseEventId,
     Object* ptr_Algorithm_Subset,
     Object* ptr_Input_Subset,
@@ -117,7 +117,7 @@ void Avril_FSD::Concurrent::Do_Concurrent_Algorithm_For_PraiseEventId(
         ptr_Algorithm_Subset_Praise1 = reinterpret_cast <Avril_FSD::Praise1_Algorithm*> (ptr_Algorithm_Subset);
         ptr_Input_Subset_Praise1 = reinterpret_cast <Avril_FSD::Praise1_Input*> (ptr_Input_Subset);
         ptr_Output_Subset_Praise1 = reinterpret_cast <Avril_FSD::Praise1_Output*> (ptr_Output_Subset);
-        ptr_Algorithm_Subset_Praise1->Do_Praise(obj, player, ptr_Input_Subset_Praise1, ptr_Output_Subset_Praise1);
+        ptr_Algorithm_Subset_Praise1->Do_Praise(obj, playerId, ptr_Input_Subset_Praise1, ptr_Output_Subset_Praise1);
         break;
 
     case 2:
