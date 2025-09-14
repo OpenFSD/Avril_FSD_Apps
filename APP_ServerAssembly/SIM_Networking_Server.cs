@@ -29,12 +29,12 @@ namespace SIMULATION
             byte[] buffer = new byte[1];
             int bytesRead = _server.Read(buffer, 0, buffer.Length);
             byte praiseEventId = buffer[0];
-            Avril_FSD.Library_For_Server_Concurrency.Set_PraiseEventId((sbyte)praiseEventId);//TODO: change to byte
+            Avril_FSD.Library_For_Server_Concurrency.Set_PraiseEventId(praiseEventId);//TODO: change to byte
 
             buffer = new byte[1];
             bytesRead = _server.Read(buffer, 1, buffer.Length);
             byte playerID = buffer[0];
-            Avril_FSD.Library_For_Server_Concurrency.Set_playerId((sbyte)playerID);//TODO: change to byte
+            Avril_FSD.Library_For_Server_Concurrency.Set_playerId(playerID);//TODO: change to byte
 
             Avril_FSD.Library_For_Server_Concurrency.Select_Set_Intput_Subset(obj, praiseEventId);
             switch (praiseEventId)
@@ -67,8 +67,8 @@ namespace SIMULATION
 
                 case 1:
                     byte[] buffer = new byte[38];
-                    buffer[0] = obj.Get_server().Get_data().Get_output_Instnace().Get_FRONT_outputDoubleBuffer(obj).Get_praiseEventId();
-                    buffer[1] = obj.Get_server().Get_data().Get_output_Instnace().Get_FRONT_outputDoubleBuffer(obj).Get_out_playerId();
+                    buffer[0] = Avril_FSD.Library_For_Server_Concurrency.Get_PraiseEventId();
+                    buffer[1] = Avril_FSD.Library_For_Server_Concurrency.Get_playerId();
                     Avril.ServerAssembly.Praise_Files.Praise1_Output subset = (Avril.ServerAssembly.Praise_Files.Praise1_Output)obj.Get_server().Get_data().Get_input_Instnace().Get_BACK_inputDoubleBuffer(obj).Get_praiseInputBuffer_Subset();
                     byte[] byteArray = BitConverter.GetBytes(subset.Get_fowards().X);
                     for (ushort index = 2; index < 6; index++)

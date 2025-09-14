@@ -43,18 +43,18 @@ namespace Avril_FSD
         public static extern IntPtr Get_program_WriteEnableStack_ServerOutputRecieve(Avril.ServerAssembly.Framework_Server obj);
 
         // Player Id
-        [DllImport("LIBServerConcurrency.dll", EntryPoint = "")]
+        [DllImport("LIBServerConcurrency.dll", EntryPoint = "?Get_playerId@CLIBServerConcurrency@Avril_FSD@@SADPAVFramework_Server@2@@Z")]
         public static extern byte Get_playerId();
 
-        [DllImport("LIBServerConcurrency.dll", EntryPoint = "")]
-        public static extern void Set_playerId(sbyte value);
+        [DllImport("LIBServerConcurrency.dll", EntryPoint = "?Set_playerId@CLIBServerConcurrency@Avril_FSD@@SAXPAVFramework_Server@2@D@Z")]
+        public static extern void Set_playerId(byte value);
 
         // Praise Event Id
         [DllImport("LIBServerConcurrency.dll", EntryPoint = "?Get_PraiseEventId@CLIBServerConcurrency@Avril_FSD@@SADPAVFramework_Server@2@@Z")]
         public static extern byte Get_PraiseEventId();
 
         [DllImport("LIBServerConcurrency.dll", EntryPoint = "?Set_PraiseEventId@CLIBServerConcurrency@Avril_FSD@@SAXPAVFramework_Server@2@D@Z")]
-        public static extern void Set_PraiseEventId(sbyte value);
+        public static extern void Set_PraiseEventId(byte value);
     }
 
     // Praise 0 Data

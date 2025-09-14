@@ -35,5 +35,17 @@ namespace GameMainScreen
                 MessageBox.Show($"Error launching console app: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start("..\\..\\..\\APP_ServerAssembly\\bin\\Release\\net8.0\\APP_ServerAssembly.exe");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error launching console app: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

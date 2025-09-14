@@ -32,7 +32,7 @@ namespace Avril.ServerAssembly.Inputs
         }
         public ushort Get_praiseEventId()
         {
-            return _praiseEventId;
+            return _in_praiseEventId;
         }
         public void Set_input_Control(Input_Control value)
         {
@@ -43,9 +43,9 @@ namespace Avril.ServerAssembly.Inputs
             _praiseInputBuffer_Subset = value;
         }
         
-        public void Set_praiseEventId(ushort value)
+        public void Set_praiseEventId(byte value)
         {
-            _praiseEventId = value;
+            _in_praiseEventId = value;
         }
     }
 }
