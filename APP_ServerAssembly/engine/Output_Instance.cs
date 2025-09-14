@@ -5,7 +5,6 @@ namespace Avril.ServerAssembly.Outputs
     {
         private Avril.ServerAssembly.Outputs.Output _empty_OutputBuffer;
         private Avril.ServerAssembly.Outputs.Output[] _outputDoubleBuffer;
-        private Avril.ServerAssembly.Outputs.Output _transmitOutputBuffer;
 
         public Output_Instance() 
         {
@@ -19,8 +18,6 @@ namespace Avril.ServerAssembly.Outputs
                 _outputDoubleBuffer[index] = Get_empty_OutputBuffer();
                 while (_outputDoubleBuffer[index] == null) { }
             }
-            Set_transmitOutputBuffer(new Avril.ServerAssembly.Outputs.Output());
-            while (Get_transmitOutputBuffer() == null) { }
         }
 
         private UInt16 BoolToInt16(bool value)
@@ -49,11 +46,6 @@ namespace Avril.ServerAssembly.Outputs
         {
             return _outputDoubleBuffer[BoolToInt16(!obj.Get_server().Get_data().Get_state_Buffer_Output_ToWrite())];
         }
-        public Avril.ServerAssembly.Outputs.Output Get_transmitOutputBuffer()
-        {
-            return _transmitOutputBuffer;
-        }
-
         private void Set_empty_OutputBuffer(Avril.ServerAssembly.Outputs.Output value)
         {
             _empty_OutputBuffer = value;
@@ -61,10 +53,6 @@ namespace Avril.ServerAssembly.Outputs
         public void Set_outputDoubleBuffer(Avril.ServerAssembly.Framework_Server obj, Avril.ServerAssembly.Outputs.Output value)
         {
             _outputDoubleBuffer[BoolToInt16(!obj.Get_server().Get_data().Get_state_Buffer_Output_ToWrite())] = value;
-        }
-        private void Set_transmitOutputBuffer(Avril.ServerAssembly.Outputs.Output value)
-        {
-            _transmitOutputBuffer = value;
         }
     }
 }

@@ -52,7 +52,6 @@ void Avril_FSD::Execute::Initialise_Threads(class Avril_FSD::Framework_Server* o
     {
         ptr_Thread_WithCoreId[coreId] = new std::thread(obj->Get_Server_Assembly()->Get_Algorithms()->Get_Concurrent(coreId)->Thread_Concurrency, obj, coreId);
     }
-    //todo: add input capture and output send threads
 }
 
 Avril_FSD::Execute_Control* Avril_FSD::Execute::Get_Control_Of_Execute()

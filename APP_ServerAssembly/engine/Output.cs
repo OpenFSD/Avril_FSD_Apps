@@ -3,8 +3,9 @@
     public class Output
     {
         private Avril.ServerAssembly.Outputs.Output_Control _output_Control;
-        private ushort _praiseEventId;
         private Object _praiseOutputBuffer_Subset;
+        private byte _out_praiseEventId;
+        private byte _out_playerId;
 
         private static float[] _vertices = {
             -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
@@ -61,14 +62,8 @@
 
         public Output()
         {
-            //player = new Avril.ServerAssembly.Player();
-
-            _praiseEventId = new int();
-            _praiseEventId = 0;
-
-            _praiseOutputBuffer_Subset = null;
-
-            System.Console.WriteLine("Avril.ServerAssembly: Output");
+            _out_praiseEventId = 255;
+            _out_praiseEventId = 255;
         }
 
         public void InitialiseControl()
@@ -90,19 +85,26 @@
             return _vertices;
         }
  
-        public ushort Get_praiseEventId()
+        public byte Get_praiseEventId()
         {
-            return _praiseEventId;
+            return _out_praiseEventId;
         }
-
+        public byte Get_out_playerId()
+        {
+            return _out_playerId;
+        }
         public void SetInputBufferSubSet(Object value)
         {
             _praiseOutputBuffer_Subset = value;
         }
 
-        public void Set_praiseEventId(ushort value)
+        public void Set_praiseEventId(byte value)
         {
-            _praiseEventId = value;
+            _out_praiseEventId = value;
+        }
+        public void Set_out_playerId(byte value)
+        {
+            _out_playerId = value;
         }
     }
 }

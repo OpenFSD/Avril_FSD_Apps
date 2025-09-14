@@ -24,7 +24,7 @@
 
         public void Initialise_Libraries()
         {
-            _program_ServerConcurrency = Avril_FSD.Library_For_Server_Concurrency.Initialise_Server_Assembly();
+            Set_program_ServerConcurrency(Avril_FSD.Library_For_Server_Concurrency.Initialise_Server_Assembly());
         }
         public void Initialise_Threads(Avril.ServerAssembly.Framework_Server obj)
         {
@@ -53,6 +53,11 @@
             return _threads[index];
         }
 
+        public IntPtr Get_program_ServerConcurrency()
+        {
+            return _program_ServerConcurrency;
+        }
+
         private void Set_execute_Control(Avril.ServerAssembly.Execute_Control execute_Control)
         {
             _execute_Control = execute_Control;
@@ -61,6 +66,11 @@
         private void Set_thread(byte index, Thread thread) 
         {
             _threads[index] = thread;
+        }
+
+        private void Set_program_ServerConcurrency(IntPtr handle)
+        {
+            _program_ServerConcurrency = handle;
         }
     }   
 }

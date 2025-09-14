@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Avril.ClientAssembly.Praise_Files
+﻿namespace Avril.ClientAssembly.Praise_Files
 {
     public class Praise1_Input
     {
-        static private float mouse_X;
-        static private float mouse_Y;
+        private float mouse_X;
+        private float mouse_Y;
 
         public Praise1_Input()
         {

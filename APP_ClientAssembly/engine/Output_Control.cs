@@ -8,20 +8,20 @@ namespace Avril.ClientAssembly.Outputs
 
         }
 
-        void SelectSetOutputSubset(Avril.ClientAssembly.Framework_Client obj, int praiseEventId)
+        public void Select_Set_Output_Subset(Avril.ClientAssembly.Framework_Client obj, int praiseEventId)
         {
             switch (praiseEventId)
             {
                 case 0:
-                    obj.Get_client().Get_data().Get_output_Instnace().Get_BACK_outputDoubleBuffer(obj).SetInputBufferSubSet(obj.Get_client().Get_data().Get_user_I().GetPraise0_Input());
+                    obj.Get_client().Get_data().Get_output_Instnace().Get_BACK_outputDoubleBuffer(obj).Set_praiseOutputBuffer_Subset(obj.Get_client().Get_data().Get_user_O().GetPraise0_Outnput());
                     break;
 
                 case 1:
-                    obj.Get_client().Get_data().Get_output_Instnace().Get_BACK_outputDoubleBuffer(obj).SetInputBufferSubSet(obj.Get_client().Get_data().Get_user_I().GetPraise1_Input());
+                    obj.Get_client().Get_data().Get_output_Instnace().Get_BACK_outputDoubleBuffer(obj).Set_praiseOutputBuffer_Subset(obj.Get_client().Get_data().Get_user_O().GetPraise1_Output());
                     break;
 
                 case 2:
-                    obj.Get_client().Get_data().Get_output_Instnace().Get_BACK_outputDoubleBuffer(obj).SetInputBufferSubSet(obj.Get_client().Get_data().Get_user_I().GetPraise2_Input());
+                    
                     break;
 
             }

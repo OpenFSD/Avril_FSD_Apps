@@ -41,7 +41,15 @@ namespace Avril.ClientAssembly
             System.Console.WriteLine("Thread Starting => Thread_Output_Respond()");//TestBench
             while (obj.Get_client().Get_execute().Get_execute_Control().Get_flag_isInitialised_ClientApp() == false)
             {
-                //Networking.CreateAndSendNewMessage();//todo
+                
+                SIMULATION.SIM_Networking.SIM_Client_Recieve(obj);
+                obj.Get_client().Get_data().Flip_OutBufferToWrite();
+                obj.Get_client().Get_data().Get_data_Control().Push_Stack_OutputRecieve(obj.Get_client().Get_data().Get_stack_Client_OutputRecieves(), obj.Get_client().Get_data().Get_output_Instnace().Get_FRONT_outputDoubleBuffer(obj));
+                if(Avril_FSD.Library_For_LaunchEnableForConcurrentThreadsAt_CLIENT.Get_State_LaunchBit(obj.Get_client().Get_execute().Get_program_ConcurrentQue_C()) == Avril_FSD.Library_For_LaunchEnableForConcurrentThreadsAt_CLIENT.Get_Flag_Idle(obj.Get_client().Get_execute().Get_program_ConcurrentQue_C()))
+                {
+                    Avril_FSD.Library_For_LaunchEnableForConcurrentThreadsAt_CLIENT.Request_Wait_Launch(obj.Get_client().Get_execute().Get_program_ConcurrentQue_C(), Avril_FSD.Library_For_LaunchEnableForConcurrentThreadsAt_CLIENT.Get_coreId_To_Launch(obj.Get_client().Get_execute().Get_program_ConcurrentQue_C()));
+                }
+                Avril_FSD.Library_For_WriteEnableForThreadsAt_CLIENTOUTPUTRECIEVE.Write_End(obj.Get_client().Get_execute().Get_program_WriteQue_C_OR(), Get_listen_CoreId());
             }
         }
         public IO_Listen_Respond_Control Get_io_Control()

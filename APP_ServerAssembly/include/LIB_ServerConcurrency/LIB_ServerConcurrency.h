@@ -26,10 +26,13 @@ namespace Avril_FSD
 		static Avril_FSD::LaunchEnableForConcurrentThreadsAt_SERVER_Framework* Get_program_ConcurrentQue_Server(Avril_FSD::Framework_Server* obj);
 		static Avril_FSD::WriteEnableForThreadsAt_SERVERINPUTACTION_Framework* Get_program_WriteEnableStack_ServerInputAction(Avril_FSD::Framework_Server* obj);
 		static Avril_FSD::WriteEnableForThreadsAt_SERVEROUTPUTRECIEVE_Framework* Get_program_WriteEnableStack_ServerOutputRecieve(Avril_FSD::Framework_Server* obj);
-
-	// Praise Event Id
+		// Player Id
+		static char Get_playerId(class Framework_Server* obj);
+		static void Set_playerId(class Framework_Server* obj, char playerId);
+		// Praise Event Id
 		static __int8 Get_PraiseEventId(class Framework_Server* obj);
 		static void Set_PraiseEventId(class Framework_Server* obj, __int8 value);
+// USER IMPLEMENTATION - ABCDE
 		// Praise 0 Data
 		static bool Get_Praise0_Input_IsPingActive(class Framework_Server* obj);
 		static void Set_Praise0_Input_IsPingActive(class Framework_Server* obj, bool value);
@@ -46,7 +49,7 @@ namespace Avril_FSD
 		static void Set_Praise1_Output_Player_Fowards(class Framework_Server* obj, Eigen::Vector3d value);
 		static void Set_Praise1_Output_Player_Up(class Framework_Server* obj, Eigen::Vector3d value);
 		static void Set_Praise1_Output_Player_Right(class Framework_Server* obj, Eigen::Vector3d value);
-		// Praise 0 Data
+		// Praise 2 Data
 	};
 }
 

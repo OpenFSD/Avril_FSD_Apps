@@ -14,6 +14,9 @@ bool _flag_IsStackLoaded_Server_InputAction;
 bool _flag_IsStackLoaded_Server_OutputRecieve;
 bool _flag_IsInitialised_Avril_FSD_ServerAssembly;
 
+// Player Id
+__int8 _playerId;
+
 // Praise Event Id
 __int8 _PraiseEventId;
 
@@ -97,10 +100,20 @@ Avril_FSD::WriteEnableForThreadsAt_SERVEROUTPUTRECIEVE_Framework* Avril_FSD::CLI
     return obj->Get_Server_Assembly()->Get_Execute()->Get_Program_WriteEnable_ServerOutputRecieve();
 }
 
+char Avril_FSD::CLIBServerConcurrency::Get_playerId(Framework_Server* obj)
+{
+    _playerId = obj->Get_Server_Assembly()->Get_Data()->GetBuffer_OutputFrontDouble()->Get_out_playerId();
+    return _playerId;
+}
+void Avril_FSD::CLIBServerConcurrency::Set_playerId(Framework_Server* ob, char playerId)
+{
+    _playerId = playerId;
+}
+
 
 __int8 Avril_FSD::CLIBServerConcurrency::Get_PraiseEventId(Avril_FSD::Framework_Server* obj)
 {
-    _PraiseEventId = obj->Get_Server_Assembly()->Get_Data()->GetBuffer_OutputBackDouble()->GetPraiseEventId();
+    _PraiseEventId = obj->Get_Server_Assembly()->Get_Data()->GetBuffer_OutputBackDouble()->Get_out_praiseEventId();
     return _PraiseEventId;
 }
 void Avril_FSD::CLIBServerConcurrency::Set_PraiseEventId(Avril_FSD::Framework_Server* obj, __int8 value)

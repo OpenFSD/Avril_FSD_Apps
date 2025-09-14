@@ -42,6 +42,13 @@ namespace Avril_FSD
         [DllImport("LIBServerConcurrency.dll", EntryPoint = "?Get_program_WriteEnableStack_ServerOutputRecieve@CLIBServerConcurrency@Avril_FSD@@SAPAVWriteEnableForThreadsAt_SERVEROUTPUTRECIEVE_Framework@2@PAVFramework_Server@2@@Z")]
         public static extern IntPtr Get_program_WriteEnableStack_ServerOutputRecieve(Avril.ServerAssembly.Framework_Server obj);
 
+        // Player Id
+        [DllImport("LIBServerConcurrency.dll", EntryPoint = "")]
+        public static extern byte Get_playerId();
+
+        [DllImport("LIBServerConcurrency.dll", EntryPoint = "")]
+        public static extern void Set_playerId(sbyte value);
+
         // Praise Event Id
         [DllImport("LIBServerConcurrency.dll", EntryPoint = "?Get_PraiseEventId@CLIBServerConcurrency@Avril_FSD@@SADPAVFramework_Server@2@@Z")]
         public static extern byte Get_PraiseEventId();

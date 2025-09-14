@@ -9,6 +9,7 @@
         private Avril.ClientAssembly.Outputs.Output_Instance _output_Instnace;
         private List<Avril.ClientAssembly.Outputs.Output> _stack_Client_OutputRecieves;
         private Avril.ClientAssembly.Praise_Files.User_I _user_I;
+        private Avril.ClientAssembly.Praise_Files.User_O _user_O;
         private bool _state_Buffer_Input_ToWrite;
         private bool _state_Buffer_Output_ToWrite;
 
@@ -33,6 +34,9 @@
 
             Set_user_I(new Avril.ClientAssembly.Praise_Files.User_I());
             while (Get_user_I() == null) { }
+
+            Set_user_O(new Avril.ClientAssembly.Praise_Files.User_O());
+            while (Get_user_O() == null) { }
 
             Set_state_Buffer_Input_ToWrite(true);
             Set_state_Buffer_Output_ToWrite(false);
@@ -97,7 +101,10 @@
         {
             return _user_I;
         }
-
+        public Avril.ClientAssembly.Praise_Files.User_O Get_user_O()
+        {
+            return _user_O;
+        }
         private void Set_data_Control(Avril.ClientAssembly.Data_Control data_Control)
         {
             _data_Control = data_Control;
@@ -139,6 +146,11 @@
         private void Set_user_I(Avril.ClientAssembly.Praise_Files.User_I user_I)
         {
             _user_I = user_I;
+        }
+
+        private void Set_user_O(Avril.ClientAssembly.Praise_Files.User_O user_O)
+        {
+            _user_O = user_O;
         }
     }
 }

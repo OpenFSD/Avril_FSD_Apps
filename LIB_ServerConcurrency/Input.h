@@ -16,7 +16,7 @@ namespace Avril_FSD
         __int8 Get_playerId();
 
         void Set_in_praiseEventId(__int8 praiseEventId);
-
+        void Set_in_playerId(__int8 praiseEventId);
         void Set_Subset_InputBuffer(class Praise0_Input* value);
         void Set_Subset_InputBuffer(class Praise1_Input* value);
         void Set_Subset_InputBuffer(class Praise2_Input* value);

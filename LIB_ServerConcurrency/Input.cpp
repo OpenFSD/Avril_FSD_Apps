@@ -4,7 +4,7 @@
 
 Avril_FSD::Input_Control* ptr_input_Control = NULL;
 __int8 _in_praiseEventId = 255;
-__int8 _playerId = 255;
+__int8 _in_playerId = 255;
 Avril_FSD::Object* ptr_buffer_SubSet_InputPraise = NULL;
 
 Avril_FSD::Input::Input()
@@ -38,13 +38,16 @@ __int8 Avril_FSD::Input::GetPraiseEventId()
 }
 __int8 Avril_FSD::Input::Get_playerId()
 {
-    return _playerId;
+    return _in_playerId;
 }
 void Avril_FSD::Input::Set_in_praiseEventId(__int8 value)
 {
     _in_praiseEventId = value;
 }
-
+void Avril_FSD::Input::Set_in_playerId(__int8 value)
+{
+    _in_playerId = value;
+}
 void Avril_FSD::Input::Set_input_Control(Avril_FSD::Input_Control* input_Control)
 {
     ptr_input_Control = input_Control;

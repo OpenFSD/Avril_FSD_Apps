@@ -3,8 +3,9 @@
     public class Output
     {
         private Avril.ClientAssembly.Outputs.Output_Control _output_Control;
-        private UInt16 _praiseEventId;
         private Object _praiseOutputBuffer_Subset;
+        private byte _praiseEventId;
+        private byte _playerId;
 
         private static float[] _vertices = {
             -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
@@ -61,48 +62,60 @@
 
         public Output()
         {
-            //player = new Avril.ClientAssembly.Player();
-
-            _praiseEventId = new int();
-            _praiseEventId = 0;
-
             _praiseOutputBuffer_Subset = null;
-
+            _praiseEventId = 255;
+            _playerId = 255;
             System.Console.WriteLine("Avril.ClientAssembly: Output");
         }
 
-        public void InitialiseControl()
+        public void Initialise_Control()
         {
-            _output_Control = new Avril.ClientAssembly.Outputs.Output_Control();
-            while (_output_Control == null) { /* Wait while is created */ }
+            Set_output_Control(new Avril.ClientAssembly.Outputs.Output_Control());
+            while (Get_output_Control() == null) { /* Wait while is created */ }
         }
+
+        public Avril.ClientAssembly.Outputs.Output_Control Get_output_Control()
+        {
+            return _output_Control;
+        }
+        public Object Get_praiseOutputBuffer_Subset()
+        {
+            return _praiseOutputBuffer_Subset;
+        }
+        public byte Get_praiseEventId()
+        { 
+            return _praiseEventId; 
+        }
+        public byte Get_playerId()
+        {
+            return _playerId;    
+        }
+
+        public void Set_output_Control(Avril.ClientAssembly.Outputs.Output_Control output_Control)
+        {
+            _output_Control = output_Control;
+        }
+        public void Set_praiseOutputBuffer_Subset(Object outputSubset)
+        {
+            _praiseOutputBuffer_Subset = outputSubset ;
+        }
+        public void Set_praiseEventId(byte praiseEventId)
+        {
+            _praiseEventId = praiseEventId;
+        }
+        public void Set_playerId(byte playerIdalue)
+        {
+            _playerId = playerIdalue;
+        }
+
+
         public uint[] Get_Indices()
         {
             return _indices;
         }
-        public Object GetOutputBufferSubset()
-        {
-            return _praiseOutputBuffer_Subset;
-        }
-
         public float[] Get_Vertices()
         {
             return _vertices;
         }
- 
-        public int GetPraiseEventId()
-        {
-            return _praiseEventId;
-        }
-
-        public void SetInputBufferSubSet(Object value)
-        {
-            _praiseOutputBuffer_Subset = value;
-        }
-
-        public void SetPraiseEventId(ushort value)
-        {
-            _praiseEventId = value;
-        }
-    }
+     }
 }

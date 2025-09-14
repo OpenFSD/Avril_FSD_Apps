@@ -6,7 +6,8 @@ namespace Avril.ServerAssembly.Inputs
     {
         private Avril.ServerAssembly.Inputs.Input_Control _input_Control;
         private Object _praiseInputBuffer_Subset;
-        private ushort _praiseEventId;
+        private byte _in_praiseEventId;
+        private byte _in_playerId;
 
         public Input()
         {

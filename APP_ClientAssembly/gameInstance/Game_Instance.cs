@@ -192,7 +192,7 @@ namespace Avril.ClientAssembly
                 subset.Set_Mouse_X(mouseState.X);
                 subset.Set_Mouse_Y(mouseState.Y);
                 obj.Get_client().Get_data().Flip_InBufferToWrite();
-                SIMULATION.SIM_Networking.SIM_Client_Send(obj, obj.Get_client().Get_data().Get_input_Instnace().Get_BACK_inputDoubleBuffer(obj).Get_praiseEventId());
+                SIMULATION.SIM_Networking.SIM_Client_Send(obj);
             }
         }
         private void HandleKeyboard(double dt)
