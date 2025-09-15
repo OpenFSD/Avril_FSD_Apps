@@ -19,6 +19,7 @@
             while (Get_io_ListenRespond() == null) { }
             Get_io_ListenRespond().InitialiseControl();
 
+            _concurrency = new Avril.ClientAssembly.Concurrency[numberOfCores - 2];
             for (byte index = 0; index < numberOfCores - 2; index++)
             {
                 Set_concurrency(index, new Avril.ClientAssembly.Concurrency());

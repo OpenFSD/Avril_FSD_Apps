@@ -17,7 +17,7 @@ namespace GameMainScreen
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new GameMainMenu_Client());
+            Application.Run(new TESTBENCH_MainMenu());
         }
     }
 }

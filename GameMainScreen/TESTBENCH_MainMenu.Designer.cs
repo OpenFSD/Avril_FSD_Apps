@@ -1,6 +1,6 @@
 ﻿namespace GameMainScreen
 {
-    partial class GameMainMenu_Client
+    partial class TESTBENCH_MainMenu
     {
         /// <summary>
         /// Required designer variable.

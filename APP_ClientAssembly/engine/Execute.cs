@@ -26,8 +26,8 @@
 
         public void Initialise_Libraries()
         {
-            Set_program_ConcurrentQue_C(Avril_FSD.Library_For_LaunchEnableForConcurrentThreadsAt_CLIENT.Initialise_LaunchEnableForConcurrentThreadsAt());
-            Set_program_WriteQue_C_OR(Avril_FSD.Library_For_WriteEnableForThreadsAt_CLIENTOUTPUTRECIEVE.Initialise_WriteEnable());
+            _program_ConcurrentQue_C = Avril_FSD.Library_For_LaunchEnableForConcurrentThreadsAt_CLIENT.Initialise_LaunchEnableForConcurrentThreadsAt();
+            _program_WriteQue_C_OR = Avril_FSD.Library_For_WriteEnableForThreadsAt_CLIENTOUTPUTRECIEVE.Initialise_WriteEnable();
         }
         public void Initialise_Threads(Avril.ClientAssembly.Framework_Client obj)
         {

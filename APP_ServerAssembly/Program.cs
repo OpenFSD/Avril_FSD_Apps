@@ -10,6 +10,7 @@
             System.Console.WriteLine("ENTERED => app entry point.");//TestBench
             _framework_ServerAssembly = new Avril.ServerAssembly.Framework_Server();
             while (_framework_ServerAssembly == null) { /* wait until class created */ }
+            _framework_ServerAssembly.Initialise(_framework_ServerAssembly);
             System.Console.WriteLine("Created: Server App Architechture.");//TestBench
         }
 

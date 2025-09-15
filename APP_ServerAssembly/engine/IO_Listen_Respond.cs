@@ -28,7 +28,6 @@ namespace Avril.ServerAssembly
             {
                 if (done_once == true)
                 {
-                    SIMULATION.SIM_Networking_Server.Initialise_Server();//TESTBENCH
                     obj.Get_server().Get_execute().Get_execute_Control().Set_flag_ThreadInitialised(Get_listen_CoreId(), false);
                     done_once = false;
                 }

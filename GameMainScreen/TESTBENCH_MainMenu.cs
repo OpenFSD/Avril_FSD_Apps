@@ -12,9 +12,9 @@ using System.Windows.Forms;
 
 namespace GameMainScreen
 {
-    public partial class GameMainMenu_Client : Form
+    public partial class TESTBENCH_MainMenu : Form
     {
-        public GameMainMenu_Client()
+        public TESTBENCH_MainMenu()
         {
             InitializeComponent();
         }
@@ -28,7 +28,7 @@ namespace GameMainScreen
         {
             try
             {
-                Process.Start("..\\..\\..\\APP_ClientAssembly\\bin\\Release\\net8.0\\APP_ClientAssembly.exe");
+                Process.Start("..\\..\\..\\APP_ServerAssembly\\bin\\Release\\net8.0\\APP_ServerAssembly.exe");
             }
             catch (Exception ex)
             {
@@ -40,7 +40,7 @@ namespace GameMainScreen
         {
             try
             {
-                Process.Start("..\\..\\..\\APP_ServerAssembly\\bin\\Release\\net8.0\\APP_ServerAssembly.exe");
+                Process.Start("..\\..\\..\\APP_ClientAssembly\\bin\\Release\\net8.0\\APP_ClientAssembly.exe");
             }
             catch (Exception ex)
             {

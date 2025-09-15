@@ -27,6 +27,7 @@
             Set_input_Instnace(new Avril.ClientAssembly.Inputs.Input_Instance());
             while (Get_input_Instnace() == null) { }
 
+            _buffer_Output_Reference_ForCore = new Avril.ClientAssembly.Outputs.Output[4];
             for (byte index = 0; index < 4; index++)
             {
                 Set_buffer_Output_Reference_ForCore(index, new Avril.ClientAssembly.Outputs.Output());

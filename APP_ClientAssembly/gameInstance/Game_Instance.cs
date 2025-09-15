@@ -36,11 +36,11 @@ namespace Avril.ClientAssembly
         private bool cameraSelector = false;
        
         public Game_Instance()
-            : base(1920, // initial width
-                1080, // initial height
+            : base(960, // initial width
+                540, // initial height
                 GraphicsMode.Default,
                 "",  // initial title
-                GameWindowFlags.Fullscreen,
+                GameWindowFlags.FixedWindow,
                 DisplayDevice.Default,
                 4, // OpenGL major version
                 5, // OpenGL minor version
@@ -125,10 +125,7 @@ namespace Avril.ClientAssembly
             GL.PatchParameter(PatchParameterInt.PatchVertices, 3);
             GL.PointSize(3);
             GL.Enable(EnableCap.DepthTest);
-            GL.Enable(EnableCap.CullFace);
-
-            SIMULATION.SIM_Networking.Initialise_Cleint();
-            
+            GL.Enable(EnableCap.CullFace);           
             Closed += OnClosed;
             Debug.WriteLine("OnLoad .. done");
         }

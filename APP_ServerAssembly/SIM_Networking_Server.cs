@@ -1,8 +1,4 @@
-﻿using Avril.ServerAssembly;
-using System;
-using System.IO.Pipes;
-using System.Runtime.InteropServices;
-using System.Text;
+﻿using System.IO.Pipes;
 
 namespace SIMULATION
 {
@@ -14,53 +10,51 @@ namespace SIMULATION
         { 
         
         }
-        static public void Initialise_Server()
-        {
-            using (_server = new NamedPipeServerStream("Avril_FSD", PipeDirection.InOut))
-            {
 
-            }
-        }
         static public void SIM_Server_Recieve(Avril.ServerAssembly.Framework_Server obj)
         {
-            _server.WaitForConnectionAsync();
-            Avril_FSD.Library_For_WriteEnableForThreadsAt_SERVERINPUTACTION.Write_Start(Avril_FSD.Library_For_Server_Concurrency.Get_program_WriteEnableStack_ServerInputAction(obj), 0);
-
-            byte[] buffer = new byte[1];
-            int bytesRead = _server.Read(buffer, 0, buffer.Length);
-            byte praiseEventId = buffer[0];
-            Avril_FSD.Library_For_Server_Concurrency.Set_PraiseEventId(praiseEventId);//TODO: change to byte
-
-            buffer = new byte[1];
-            bytesRead = _server.Read(buffer, 1, buffer.Length);
-            byte playerID = buffer[0];
-            Avril_FSD.Library_For_Server_Concurrency.Set_playerId(playerID);//TODO: change to byte
-
-            Avril_FSD.Library_For_Server_Concurrency.Select_Set_Intput_Subset(obj, praiseEventId);
-            switch (praiseEventId)
+            using (_server = new NamedPipeServerStream("Avril_FSD_InputAction_S", PipeDirection.In))
             {
-// USER IMPLEMENTATION - ABCDE
-                case 0:
+                _server.WaitForConnectionAsync();
+                Avril_FSD.Library_For_WriteEnableForThreadsAt_SERVERINPUTACTION.Write_Start(Avril_FSD.Library_For_Server_Concurrency.Get_program_WriteEnableStack_ServerInputAction(obj), 0);
 
-                    break;
+                byte[] buffer = new byte[1];
+                int bytesRead = _server.Read(buffer, 0, buffer.Length);
+                byte praiseEventId = buffer[0];
+                Avril_FSD.Library_For_Server_Concurrency.Set_PraiseEventId(praiseEventId);//TODO: change to byte
 
-                case 1:
-                    buffer = new byte[8];
-                    bytesRead = _server.Read(buffer, 2, buffer.Length);
-                    float temp = System.BitConverter.ToSingle(buffer, 0);
-                    Avril_FSD.Library_For_Praise_1_Events.Set_Praise1_Input_mouseDelta_X(temp);
-                    temp = System.BitConverter.ToSingle(buffer, 4);
-                    Avril_FSD.Library_For_Praise_1_Events.Set_Praise1_Input_mouseDelta_X(temp);
-                    break;
+                buffer = new byte[1];
+                bytesRead = _server.Read(buffer, 1, buffer.Length);
+                byte playerID = buffer[0];
+                Avril_FSD.Library_For_Server_Concurrency.Set_playerId(playerID);//TODO: change to byte
+
+                Avril_FSD.Library_For_Server_Concurrency.Select_Set_Intput_Subset(obj, praiseEventId);
+                switch (praiseEventId)
+                {
+                    // USER IMPLEMENTATION - ABCDE
+                    case 0:
+
+                        break;
+
+                    case 1:
+                        buffer = new byte[8];
+                        bytesRead = _server.Read(buffer, 2, buffer.Length);
+                        float temp = System.BitConverter.ToSingle(buffer, 0);
+                        Avril_FSD.Library_For_Praise_1_Events.Set_Praise1_Input_mouseDelta_X(temp);
+                        temp = System.BitConverter.ToSingle(buffer, 4);
+                        Avril_FSD.Library_For_Praise_1_Events.Set_Praise1_Input_mouseDelta_X(temp);
+                        break;
+                }
             }
-
         }
         static public void SIM_Server_Send(Avril.ServerAssembly.Framework_Server obj)
         {
-            _server.WaitForConnection();
-            switch (obj.Get_server().Get_data().Get_output_Instnace().Get_FRONT_outputDoubleBuffer(obj).Get_praiseEventId())
+            using (_server = new NamedPipeServerStream("Avril_FSD_OutputRecieve_S", PipeDirection.Out))
             {
-// USER IMPLEMENTATION - ABCDE
+                _server.WaitForConnection();
+                switch (obj.Get_server().Get_data().Get_output_Instnace().Get_FRONT_outputDoubleBuffer(obj).Get_praiseEventId())
+                {
+                // USER IMPLEMENTATION - ABCDE
                 case 0:
 
                     break;
@@ -117,6 +111,7 @@ namespace SIMULATION
                     }
                     _server.Write(buffer, 0, buffer.Length);
                     break;
+                }
             }
         }
     }
