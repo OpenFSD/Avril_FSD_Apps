@@ -11,7 +11,7 @@ namespace Avril.ClientAssembly.Outputs
         {
             Set_empty_OutputBuffer(new Avril.ClientAssembly.Outputs.Output());
             while (Get_empty_OutputBuffer() == null) { }
-            Get_empty_OutputBuffer().InitialiseControl();
+            Get_empty_OutputBuffer().Initialise_Control();
 
             _outputDoubleBuffer = new Avril.ClientAssembly.Outputs.Output[2];
             for (byte index = 0; index < 2; index++)

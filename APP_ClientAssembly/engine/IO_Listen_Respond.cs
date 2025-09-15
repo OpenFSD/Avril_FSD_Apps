@@ -41,7 +41,7 @@ namespace Avril.ClientAssembly
             System.Console.WriteLine("Thread Starting => Thread_Output_Respond()");//TestBench
             while (obj.Get_client().Get_execute().Get_execute_Control().Get_flag_isInitialised_ClientApp() == false)
             {
-                
+
                 SIMULATION.SIM_Networking.SIM_Client_Recieve(obj);
                 obj.Get_client().Get_data().Flip_OutBufferToWrite();
                 obj.Get_client().Get_data().Get_data_Control().Push_Stack_OutputRecieve(obj.Get_client().Get_data().Get_stack_Client_OutputRecieves(), obj.Get_client().Get_data().Get_output_Instnace().Get_FRONT_outputDoubleBuffer(obj));

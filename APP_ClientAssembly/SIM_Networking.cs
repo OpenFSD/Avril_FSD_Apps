@@ -65,8 +65,7 @@ namespace SIMULATION
             bytesRead = _client.Read(buffer, 1, buffer.Length);
             byte playerId = buffer[1];
             obj.Get_client().Get_data().Get_output_Instnace().Get_BACK_outputDoubleBuffer(obj).Set_playerId(playerId);
-            
-            obj.Get_client().Get_data().Get_output_Instnace().Get_BACK_outputDoubleBuffer(obj).Get_output_Control().Select_Set_Output_Subset(obj, priaseEventId);
+
             switch (priaseEventId)
             {
                 case 0:

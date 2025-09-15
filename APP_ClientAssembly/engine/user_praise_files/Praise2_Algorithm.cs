@@ -8,10 +8,7 @@ namespace Avril.ClientAssembly.Praise_Files
 {
     public class Praise2_Algorithm
     {
-        public void Do_Praise(
-            Avril.ClientAssembly.Praise_Files.Praise1_Input in_SubSet,
-            Avril.ClientAssembly.Praise_Files.Praise1_Output out_SubSet
-        )
+        public void Do_Praise(Avril.ClientAssembly.Praise_Files.Praise2_Output in_SubSet, Avril.ClientAssembly.Game_Instance gameInstance)
         {
 
 

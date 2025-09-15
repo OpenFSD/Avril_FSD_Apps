@@ -6,6 +6,7 @@
         private Avril.ClientAssembly.Game_Instance _gameInstance;
         private ClientAssembly.GameInstance.Settings _settings;
         private Avril.ClientAssembly.Inputs.Input_Instance _input_Instnace;
+        private Avril.ClientAssembly.Outputs.Output[] _buffer_Output_Reference_ForCore;
         private Avril.ClientAssembly.Outputs.Output_Instance _output_Instnace;
         private List<Avril.ClientAssembly.Outputs.Output> _stack_Client_OutputRecieves;
         private Avril.ClientAssembly.Praise_Files.User_I _user_I;
@@ -25,6 +26,13 @@
 
             Set_input_Instnace(new Avril.ClientAssembly.Inputs.Input_Instance());
             while (Get_input_Instnace() == null) { }
+
+            for (byte index = 0; index < 4; index++)
+            {
+                Set_buffer_Output_Reference_ForCore(index, new Avril.ClientAssembly.Outputs.Output());
+                while (Get_buffer_Output_Reference_ForCore(index) == null) { }
+            }
+            
 
             Set_output_Instnace(new Avril.ClientAssembly.Outputs.Output_Instance());
             while (Get_output_Instnace() == null) { }
@@ -73,6 +81,11 @@
         {
             return _input_Instnace;
         }
+        public Avril.ClientAssembly.Outputs.Output Get_buffer_Output_Reference_ForCore(byte concurrentCoreId)
+        {
+            return _buffer_Output_Reference_ForCore[concurrentCoreId];
+        }
+        
         public Avril.ClientAssembly.Outputs.Output_Instance Get_output_Instnace()
         {
             return _output_Instnace;
@@ -119,6 +132,11 @@
         {
             _input_Instnace = input_Instance;
         }
+        private void Set_buffer_Output_Reference_ForCore(byte concurrenctCoreId, Avril.ClientAssembly.Outputs.Output input_Instance)
+        {
+            _buffer_Output_Reference_ForCore[concurrenctCoreId] = input_Instance;
+        }
+
         private void Set_output_Instnace(Avril.ClientAssembly.Outputs.Output_Instance output_Instance)
         {
             _output_Instnace = output_Instance;

@@ -26,7 +26,7 @@
         {
             stack_OutputRecieve.Add(buffer_TransmitOutput);
         }
-        public void Pop_Stack_OutputRecieve(
+        public void Pop_Stack_OutputAction(
             Avril.ClientAssembly.Outputs.Output buffer_Back_Output,
             List<Avril.ClientAssembly.Outputs.Output> stack_OutputRecieve
         )
