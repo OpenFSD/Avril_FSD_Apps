@@ -17,14 +17,14 @@
             while (Get_execute_Control() == null) { }
         }
 
-        public void Initialise(Avril.ServerAssembly.Framework_Server obj)
-        {
-            obj.Get_server().Get_algorithms().Initialise(obj.Get_server().Get_global().Get_numberOfCores());
-        }
-
         public void Initialise_Libraries()
         {
-            Set_program_ServerConcurrency(Avril_FSD.Library_For_Server_Concurrency.Initialise_Server_Assembly());
+            Set_program_ServerConcurrency(Avril_FSD.Library_For_Server_Concurrency.Initialise_Server_Concurrency());
+        }
+        public void Initialise_NetworkingPipes()
+        {
+            SIMULATION.SIM_NetworkingIO.Initialise_Server_IO();
+
         }
         public void Initialise_Threads(Avril.ServerAssembly.Framework_Server obj)
         {

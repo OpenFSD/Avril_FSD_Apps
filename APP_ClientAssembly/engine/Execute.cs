@@ -19,9 +19,10 @@
             while (Get_execute_Control() == null) { }
         }
 
-        public void Initialise(Avril.ClientAssembly.Framework_Client obj)
+        public void Initialise_NetworkingPipes()
         {
-            obj.Get_client().Get_algorithms().Initialise(obj.Get_client().Get_global().Get_numberOfCores());
+            //SIMULATION.SIM_NetworkingIO.Initialise_Client_Recieve();
+            //SIMULATION.SIM_NetworkingIO.Initialise_Client_Send();
         }
 
         public void Initialise_Libraries()

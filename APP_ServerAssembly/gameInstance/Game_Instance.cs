@@ -36,11 +36,11 @@ namespace Avril.ServerAssembly
         private bool cameraSelector = false;
        
         public Game_Instance()
-            : base(960, // initial width
-                540, // initial height
+            : base(1920, // initial width
+                1080, // initial height
                 GraphicsMode.Default,
                 "",  // initial title
-                GameWindowFlags.FixedWindow,
+                GameWindowFlags.Fullscreen,
                 DisplayDevice.Default,
                 4, // OpenGL major version
                 5, // OpenGL minor version

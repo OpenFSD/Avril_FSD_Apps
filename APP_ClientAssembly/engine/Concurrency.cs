@@ -56,6 +56,7 @@ namespace Avril.ClientAssembly
                         obj.Get_client().Get_data().Get_buffer_Output_Reference_ForCore(concurrent_coreId).Get_praiseOutputBuffer_Subset(),
                         obj.Get_client().Get_data().Get_gameInstance()                    //TODO write game data to game instance.
                     );
+                    obj.Get_client().Get_data().Get_data_Control().Set_isPraiseActive(obj.Get_client().Get_data().Get_buffer_Output_Reference_ForCore(concurrent_coreId).Get_praiseEventId(), false);
                     if (obj.Get_client().Get_data().Get_data_Control().Get_flag_IsLoaded_Stack_OutputAction() == true)
                     {
                         if (Avril_FSD.Library_For_LaunchEnableForConcurrentThreadsAt_CLIENT.Get_Flag_ConcurrentCoreState(obj.Get_client().Get_execute().Get_program_ConcurrentQue_C(), Avril_FSD.Library_For_LaunchEnableForConcurrentThreadsAt_CLIENT.Get_coreId_To_Launch(0)) == Avril_FSD.Library_For_LaunchEnableForConcurrentThreadsAt_CLIENT.Get_Flag_Idle(obj.Get_client().Get_execute().Get_program_ConcurrentQue_C()))
@@ -101,6 +102,7 @@ namespace Avril.ClientAssembly
 
                     break;
             }
+            obj.Get_client().Get_data().Get_data_Control().Set_isPraiseActive(praiseEventId, false);
         }
 
         public Avril.ClientAssembly.Concurrency_Control Get_concurrency_Control()

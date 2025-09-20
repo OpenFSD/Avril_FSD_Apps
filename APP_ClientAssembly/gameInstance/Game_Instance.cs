@@ -36,11 +36,11 @@ namespace Avril.ClientAssembly
         private bool cameraSelector = false;
        
         public Game_Instance()
-            : base(960, // initial width
-                540, // initial height
+            : base(1920, // initial width
+                1080, // initial height
                 GraphicsMode.Default,
                 "",  // initial title
-                GameWindowFlags.FixedWindow,
+                GameWindowFlags.Fullscreen,
                 DisplayDevice.Default,
                 4, // OpenGL major version
                 5, // OpenGL minor version
@@ -182,6 +182,7 @@ namespace Avril.ClientAssembly
             Avril.ClientAssembly.Framework_Client obj = Program.Get_framework_Client();
             if (obj.Get_client().Get_data().Get_data_Control().Get_isPraiseActive(1) == false)
             {
+                obj.Get_client().Get_data().Get_data_Control().Set_isPraiseActive(1, true);
                 obj.Get_client().Get_data().Get_input_Instnace().Get_FRONT_inputDoubleBuffer(obj).Set_playerId(0);
                 obj.Get_client().Get_data().Get_input_Instnace().Get_FRONT_inputDoubleBuffer(obj).Set_praiseEventId(1);
                 obj.Get_client().Get_data().Get_input_Instnace().Get_FRONT_inputDoubleBuffer(obj).Get_input_Control().SelectSetIntputSubset(obj, obj.Get_client().Get_data().Get_input_Instnace().Get_FRONT_inputDoubleBuffer(obj).Get_praiseEventId());
@@ -189,7 +190,8 @@ namespace Avril.ClientAssembly
                 subset.Set_Mouse_X(mouseState.X);
                 subset.Set_Mouse_Y(mouseState.Y);
                 obj.Get_client().Get_data().Flip_InBufferToWrite();
-                SIMULATION.SIM_Networking.SIM_Client_Send(obj);
+                SIMULATION.SIM_AlgorithmsOnCLient.Calc_praise1(obj, obj.Get_client().Get_data().Get_input_Instnace().Get_BACK_inputDoubleBuffer(obj), obj.Get_client().Get_data().Get_gameInstance());
+                //SIMULATION.SIM_NetworkingIO.Do_Client_Send(obj);
             }
         }
         private void HandleKeyboard(double dt)

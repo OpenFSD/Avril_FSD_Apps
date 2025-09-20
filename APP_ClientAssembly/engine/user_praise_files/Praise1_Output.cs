@@ -5,12 +5,14 @@ namespace Avril.ClientAssembly.Praise_Files
     public class Praise1_Output
     {
         Vector3 _fowards;
-        Vector3 _right;
         Vector3 _up;
+        Vector3 _right;
 
         public Praise1_Output() 
-        { 
-        
+        {
+            _fowards = new Vector3(1f, 0f, 0f);
+            _up = new Vector3(0f, 1f, 0f);
+            _right = new Vector3(0f, 0f, 1f);
         }
 
         public Vector3 Get_fowards()

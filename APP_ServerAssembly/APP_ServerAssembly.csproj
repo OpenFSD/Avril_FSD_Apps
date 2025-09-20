@@ -17,10 +17,28 @@
     <None Update="LIBLaunchEnableForConcurrentThreadsAtSERVER.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="LIBLaunchEnableForConcurrentThreadsAtSERVER.lib">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="LIBServerConcurrency.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="LIBServerIOConcurrnecy.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="LIBServerIOConcurrnecy.lib">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="LIBWriteEnableForThreadsAtSERVERINPUTACTION.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="LIBWriteEnableForThreadsAtSERVERINPUTACTION.lib">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="LIBWriteEnableForThreadsAtSERVEROUTPUTRECIEVE.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="LIBWriteEnableForThreadsAtSERVEROUTPUTRECIEVE.lib">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="lib\LIBLaunchEnableForConcurrentThreadsAtSERVER.dll">
