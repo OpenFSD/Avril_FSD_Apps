@@ -21,8 +21,8 @@
 
         public void Initialise_NetworkingPipes()
         {
-            //SIMULATION.SIM_NetworkingIO.Initialise_Client_Recieve();
-            //SIMULATION.SIM_NetworkingIO.Initialise_Client_Send();
+            SIMULATION.SIM_NetworkingIO.Initialise_Client_Recieve();
+            SIMULATION.SIM_NetworkingIO.Initialise_Client_Send();
         }
 
         public void Initialise_Libraries()

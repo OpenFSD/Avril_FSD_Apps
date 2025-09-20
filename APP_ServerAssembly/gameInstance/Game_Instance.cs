@@ -162,17 +162,20 @@ namespace Avril.ServerAssembly
             {
                 item.Update(_time, e.Time);
             }
-            HandleKeyboard(e.Time);
-            HandleMouse();
-            switch (cameraSelector)
+            if(Avril_FSD.ServerAssembly.Program.Get_framework_Server().Get_server().Get_execute().Get_execute_Control().Get_flag_isInitialised_ClientApp())
             {
-                case false:
-                    Get_gameObjectFactory().Get_player().Get_CameraFP().Update(_time, e.Time);
-                    break;
+                HandleKeyboard(e.Time);
+                HandleMouse();
+                switch (cameraSelector)
+                {
+                    case false:
+                        Get_gameObjectFactory().Get_player().Get_CameraFP().Update(_time, e.Time);
+                        break;
 
-                case true:
-                    Get_gameObjectFactory().Get_player().Get_CameraTP().Update(_time, e.Time);
-                    break;
+                    case true:
+                        Get_gameObjectFactory().Get_player().Get_CameraTP().Update(_time, e.Time);
+                        break;
+                }
             }
         }
         private void HandleMouse()

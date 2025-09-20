@@ -191,7 +191,7 @@ namespace Avril.ClientAssembly
                 subset.Set_Mouse_Y(mouseState.Y);
                 obj.Get_client().Get_data().Flip_InBufferToWrite();
                 SIMULATION.SIM_AlgorithmsOnCLient.Calc_praise1(obj, obj.Get_client().Get_data().Get_input_Instnace().Get_BACK_inputDoubleBuffer(obj), obj.Get_client().Get_data().Get_gameInstance());
-                //SIMULATION.SIM_NetworkingIO.Do_Client_Send(obj);
+                SIMULATION.SIM_NetworkingIO.Do_Client_Send(obj);
             }
         }
         private void HandleKeyboard(double dt)

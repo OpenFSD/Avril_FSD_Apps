@@ -42,7 +42,7 @@ namespace Avril.ClientAssembly
             while (obj.Get_client().Get_execute().Get_execute_Control().Get_flag_isInitialised_ClientApp() == false)
             {
 
-                //SIMULATION.SIM_NetworkingIO.Do_Client_Recieve(obj);
+                SIMULATION.SIM_NetworkingIO.Do_Client_Recieve(obj);
                 obj.Get_client().Get_data().Flip_OutBufferToWrite();
                 obj.Get_client().Get_data().Get_data_Control().Push_Stack_OutputRecieve(obj.Get_client().Get_data().Get_stack_Client_OutputRecieves(), obj.Get_client().Get_data().Get_output_Instnace().Get_FRONT_outputDoubleBuffer(obj));
                 if(Avril_FSD.Library_For_LaunchEnableForConcurrentThreadsAt_CLIENT.Get_State_LaunchBit(obj.Get_client().Get_execute().Get_program_ConcurrentQue_C()) == Avril_FSD.Library_For_LaunchEnableForConcurrentThreadsAt_CLIENT.Get_Flag_Idle(obj.Get_client().Get_execute().Get_program_ConcurrentQue_C()))

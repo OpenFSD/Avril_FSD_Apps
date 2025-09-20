@@ -19,13 +19,13 @@
             System.Console.WriteLine("alpha");//TESTBENCH
             obj.Get_client().Get_data().Get_data_Control().Initialise(obj);
             System.Console.WriteLine("bravo");//TESTBENCH
-            //obj.Get_client().Get_execute().Initialise_NetworkingPipes();
-            System.Console.WriteLine("charlie");//TESTBENCH
-            obj.Get_client().Get_execute().Initialise_Threads(obj);
-            System.Console.WriteLine("delta");//TESTBENCH
             obj.Get_client().Get_execute().Create_And_Run_Graphics(obj);
-            System.Console.WriteLine("echo");//TESTBENCH
+            System.Console.WriteLine("charlie");//TESTBENCH
+            obj.Get_client().Get_execute().Initialise_NetworkingPipes();
+            System.Console.WriteLine("delta");//TESTBENCH
             obj.Get_client().Get_execute().Initialise_Libraries();
+            System.Console.WriteLine("echo");//TESTBENCH
+            obj.Get_client().Get_execute().Initialise_Threads(obj);
             System.Console.WriteLine("foxtrot");//TESTBENCH
         }
         static public Avril.ClientAssembly.Client Get__client()
